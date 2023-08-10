@@ -1,0 +1,202 @@
+main {
+    width: 100%;
+    height: 100%;
+}
+
+.containermain {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    line-height: 140%;
+}
+
+.login_cred {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: max-content;
+    align-items: end;
+}
+
+.wrpp {
+    width: 400px;
+    max-width: 85vw;
+    padding: 10px;
+    background-color: #ECECEC;
+    border: 2px solid #fff;
+    box-shadow: -4px 4px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+
+.forgot_wr a {
+    color: #B3B3B3;
+}
+
+
+input {
+    
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    font-family: FugazOne;
+    font-size: 16px;
+}
+
+.login_bt{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #214CDB;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+    box-shadow: -4px 4px #000;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#phone-input{
+    width: 100%;
+}
+
+.login_bt:hover{
+    transform: translate(2px,-2px);
+    box-shadow: -6px 6px #000;
+}
+
+.login_bt:active{
+    transform: translate(-4px,4px);
+    transition: all 100ms ease-out;
+    box-shadow: 0 0 #000;
+}
+
+h4 {
+    font-size: 12px;
+    color: #B3B3B3;
+    line-height: 140%;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a span{
+    color: #000;
+}
+
+.bottom {
+    margin-top: 0px;
+    width: 300px;
+    max-width: 80vw;
+}
+
+#toggle-button {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 10px 0 0;
+    height: max-content;
+    width: max-content;
+    transform: translate(-50%,-50%);
+}
+#toggle-button img{
+    width: 20px;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-inner-spin-button,
+input[type="password"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+.phone_wr{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.wrph{
+    width: 100%;
+}
+
+#country_code{
+    width: max-content;
+    color: #B3B3B3;
+}
+
+.mainlogo {
+    display: flex;
+    width: auto;
+    align-items: center;
+}
+
+.imagelogo_name {
+    height: 35px;
+}
+
+.imagelogo {
+    height: 45px;
+}
+
+
+.justop{
+    justify-content: flex-start;
+    overflow: scroll;
+    padding: 30px 0;
+}
+
+.justop::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.justop {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

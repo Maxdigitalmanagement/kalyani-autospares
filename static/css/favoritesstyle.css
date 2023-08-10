@@ -1,0 +1,264 @@
+
+
+.wr_empty {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.empty_fav {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.empty_fav .pics {
+    display: flex;
+    flex-direction: column;
+}
+
+#bottom_right {
+    width: 92px;
+    align-self: flex-end;
+    margin-right: -70px;
+}
+
+#left_top {
+    width: 92px;
+    margin-left: -55px;
+}
+
+#middle {
+    width: fit-content;
+    max-width: 80vw;
+}
+
+.empty_fav h1 {
+    font-size: 32px;
+}
+
+.empty_fav span {
+    color: white;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.empty_fav p {
+    font-size: 12px;
+    color: #214CDB;
+}
+
+
+.section1 {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.heading {
+    display: none;
+
+}
+
+.heading h1 {
+    font-size: 32px;
+}
+
+
+.fav_items_wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.fav_items_wrap::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.fav_items_wrap {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.fav_item {
+    width: 400px;
+    max-width: 87vw;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #FFF;
+    background: #EAEAEA;
+    box-shadow: -4px 4px 0px 0px #000;
+}
+
+
+.item_left {
+    padding: 10px;
+    border-radius: 65px;
+    background: #D4D4D4;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+}
+
+.item_left img {
+    width: 60px;
+}
+
+.item_right {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.item_right .name_wrap, .price_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item_right .name_wrap h3 {
+    font-size: 14px;
+    line-height: 120%;
+    width: 120px;
+}
+
+.garbage{
+    height: max-content;
+    padding: 7px;
+    background-color: #000;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.garbage:hover{
+    box-shadow: -2px 2px #D4D4D4;
+    transform: translate(2px,-2px);
+}
+
+.garbage:active{
+    box-shadow: 0 0 #D4D4D4;
+    transform: translate(0,0);
+    transition: all 50ms ease-in-out;
+}
+
+.price_wrap p{
+    margin: 0;
+    text-decoration: line-through;
+    font-size: 10px;
+}
+
+.price_wrap .prices{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.prices h1{
+    color: #214CDB;
+    font-size: 18px;
+}
+
+
+.price_wrap .add_cart{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.price_wrap .add_cart:hover{
+    box-shadow: -2px 2px #D4D4D4;
+    transform: translate(2px,-2px);
+}
+
+.price_wrap .add_cart:active{
+    box-shadow: 0 0 #D4D4D4;
+    transform: translate(0,0);
+    transition: all 100ms ease-in-out;
+}
+
+
+.add_cart h2{
+    font-size: 10px;
+    color: #FFF;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+#ChekBox{
+    display: none;
+}
+
+
+
+
+@media screen and (min-width : 801px) {
+
+    .section1{
+        margin-bottom: 50px;
+    }
+    
+    .heading {
+        display: block;
+    }
+
+    .fav_item {
+        width: 1000px;
+        max-width:87vw;
+    }
+
+    .item_right .name_wrap h3 {
+        font-size: 18px;
+        line-height: 120%;
+        width: max-content;
+    }
+
+    .price_wrap p{
+        margin: 0;
+        text-decoration: line-through;
+        font-size: 12px;
+    }
+    
+    .prices h1{
+        color: #214CDB;
+        font-size: 24px;
+    }
+
+    .add_cart h2{
+        font-size: 12px;
+        color: #FFF;
+    }
+
+}
+
+@media screen and (max-width : 800px) {
+
+    .statusbar .middle h3{
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,839 @@
+html,
+body {
+    height: 100%;
+    padding: 0;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.section1 {
+    margin-top: 70px;
+    padding-bottom: 60px;
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile_and_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.profilepic img {
+    width: 80px;
+    height: 80px;
+}
+
+.profilepic {
+    overflow: hidden;
+    border-radius: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fff;
+    box-shadow: -2px 2px #000;
+}
+
+.profile_name {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile_name h1 {
+    font-size: 20px;
+}
+
+.profile_name h3 {
+    font-size: 14px;
+    color: #808080;
+}
+
+.detail_wr {
+    padding: 20px;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail_wr .left h1 {
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.detail_wr .left p {
+    font-size: 14px;
+    color: #808080;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.detail_wr .right img {
+    rotate: 180deg;
+}
+
+
+.cencen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+}
+
+
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ My orders page style @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+
+#allorders:checked~.cat_nav .allorders,
+#delivered:checked~.cat_nav .delivered,
+#processing:checked~.cat_nav .processing,
+#cancelled:checked~.cat_nav .cancelled {
+    color: #214CDB;
+}
+
+.navradios input {
+    display: none;
+}
+
+.navradios {
+    display: flex;
+    justify-content: center;
+}
+
+.cat_nav {
+    display: flex;
+    gap: 20px;
+    width: 400px;
+    max-width: 100%;
+    align-items: center;
+    padding-bottom: 2px;
+}
+
+.cat_nav label {
+    width: 100%;
+    text-align: center;
+    transition: all 0s ease-out;
+    color: #BBBBBB;
+}
+
+
+.main_or_wr {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.order_wrap {
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 400px;
+    max-width: 100%;
+}
+
+.break {
+    height: 1.5px;
+    background-color: #000;
+}
+
+.ot_det_st {
+    padding: 0 15px;
+    align-items: center;
+}
+
+
+.or_inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.or_inner h2 {
+    font-size: 14px;
+}
+
+.or_inner h3 {
+    font-size: 14px;
+    color: #888888;
+    line-height: 140%;
+}
+
+.order_wrap button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+
+
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-family: FugazOne;
+
+}
+
+.disfle {
+    display: flex;
+}
+
+.navradios::-webkit-scrollbar {
+    display: none;
+}
+
+
+.navradios {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.title {
+    display: none;
+    text-align: center;
+    font-size: 32px;
+}
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ Addresses page style @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+
+.addr_title .title {
+    width: max-content;
+}
+
+.addr_title {
+    width: 400px;
+    max-width: 100%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.plus_ic {
+    background-color: #214CDB;
+    padding: 5px;
+    height: fit-content;
+    border-radius: 5px;
+}
+
+.add_wrap {
+    gap: 10px;
+}
+
+.use_default {
+    display: flex;
+    gap: 10px;
+}
+
+.use_default .container {
+    --input-focus: #2d8cf0;
+    --input-out-of-focus: #ccc;
+    --bg-color: #fff;
+    --bg-color-alt: #666;
+    --main-color: #323232;
+    position: relative;
+    cursor: pointer;
+}
+
+.use_default .container input {
+    position: absolute;
+    opacity: 0;
+}
+
+.use_default .checkmark {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    box-shadow: -2px 2px var(--main-color);
+    background-color: var(--input-out-of-focus);
+    transition: all 0.3s;
+}
+
+.use_default .container input:checked~.checkmark {
+    background-color: var(--input-focus);
+}
+
+.use_default .checkmark:after {
+    content: "";
+    width: 3px;
+    height: 10px;
+    position: absolute;
+    left: 6px;
+    display: none;
+    border: solid var(--bg-color);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
+.use_default .container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ Addresses page style @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@*/
+
+.card_wrap {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 400px;
+    max-width: 100%;
+}
+
+
+
+.card_wrap .card_inner h4 {
+    font-size: 12px;
+    color: #959595;
+    text-transform: capitalize;
+    margin-bottom: -15px;
+}
+
+.card_inner h2 {
+    font-size: 14px;
+}
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ Reviews page style @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+.cart_item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #FFF;
+    background: #EAEAEA;
+    box-shadow: -4px 4px 0px 0px #000;
+}
+
+
+.item_left {
+    padding: 10px;
+    border-radius: 65px;
+    background: #D4D4D4;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+}
+
+.item_left img {
+    width: 60px;
+}
+
+.item_right {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.item_right .name_wrap,
+.price_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item_right .name_wrap h3 {
+    font-size: 14px;
+    line-height: 120%;
+    width: 120px;
+}
+
+.price_wrap p {
+    margin: 0;
+    text-decoration: line-through;
+    font-size: 10px;
+}
+
+.price_wrap .prices {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.prices h1 {
+    color: #214CDB;
+    font-size: 18px;
+}
+
+.top {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.middle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle h2 {
+    color: #959595;
+    font-size: 14px;
+}
+
+
+
+.cart_item .break{
+    background-color: #D4D4D4;
+}
+
+.cart_item .bottom{
+    color: #808080;
+    font-size: 14px;
+    text-align: justify;
+}
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ My Info page style @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+.myinf{
+    user-select: none;
+}
+
+.wrpp {
+    width: 400px;
+    max-width: 85vw;
+    padding: 10px;
+    background-color: #ECECEC;
+    border: 2px solid #fff;
+    box-shadow: -4px 4px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    user-select: none;
+}
+
+.wrpp h4 {
+    font-size: 12px;
+    color: #B3B3B3;
+    line-height: 140%;
+}
+
+.wrpp h2 {
+    font-size: 16px;
+    line-height: 140%;
+}
+
+#heading_pinfo{
+    font-size: 18px;
+    width: 400px;
+    max-width: 100%;
+}
+
+.wrpp input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    font-family: FugazOne;
+    font-size: 16px;
+    transition: all 0s ease-out;
+}
+
+#toggle-button {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 10px 0 0;
+    height: max-content;
+    width: max-content;
+    transform: translate(-50%,-50%);
+}
+#toggle-button img{
+    width: 20px;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-inner-spin-button,
+input[type="password"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+.break_info {
+    width: 400px;
+    max-width: 100%;
+    height: 1px;
+    background-color: #000;
+}
+
+.phone_wr{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+#country_code{
+    opacity: 0.5;
+    user-select: none;
+}
+
+.btn_save_info{
+    width: 100%;
+    max-width: calc(100vw - 40px);
+    background-color: #000;
+    padding: 15px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 24px;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 20px;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.btn_edit{
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 10px 0 0;
+    height: max-content;
+    width: max-content;
+    transform: translate(-50%,-50%);
+}
+
+.btn_edit img{
+    width: 20px;
+}
+
+.p_ed{
+    transform: translate(-200%,-50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ Order Detail page style @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+
+.order_details_wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+    
+
+.order_details_wrap h2{
+    font-size: 18px;
+}
+.order_details_wrap h3{
+    font-size: 16px;
+}
+.order_details_wrap h4{
+    font-size: 14px;
+}
+
+.order_details_wrap h2 span{
+    color: #214CDB;
+}
+
+.cart_item{
+    flex-direction: row;
+}
+
+.order_details_wrap .rate_pur{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order_details_wrap .invoice_la{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-radius: 10px;
+    margin-top: -6px;
+    border: 3px solid #FFF;
+    background: #EAEAEA;
+    box-shadow: -4px 4px 0px 0px #000;
+    transition: all 0.1s ease-in;
+}
+
+.order_details_wrap .invoice_la:hover{
+    box-shadow: -6px 6px #000;
+    transform: translate(2px,-2px);
+}
+
+.order_details_wrap .invoice_la:active{
+    box-shadow: 0px 0px #000;
+    transform: translate(-6px,6px);
+}
+
+
+
+.orddetwrpper{
+    padding: 15px 0;
+}
+
+.order_details_wrap .add_delivered{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order_details_wrap .add_delivered .address_details h4{
+    color: #959595;
+    line-height: 140%;
+}
+
+.order_details_wrap .add_delivered #personname{
+    color:#214CDB ;
+    margin-bottom: 5px;
+}
+
+.order_details_wrap .add_delivered .statepin{
+    display: flex;
+    gap: 10px;
+    color: #959595;
+}
+
+.cart_total {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.totitem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.totitem h3 {
+    font-size: 14px;
+    line-height: 140%;
+}
+
+.totitem h2 {
+    font-size: 32px;
+    line-height: 140%;
+}
+
+#pricemain {
+    color: #214CDB;
+}
+
+.nomarg{
+    padding: 0px;
+}
+
+.payment_details h4>span{
+    color: #214CDB;
+    text-transform: capitalize;
+}
+
+
+
+
+
+
+@media screen and (min-width : 801px) {
+
+    .addr_title {
+        display: flex;
+    }
+
+    .title {
+        display: block;
+    }
+
+    .wrapper {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px 0;
+        gap: 30px;
+    }
+
+    /* reviews page */
+
+    .cart_item {
+        width: 1000px;
+        max-width: 50vw;
+    }
+    .caror{
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .item_right .name_wrap h3 {
+        font-size: 18px;
+        line-height: 120%;
+        width: fit-content;
+    }
+
+    .price_wrap p {
+        margin: 0;
+        text-decoration: line-through;
+        font-size: 12px;
+    }
+
+    .prices h1 {
+        color: #214CDB;
+        font-size: 24px;
+    }
+
+    .btn_save_info{
+        width: 400px;
+        position: relative;
+        margin: 0 auto;
+        padding: 100px 0;
+    }
+
+}
+
+
+
+@media screen and (max-width : 800px) {
+
+    .wrapper {
+        padding-bottom: 30px;
+    }
+
+    .ordwrpper {
+        padding-bottom: 22px;
+    }
+
+    .section1 {
+        margin-top: 60px;
+    }
+
+    .statusbar .middle h3 {
+        font-size: 18px;
+    }
+
+    .statusbar {
+        padding: 20px 30px;
+    }
+
+    .ordstb {
+        padding: 10px 30px;
+    }
+
+}
+
+@media screen and (max-width : 500px) {
+
+    .profile_and_name {
+        justify-content: start;
+    }
+}

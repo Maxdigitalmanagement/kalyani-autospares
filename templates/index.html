@@ -1,0 +1,428 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Hari Babu" />
+    <meta name="description" content="Kalyani Autospares Home Page" />
+    <meta name="keywords" content="Food, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SITE TITLE -->
+    <title>Kalyani Autospares | Home</title>
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/homepagestyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"), auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css' %}" />
+
+</head>
+
+<body>
+
+    <div id="preloader">
+		<div class="bulb">
+			<svg height="511pt" viewBox="1 -13 511.999 511" width="511pt" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="m300.386719 20.367188c-11.515625-12.628907-27.910157-19.867188-44.996094-19.867188-.03125 0-.0625 0-.09375 0-17.121094.027344-33.535156 7.320312-45.027344 20.011719 0 0-193.199219 212.128906-196.042969 215.1875-9.410156 10.609375-14.226562 22.394531-14.226562 34.308593v166.316407c0 26.78125 21.789062 48.574219 48.570312 48.574219h414.855469c26.785157 0 48.574219-21.792969 48.574219-48.574219v-166.316407c0-12.390624-4.667969-23.71875-12.335938-32.308593-2.175781-2.441407-199.277343-217.332031-199.277343-217.332031zm-44.386719 11.984374c12.722656 0 23.035156 10.3125 23.035156 23.035157 0 12.722656-10.3125 23.035156-23.035156 23.035156s-23.035156-10.3125-23.035156-23.035156c0-12.71875 10.3125-23.035157 23.035156-23.035157zm0 76.070313c23.589844 0 43.621094-15.484375 50.488281-36.820313l136.574219 149.835938h-374.300781l136.480469-150.6875c6.601562 21.773438 26.855468 37.671875 50.757812 37.671875zm226 327.902344c0 10.238281-8.332031 18.570312-18.570312 18.570312h-414.859376c-10.238281 0-18.570312-8.332031-18.570312-18.570312v-166.316407c0-10.238281 8.332031-18.570312 18.570312-18.570312h414.855469c10.242188 0 18.574219 8.332031 18.574219 18.570312zm0 0" />
+				<path
+					d="m132.28125 280.375h-58.648438c-8.285156 0-15 6.714844-15 15v125.304688c0 8.285156 6.714844 15 15 15h58.648438c8.285156 0 15-6.714844 15-15v-125.304688c0-8.285156-6.714844-15-15-15zm-15 125.304688h-28.648438v-95.304688h28.648438zm0 0" />
+				<path
+					d="m237.121094 280.375h-55.203125c-8.285157 0-15 6.714844-15 15v125.304688c0 8.285156 6.714843 15 15 15 8.28125 0 15-6.714844 15-15v-47.652344h40.203125c8.285156 0 15-6.714844 15-15v-62.652344c0-8.285156-6.714844-15-15-15zm-15 62.652344h-25.203125v-32.652344h25.203125zm0 0" />
+				<path
+					d="m438.367188 280.375c-8.28125 0-15 6.714844-15 15v60.148438l-32.429688-66.707032c-3.054688-6.285156-10.042969-9.625-16.855469-8.058594-6.8125 1.566407-11.636719 7.628907-11.636719 14.617188v125.304688c0 8.285156 6.714844 15 15 15 8.285157 0 15-6.714844 15-15v-60.148438l32.433594 66.707031c2.550782 5.25 7.84375 8.445313 13.484375 8.445313 1.117188 0 2.246094-.125 3.371094-.386719 6.808594-1.566406 11.632813-7.628906 11.632813-14.617187v-125.304688c0-8.285156-6.714844-15-15-15zm0 0" />
+				<path
+					d="m323.96875 310.375c8.285156 0 15-6.714844 15-15s-6.714844-15-15-15h-38.507812c-8.285157 0-15 6.714844-15 15v125.304688c0 8.285156 6.714843 15 15 15h38.507812c8.285156 0 15-6.714844 15-15 0-8.28125-6.714844-15-15-15h-23.507812v-32.652344h17.976562c8.28125 0 15-6.714844 15-15s-6.71875-15-15-15h-17.976562v-32.652344zm0 0" />
+			</svg>
+		</div>
+
+		<div class="line-wobble"></div>
+
+	</div>
+
+	<header>
+		<nav id="navbar">
+			<div id="nav_tot" class="topnav">
+				<div class="left">
+					<img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+					<img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+				</div>
+				<div class="right">
+					<div class="container">
+						<input placeholder="Search Something" required="" class="input" name="text" type="search">
+						<div class="icon">
+							<img src="{% static '/images/search_ic.svg'%}" alt="">
+						</div>
+					</div>
+					<div class="cart_ic">
+						<p class="cartitems">12</p>
+						<img src="{% static '/images/cart_ic.svg'%}" alt="">
+					</div>
+					<div class="tab_nav">
+						<div class="home pill pillactive">
+							<img src="{% static '/images/home_ic.svg'%}" alt="">
+							<h4>HOME</h4>
+						</div>
+						<div class="profile pill">
+							<img src="{% static '/images/profile_ic.svg'%}" alt="">
+							<h4>PROFILE</h4>
+						</div>
+						<div class="favorites pill">
+							<img src="{% static '/images/fav_ic.svg'%}" alt="">
+							<h4>FAVORITE'S</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="statusbar">
+				<div id="sbleft" class="left">
+					<div id="sbcont" class="container">
+						<input id="inputHolder" placeholder="Search Something" required="" class="input" name="text"
+							type="search">
+						<div class="icon">
+							<img src="{% static '/images/search_ic_black.svg'%}" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="middle">
+					<img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
+					<img id="name_logo" class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
+				</div>
+				<div class="right">
+					<div class="cart_ic">
+						<p class="cartitems">12</p>
+						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
+					</div>
+				</div>
+			</div>
+
+
+
+		</nav>
+
+		
+
+	</header>
+
+	
+
+	<main>
+		<section class="topmar">
+
+		</section>
+		<section class="section1">
+			<div class="sec1_left">
+				<div class="slider_wrap">
+					<div class="slide">
+						<div class="imagewraper">
+							<img class="imgs" src="{% static '/images/Screenshot_4.jpg'%}" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="imagewraper">
+							<img class="imgs" src="{% static '/images/Screenshot_4.jpg'%}" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="imagewraper">
+							<img class="imgs" src="{% static '/images/Screenshot_4.jpg'%}" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="imagewraper">
+							<img class="imgs" src="{% static '/images/Screenshot_4.jpg'%}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="sec1_right">
+				<div class="category_wrap">
+					<h3 class="title"> Shop By Category </h3>
+					<div class="categories">
+						<div class="item_category">
+							<img src="{% static '/images/enginespare.png'%}" alt="">
+							<h4>Engine Spares</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/headspares.png'%}" alt="">
+							<h4>Head Spares</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/tailspare.png'%}" alt="">
+							<h4>Tail Spares</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/tankspares.png'%}" alt="">
+							<h4>Tank Spares</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/wheelspare.png'%}" alt="">
+							<h4>Wheel Spares</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/bodyspare.png'%}" alt="">
+							<h4>Body Spares</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/bikeaccessories.png'%}" alt="">
+							<h4>Accessories</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/riding gear.png'%}" alt="">
+							<h4>Riding Gear</h4>
+						</div>
+						<div class="item_category">
+							<img src="{% static '/images/service.png'%}" alt="">
+							<h4>Services</h4>
+						</div>
+					</div>
+				</div>
+				<div class="bike_wrap">
+					<h3> shop by bike </h3>
+					<div class="bikes draggable_sl">
+						<div class="item_bike">
+							<img src="{% static '/images/re-interceptor 1.png'%}" alt="">
+							<h3>Interceptor 650</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-continental 1.png'%}" alt="">
+							<h3>continental Gt650</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-supermeteor650 1.png'%}" alt="">
+							<h3>Super meteor 650</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-Himalayan.png'%}" alt="">
+							<h3>Himalayan</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-Scram411.png'%}" alt="">
+							<h3>Scram 411</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-meteor 350.png'%}" alt="">
+							<h3>Meteor 350</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-classic 350.png'%}" alt="">
+							<h3>Classic 350</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-Hunter350.png'%}" alt="">
+							<h3>Hunter 350</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-Bullet350.png'%}" alt="">
+							<h3>BUllet 350</h3>
+						</div>
+						<div class="item_bike">
+							<img src="{% static '/images/re-Bulletes.png'%}" alt="">
+							<h3>Bullet Es</h3>
+						</div>
+						
+						
+					</div>
+					<div class="faders">
+						<div class="fade_l">
+
+						</div>
+						<div class="fade_r">
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+
+
+		<section class="section2">
+			<div class="title">
+				<h3>New Arrivals</h3>
+				<div class="more">
+					<a href=""><h4>more</h4></a>
+					<a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+				</div>
+			</div>
+
+			<div class="products draggable_sl">
+				{% for product in products %}
+				<div class="product" >
+					<div class="product_img">
+						<img class="product_image" src="{{ product.images.url }}" alt="">
+					</div>
+					<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+					<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
+					<div class="rating_wrap">
+						<div class="rating">
+							<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
+						</div>
+						<h4 class="rating_count">(350)</h4>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="bike_accessories">
+				<div class="top"></div>
+			</div>
+
+			<div class="title">
+				<h3>Spares</h3>
+				<div class="more">
+					<a href=""><h4>more</h4></a>
+					<a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+				</div> 
+			</div>
+
+			<div class="products sapres draggable_sl">
+				{% for product in products %}
+				{% if  product.category.slug|stringformat:"s" == "spares"%}
+				<div class="product" >
+					<div class="product_img">
+						<img class="product_image" src="{{ product.images.url }}" alt="">
+					</div>
+					<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+					<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
+					<div class="rating_wrap">
+						<div class="rating">
+							<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
+						</div>
+						<h4 class="rating_count">(350)</h4>
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+
+			<div class="title">
+				<h3>Accessories</h3>
+				<div class="more">
+					<a href=""><h4>more</h4></a>
+					<a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+				</div> 
+			</div>
+
+			<div class="products accessories draggable_sl">
+				{% for product in products %}
+				{% if  product.category.slug|stringformat:"s" == "accessories"%}
+				<div class="product" >
+					<div class="product_img">
+						<img class="product_image" src="{{ product.images.url }}" alt="">
+					</div>
+					<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+					<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
+					<div class="rating_wrap">
+						<div class="rating">
+							<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
+						</div>
+						<h4 class="rating_count">(350)</h4>
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</section>
+
+
+		<section class="section3">
+			<div class="ribbon">
+				<img src="{% static '/images/restoration_section_ribbon.svg' %}" alt="">
+			</div>
+
+			<div class="restor_main">
+				<div class="front">
+					<img src="{% static '/images/Screenshot_1.png'%}" alt="">
+					<img src="{% static '/images/Screenshot_2.png'%}" alt="">
+					<img src="{% static '/images/Screenshot_3.png'%}" alt="">
+					<img src="{% static '/images/Screenshot_5.png'%}" alt="">
+				</div>
+				<div class="back">
+					<h1>Restoration<br>custom Builds</h1>
+					<h1 class="blue">Restoration<br>custom Builds</h1>
+					<h1>Restoration<br>custom Builds</h1>
+				</div>
+			</div>
+
+
+			<div class="foo_sociallinks">
+				<div class="link">
+					<img src="{% static '/images/down-arrow 1.png'%}" alt="">
+					<a href="">MAKE A CUSTOM BUILD</a>
+				</div>
+				<div class="link">
+					<img src="{% static '/images/down-arrow 1.png'%}" alt="">
+					<a href="">RESTORE YOUR BIKE</a>
+				</div>
+			</div>
+
+			
+
+
+		</section>
+	</main>
+
+
+
+
+	{% include 'includes/footer.html' %}
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/homepage.js' %}"></script>
+
+	
+
+
+</body>
+
+<div class="mbnavpill">
+    <div class="tab_nav">
+        <div class="home pill pillactive">
+            <img src="{% static '/images/home_ic.svg' %}" alt="">
+            <h4>HOME</h4>
+        </div>
+        <div class="profile pill">
+            <img src="{% static '/images/profile_ic.svg' %}" alt="">
+            <h4>PROFILE</h4>
+        </div>
+        <div class="favorites pill">
+            <img src="{% static '/images/fav_ic.svg' %}" alt="">
+            <h4>FAVORITE'S</h4>
+        </div>
+    </div>
+</div>
+
+</html>
