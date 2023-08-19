@@ -11,13 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- SITE TITLE -->
     <title>Kalyani Autospares | product</title>
-    <!-- SITE TITLE -->
-	<title>Kalyani Autospares | Search</title>
-	<!-- CSS -->
-	<link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
-	<link href="{% static 'css/productpagestyle.css' %}" rel="stylesheet">
-	<!-- FAVICON AND TOUCH ICONS -->
-	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/productpagestyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
     <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
@@ -25,24 +23,25 @@
     <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
     <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
 
-	<!-- google fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-		rel="stylesheet">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-	<script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
 
-	<style>
+    <style>
         * {
-            cursor: url("{% static '/images/cursor.svg' %}"), auto !important;
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
         }
     </style>
 
-	<!-- slider -->
+    <!-- slider -->
 
-	<link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
 
 </head>
 
@@ -67,68 +66,68 @@
     </div>
 
     <header>
-		<nav id="navbar">
-			<div id="nav_tot" class="topnav">
-				<div class="left">
-					<img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
-					<img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
-				</div>
-				<div class="right">
-					<div class="container">
-						<input placeholder="Search Something" required="" class="input" name="text" type="search">
-						<div class="icon">
-							<img src="{% static '/images/search_ic.svg'%}" alt="">
-						</div>
-					</div>
-					<div class="cart_ic">
-						<p class="cartitems">12</p>
-						<img src="{% static '/images/cart_ic.svg'%}" alt="">
-					</div>
-					<div class="tab_nav">
-						<div class="home pill pillactive">
-							<img src="{% static '/images/home_ic.svg'%}" alt="">
-							<h4>HOME</h4>
-						</div>
-						<div class="profile pill">
-							<img src="{% static '/images/profile_ic.svg'%}" alt="">
-							<h4>PROFILE</h4>
-						</div>
-						<div class="favorites pill">
-							<img src="{% static '/images/fav_ic.svg'%}" alt="">
-							<h4>FAVORITE'S</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="statusbar">
-				<div id="sbleft" class="left">
-					<div id="sbcont" class="container">
-						<input id="inputHolder" placeholder="Search Something" required="" class="input" name="text"
-							type="search">
-						<div class="icon">
-							<img src="{% static '/images/search_ic_black.svg'%}" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="middle">
-					<img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
-					<img id="name_logo" class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
-				</div>
-				<div class="right">
-					<div class="cart_ic">
-						<p class="cartitems">12</p>
-						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
-					</div>
-				</div>
-			</div>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div onclick="gohome()" class="left">
+                    <img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div class="container">
+                        <input id="search_bar" placeholder="Search Something" required="" class="input" name="text" type="search">
+                        <div onclick="searchresult(true)" class="icon">
+                            <img src="{% static '/images/search_ic.svg'%}" alt="">
+                        </div>
+                    </div>
+                    <div class="cart_ic">
+                        <p class="cartitems">{{cart_items}}</p>
+                        <img onclick="gocart()" src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav">
+                        <div onclick="gohome()" class="home pill pillactive">
+                            <img src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div class="profile pill">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <div id="sbcont" class="container">
+                        <input id="inputHolder" placeholder="Search Something" required="" class="input" name="text"
+                            type="search">
+                        <div onclick="searchresult(false)" class="icon">
+                            <img src="{% static '/images/search_ic_black.svg'%}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div onclick="gohome()" class="middle">
+                    <img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
+                    <img id="name_logo" class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+                        <p class="cartitems">{{cart_items}}</p>
+                        <img src="{% static '/images/cart_ic_black.svg'%}" alt="">
+                    </div>
+                </div>
+            </div>
 
 
 
-		</nav>
+        </nav>
 
-		
 
-	</header>
+
+    </header>
 
 
 
@@ -168,84 +167,100 @@
 
                 </div>
             </div>
-            <div class="sec1_right">
+            <form action="{% url 'add_cart' %}" method="POST">
+                {% csrf_token %}
+                
+                <input type="hidden" name="product_id" value="{{single_product.id}}">
+                <input type="hidden" name="quantity" value="1" id="quantity_lay">
 
-                <h1>{{single_product.product_name}}</h1>
-                <div class="details">
-                    <p>{{single_product.description}}</p>
-                    <div class="det_container">
-                        <div class="price_reviews">
-                            <div class="price_details">
-                                <h3 class="mrp">₹{{single_product.price}}</h3>
-                                <h2 class="selling_price">₹{{single_product.selling_price}}</h2>
-                            </div>
-                            <div class="reviews_detail">
-                                <img src="{% static '/images/star.svg'%}" alt="">
-                                <h3 class="review_no">4.3</h3>
-                                <h3 class="review_count">(50 Reviews)</h3>
-                            </div>
-                        </div>
-                        <div class="color_items">
-                            <div class="colors">
-                                <h3>colors:</h3>
-                                <div class="rad_color">
-                                    <input type="radio" name="color" id="one" checked style="background-color: #000;">
-                                    <input type="radio" name="color" id="two" style="background-color: #efefef;">
+
+                <div class="sec1_right">
+
+                    <h1 style="text-transform: capitalize;" >{{single_product.product_name}}</h1>
+                    <h2 id="compatible_top" style="text-transform: capitalize;" > <span>compatible for :</span> {{single_product.compatible_for}}</h2>
+                    <div class="details">
+                        <p>{{single_product.description}}</p>
+                        <div class="det_container">
+                            <div class="price_reviews">
+                                <div class="price_details">
+                                    <h3 class="mrp">₹{{single_product.price}}</h3>
+                                    <h2 class="selling_price">₹{{single_product.selling_price}}</h2>
+                                </div>
+                                <div class="reviews_detail">
+                                    <img src="{% static '/images/star.svg'%}" alt="">
+                                    <h3 class="review_no">4.3</h3>
+                                    <h3 class="review_count">(50 Reviews)</h3>
                                 </div>
                             </div>
-                            <div class="items">
-                                <img id="minus_btn" src="{% static '/images/minuscart.svg'%}" alt="">
-                                <h3 id="item_no">01</h3>
-                                <img id="plus_btn" src="{% static '/images/pluscart.svg'%}" alt="">
+                            <div class="color_items">
+                                {% if single_product.variation_set.all|length > 0 %}
+                                <div class="colors">
+                                    <h3>colors:</h3>
+                                    <div class="rad_color">
+                                        {% for i in single_product.variation_set.all %}
+                                        <input type="radio" name="color" value="{{i.variation_value}}">
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="items">
+                                    <img id="minus_btn" src="{% static '/images/minuscart.svg'%}" alt="">
+                                    <h3 id="item_no">01</h3>
+                                    <img id="plus_btn" src="{% static '/images/pluscart.svg'%}" alt="">
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
-                </div>
-                <div class="benifits">
-                    <div class="b_wrapper fast_del">
-                        <div class="img_wr">
-                            <img src="{% static '/images/fast-delivery.svg'%}" alt="">
+                    <div class="benifits">
+                        <div class="b_wrapper fast_del">
+                            <div class="img_wr">
+                                <img src="{% static '/images/fast-delivery.svg'%}" alt="">
+                            </div>
+                            <h3>Free<br>delivery</h3>
                         </div>
-                        <h3>Free<br>delivery</h3>
-                    </div>
-                    <div class="b_gap">
+                        <div class="b_gap">
 
-                    </div>
-                    <div class="b_wrapper fast_del">
-                        <div class="img_wr">
-                            <img src="{% static '/images/cash-on-delivery.svg'%}" alt="">
                         </div>
-                        <h3>Pay on<br>delivery</h3>
-                    </div>
-                    <div class="b_gap">
-
-                    </div>
-                    <div class="b_wrapper fast_del">
-                        <div class="img_wr">
-                            <img src="{% static '/images/replacement.svg'%}" alt="">
+                        <div class="b_wrapper fast_del">
+                            <div class="img_wr">
+                                <img src="{% static '/images/cash-on-delivery.svg'%}" alt="">
+                            </div>
+                            <h3>Pay on<br>delivery</h3>
                         </div>
-                        <h3>7 Days<br>replace</h3>
+                        <div class="b_gap">
+
+                        </div>
+                        <div class="b_wrapper fast_del">
+                            <div class="img_wr">
+                                <img src="{% static '/images/replacement.svg'%}" alt="">
+                            </div>
+                            <h3>7 Days<br>replace</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="prquality">
-                    <div class="prq_wr">
-                        <img src="{% static '/images/original.svg'%}" alt="">
-                        <h3>Genuine Product</h3>
+                    <div class="prquality">
+                        <div class="prq_wr">
+                            <img src="{% static '/images/original.svg'%}" alt="">
+                            <h3>Genuine Product</h3>
+                        </div>
+                        <div class="b_gap"></div>
+                        <div class="prq_wr">
+                            <img src="{% static '/images/badge.svg'%}" alt="">
+                            <h3>Quality Checked</h3>
+                        </div>
                     </div>
-                    <div class="b_gap"></div>
-                    <div class="prq_wr">
-                        <img src="{% static '/images/badge.svg'%}" alt="">
-                        <h3>Quality Checked</h3>
-                    </div>
-                </div>
 
 
-                {% if single_product.stock > 0 %}
+                    {% if single_product.stock > 0 %}
                     <div class="carttab tabmain">
+                    
                         <label id="likecontainer" class="container">
-                            <input id="like" type="checkbox">
+                            {% if not favorite %}
+                            <input data-product-id="{{ single_product.id }}" id="like" type="checkbox">
+                            {% else %}
+                            <input data-product-id="{{ single_product.id }}" id="like" checked type="checkbox">
+                            {% endif %}
                             <div id="favou" class="checkmark">
                                 <svg viewBox="0 0 256 256">
                                     <rect fill="none" height="256" width="256"></rect>
@@ -255,15 +270,16 @@
                                 </svg>
                             </div>
                         </label>
-                        <div id="addtocart_btn">
+                        <button type="submit" id="addtocart_btn">
                             <h3>Add To Cart</h3>
-                        </div>
+                        </button>
                     </div>
-                {% else %}
+                    {% else %}
                     <h3 style="width: 100%; text-align: center; color: #a40000;">Out Of Stock</h3>
-                {% endif %}
+                    {% endif %}
 
-            </div>
+                </div>
+            </form>
         </section>
 
         <section class="section2">
@@ -281,6 +297,12 @@
                             <h4>Compatibility</h4>
                         </li>
                         <li>
+                            <h4>category</h4>
+                        </li>
+                        <li>
+                            <h4>Category</h4>
+                        </li>
+                        <li>
                             <h4>Part Number</h4>
                         </li>
                     </ul>
@@ -293,6 +315,12 @@
                         </li>
                         <li>
                             <h4>{{single_product.compatible_for}}</h4>
+                        </li>
+                        <li>
+                            <h4>{{single_product.belongs_to}}</h4>
+                        </li>
+                        <li>
+                            <h4>{{single_product.category}}</h4>
                         </li>
                         <li>
                             <h4>{{single_product.part_number}}</h4>
@@ -439,21 +467,24 @@
 
         <section class="section3">
             <div class="title">
-				<h3>More for your bike</h3>
-				<div class="more">
-					<a href=""><h4>more</h4></a>
-					<a href=""><img src="/images/arrow.svg" alt=""></a>
-				</div> 
-			</div>
+                <h3>More for your bike</h3>
+                <div class="more">
+                    <a href="{% url 'search' %}?keyword={{single_product.compatible_for.bike_name}}">
+                        <h4>more</h4>
+                    </a>
+                    <a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+                </div>
+            </div>
             <div class="products draggable_sl">
 
                 {% for product in like_products %}
-                {% if  single_product.product_name|stringformat:"s" != product.product_name|stringformat:"s"%}
-				<div class="product">
+                {% if single_product.product_name|stringformat:"s" != product.product_name|stringformat:"s"%}
+                <div class="product" data-product-url="{{ product.get_url }}">
                     <div class="product_img">
                         <img class="product_image" src="{{ product.images.url }}" alt="">
                     </div>
-                    <h2 class="product_title" onclick="location.href='{{ product.get_url }}'" >{{product.product_name}}</h2>
+                    <h2 class="product_title">{{product.product_name}}
+                    </h2>
                     <h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
                     <div class="rating_wrap">
                         <div class="rating">
@@ -488,16 +519,84 @@
 
 
     {% include 'includes/footer.html' %}
+    {% include 'includes/links.html' %}
 
 
 
+
+    <style>
+        #compatible_top {
+            margin-top: -10px;
+            font-size: 16px;
+        }
     
+        #compatible_top span {
+            font-size: 12px;
+            color: #000;
+        }
     
+        input[name="color"] {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+    
+        input[name="color"]:checked {
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
+        }
+    
+        #addtocart_btn {
+            border: none;
+            font-family: fugazone;
+        }
+
+    </style>
+
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="{% static 'js/main.js'%}"></script>
-	<script src="{% static 'js/slick.js'%}"></script>
-	<script src="{% static 'js/productpage.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/productpage.js'%}"></script>
+
+    <script>
+
+        var color_rad = document.querySelectorAll('input[name="color"]');
+        var inp=true;
+
+        color_rad.forEach(rads =>{
+            if(inp){
+                rads.checked=true;
+                inp=false;
+            }
+            var color = rads.value;
+            rads.style.backgroundColor = color;
+        });
+
+        const like_chekbox = document.getElementById("like");
+        const like_this_container = document.getElementById("likecontainer");
+        
+        like_chekbox.addEventListener('change', function(){
+            if(this.checked){
+                add_to_fav(this);
+            }
+            else{
+                delete_favorite(this);
+            }
+        });
+
+        function add_to_fav(object) {
+            var productId = object.getAttribute("data-product-id");
+            var url = "{% url 'add_favorites' %}?product_id=" + productId;
+            location.href = url;
+        }
+
+        function delete_favorite(object) {
+            var productId = object.getAttribute("data-product-id");
+            var url = "{% url 'delete_favorites' %}?product_id=" + productId;
+            location.href = url;
+        }
+
+
+
+    </script>
 
 
 

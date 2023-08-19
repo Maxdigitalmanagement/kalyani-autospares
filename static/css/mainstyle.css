@@ -9,7 +9,6 @@
 }
 
 *{
-    cursor: url(/images/cursor.svg), auto !important;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -162,7 +161,7 @@ body {
 #navbar {
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 102%;
     max-width: 1520px;
     margin-left: -10px;
     z-index: 100000000000;

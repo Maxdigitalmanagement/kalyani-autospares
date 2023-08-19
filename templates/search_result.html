@@ -17,12 +17,12 @@
 	<link href="{% static 'css/searchpagestyle.css' %}" rel="stylesheet">
 	<!-- FAVICON AND TOUCH ICONS -->
 	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
-    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+	<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
 
 	<!-- google fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,10 +34,11 @@
 	<script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
 
 	<style>
-        * {
-            cursor: url("{% static '/images/cursor.svg' %}"), auto !important;
-        }
-    </style>
+		* {
+			cursor: url("{% static '/images/cursor.svg' %}"),
+			auto !important;
+		}
+	</style>
 
 	<!-- slider -->
 
@@ -69,23 +70,24 @@
 	<header>
 		<nav id="navbar">
 			<div id="nav_tot" class="topnav">
-				<div class="left">
-					<img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
-					<img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+				<div onclick="gohome()" class="left">
+					<img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
+					<img class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
 				</div>
 				<div class="right">
 					<div class="container">
-						<input placeholder="Search Something" required="" class="input" name="text" type="search">
-						<div class="icon">
+						<input id="search_bar" placeholder="Search Something" required="" class="input" name="text"
+							type="search" {% if searched %} value="{{keyword}}" {% endif %}>
+						<div onclick="searchresult(true)" class="icon">
 							<img src="{% static '/images/search_ic.svg'%}" alt="">
 						</div>
 					</div>
-					<div class="cart_ic">
-						<p class="cartitems">12</p>
+					<div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items}}</p>
 						<img src="{% static '/images/cart_ic.svg'%}" alt="">
 					</div>
 					<div class="tab_nav">
-						<div class="home pill pillactive">
+						<div onclick="gohome()" class="home pill pillactive">
 							<img src="{% static '/images/home_ic.svg'%}" alt="">
 							<h4>HOME</h4>
 						</div>
@@ -93,7 +95,7 @@
 							<img src="{% static '/images/profile_ic.svg'%}" alt="">
 							<h4>PROFILE</h4>
 						</div>
-						<div class="favorites pill">
+						<div onclick="gofav()" class="favorites pill">
 							<img src="{% static '/images/fav_ic.svg'%}" alt="">
 							<h4>FAVORITE'S</h4>
 						</div>
@@ -103,20 +105,23 @@
 			<div class="statusbar">
 				<div id="sbleft" class="left">
 					<div id="sbcont" class="container">
-						<input id="inputHolder" placeholder="Search Something" required="" class="input" name="text"
+						<input id="inputHolder" placeholder="Search Something" required="" class="input" name="text" 
+							{%if searched %} 
+								value="{{keyword}}" 
+							{% endif %}
 							type="search">
-						<div class="icon">
+						<div onclick="searchresult(false)" class="icon">
 							<img src="{% static '/images/search_ic_black.svg'%}" alt="">
 						</div>
 					</div>
 				</div>
-				<div class="middle">
+				<div onclick="gohome()" class="middle">
 					<img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
 					<img id="name_logo" class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
 				</div>
 				<div class="right">
-					<div class="cart_ic">
-						<p class="cartitems">12</p>
+					<div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items}}</p>
 						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
 					</div>
 				</div>
@@ -126,7 +131,7 @@
 
 		</nav>
 
-		
+
 
 	</header>
 
@@ -140,11 +145,11 @@
 		<section class="section1">
 			<div class="sort_wrap">
 				{% for category in links %}
-					{% if category.category_name|stringformat:"s" == product_filter|stringformat:"s"%}
-						<a href="{{ category.get_url }}" class="sitem activesitem">{{category.category_name}}</a>
-					{% else %}
-						<a href="{{ category.get_url }}" class="sitem">{{category.category_name}}</a>
-					{% endif %}
+				{% if category.category_name|stringformat:"s" == product_filter|stringformat:"s"%}
+				<a href="{{ category.get_url }}" class="sitem activesitem">{{category.category_name}}</a>
+				{% else %}
+				<a href="{{ category.get_url }}" class="sitem">{{category.category_name}}</a>
+				{% endif %}
 				{% endfor %}
 				<a href="{% url 'store' %}" class="sitem">All</a>
 				<div class="sort_big sitem">
@@ -168,7 +173,7 @@
 							<li><label for="pricehlb">Price -- High To Low</label></li>
 						</ul>
 					</div>
-					
+
 				</div>
 				<div class="sort_short">
 					<div class="top">
@@ -177,7 +182,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bikefilter_wrap draggable_sl">
+			<!-- <div class="bikefilter_wrap draggable_sl">
 				<h2 class="sitem">Hunter 350</h2>
 				<h2 class="sitem">All New Classic 350</h2>
 				<h2 class="sitem">Meteor</h2>
@@ -189,7 +194,7 @@
 				<h2 class="sitem">Bullet ES</h2>
 				<h2 class="sitem">Scram 411</h2>
 				<h2 class="sitem">Super meteor 650</h2>
-			</div>
+			</div> -->
 		</section>
 
 		<section class="section2">
@@ -199,11 +204,12 @@
 			<div class="products">
 				{% for product in products %}
 				<div class="productwrap">
-					<div class="product">
+					<div class="product" data-product-url="{{ product.get_url }}">
 						<div class="product_img">
 							<img class="product_image" src="{{ product.images.url }}" alt="">
 						</div>
-						<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+						<h2 class="product_title">
+							{{product.product_name}}</h2>
 						<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
 						<div class="rating_wrap">
 							<div class="rating">
@@ -215,6 +221,71 @@
 				</div>
 				{% endfor %}
 			</div>
+			{% if products.has_other_pages %}
+			{% if not searched %}
+			<ul id="pagination">
+				{% if products.has_previous %}
+				<li onclick="location.href='?page={{products.previous_page_number}}'" class="page_item_fb"><a href="#">
+						<img src="{% static '/images/prevpage.svg'%}" alt="">
+					</a></li>
+				{% else %}
+				<li class="page_item_fb_deactive"><a href="#">
+						<img src="{% static '/images/prevpage.svg'%}" alt="">
+					</a></li>
+				{% endif %}
+
+				{% for i in page_range %}
+				{% if products.number == i %}
+				<li class="page_item page_active"><a href="#">{{i}}</a></li>
+				{% else %}
+				<li class="page_item"><a href="?page={{i}}">{{i}}</a></li>
+				{% endif %}
+				{% endfor %}
+
+				{% if products.has_next %}
+				<li onclick="location.href='?page={{products.next_page_number}}'" class="page_item_fb"><a href="#">
+						<img src="{% static '/images/nextpage.svg'%}" alt="">
+					</a></li>
+				{% else %}
+				<li class="page_item_fb_deactive"><a href="#">
+						<img src="{% static '/images/nextpage.svg'%}" alt="">
+					</a></li>
+				{% endif %}
+			</ul>
+			{% else %}
+			<ul id="pagination">
+				{% if products.has_previous %}
+				<li onclick="location.href='?keyword={{keyword}}&page={{products.previous_page_number}}'"
+					class="page_item_fb"><a href="#">
+						<img src="{% static '/images/prevpage.svg'%}" alt="">
+					</a></li>
+				{% else %}
+				<li class="page_item_fb_deactive"><a href="#">
+						<img src="{% static '/images/prevpage.svg'%}" alt="">
+					</a></li>
+				{% endif %}
+
+				{% for i in products.paginator.page_range %}
+				{% if products.number == i %}
+				<li class="page_item page_active"><a href="#">{{i}}</a></li>
+				{% else %}
+				<li class="page_item"><a href="?keyword={{keyword}}&page={{i}}">{{i}}</a></li>
+				{% endif %}
+				{% endfor %}
+
+				{% if products.has_next %}
+				<li onclick="location.href='?keyword={{keyword}}&page={{products.next_page_number}}'"
+					class="page_item_fb"><a href="#">
+						<img src="{% static '/images/nextpage.svg'%}" alt="">
+					</a></li>
+				{% else %}
+				<li class="page_item_fb_deactive"><a href="#">
+						<img src="{% static '/images/nextpage.svg'%}" alt="">
+					</a></li>
+				{% endif %}
+			</ul>
+			{% endif %}
+			{% endif %}
 		</section>
 
 		<div id="sortPopup" class="sort-popup">
@@ -253,7 +324,89 @@
 
 
 	{% include 'includes/footer.html' %}
+	{% include 'includes/links.html' %}
 
+
+
+	<style>
+		#pagination {
+			margin-top: 50px;
+			display: flex;
+			gap: 25px;
+			text-decoration: none;
+			list-style-type: none;
+			align-items: center;
+			padding: 0;
+		}
+
+		#pagination li a {
+			text-decoration: none;
+			color: black;
+			font-size: 20px;
+		}
+
+		.page_item_fb img {
+			height: 20px;
+			mix-blend-mode: difference;
+		}
+
+		.page_item_fb {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #D9D9D9;
+			padding: 5px 20px;
+			border-radius: 10px;
+		}
+
+		.page_item_fb_deactive {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #fff;
+			border: 2px solid black;
+			padding: 5px 20px;
+			border-radius: 10px;
+			opacity: 0.2;
+		}
+
+		.page_item_fb_deactive img {
+			height: 20px;
+			mix-blend-mode: difference;
+		}
+
+
+		.page_item_fb:hover {
+			background-color: #214cdb;
+		}
+
+		.page_item_fb:hover img {
+			mix-blend-mode: normal;
+		}
+
+		.page_active {
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: url("{% static '/images/currentpage.svg' %}");
+			background-size: 40px;
+			background-repeat: no-repeat;
+		}
+
+		.page_active a {
+			margin-left: -3px;
+			margin-top: 2px;
+			color: #214cdb !important;
+		}
+
+		@media screen and (max-width : 400px) {
+			#pagination {
+				gap: 15px;
+			}
+		}
+	</style>
 
 
 
@@ -275,7 +428,7 @@
 <div class="mbnavpill">
 	<div class="tab_nav">
 		<div class="home pill pillactive">
-			<img src="{% static '/images/home_ic.svg'%}" alt="">
+			<img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
 			<h4>HOME</h4>
 		</div>
 		<div class="profile pill">
@@ -283,7 +436,7 @@
 			<h4>PROFILE</h4>
 		</div>
 		<div class="favorites pill">
-			<img src="{% static '/images/fav_ic.svg'%}" alt="">
+			<img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
 			<h4>FAVORITE'S</h4>
 		</div>
 	</div>

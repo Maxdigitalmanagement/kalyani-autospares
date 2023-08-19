@@ -44,42 +44,6 @@ displayc();
 
 window.addEventListener('resize', displayc)
 
-
-minus.forEach(function (mins, i) {
-
-    mins.addEventListener('click', () => {
-        var items = txtno[i].innerHTML;
-        if (items > 1) {
-            items--;
-            txtno[i].innerHTML = "0" + items;
-        }
-    });
-
-});
-
-
-plus.forEach(function (pls, i) {
-
-
-
-    pls.addEventListener('click', () => {
-
-        var items = txtno[i].innerHTML;
-        if (items < 10) {
-            items++;
-            if (items < 10) {
-                txtno[i].innerHTML = "0" + items;
-            }
-            else {
-                txtno[i].innerHTML = items;
-            }
-
-        }
-
-    })
-
-});
-
 const cartwarp = document.querySelector('.cart_items_wrap');
 const right = document.querySelector('.sec1_right');
 

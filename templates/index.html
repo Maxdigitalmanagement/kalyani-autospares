@@ -4,50 +4,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="Hari Babu" />
-    <meta name="description" content="Kalyani Autospares Home Page" />
-    <meta name="keywords" content="Food, Restaurant">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- SITE TITLE -->
-    <title>Kalyani Autospares | Home</title>
-    <!-- CSS -->
-    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
-    <link href="{% static 'css/homepagestyle.css' %}" rel="stylesheet">
-    <!-- FAVICON AND TOUCH ICONS -->
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
-    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Hari Babu" />
+	<meta name="description" content="Kalyani Autospares Home Page" />
+	<meta name="keywords" content="Food, Restaurant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- SITE TITLE -->
+	<title>Kalyani Autospares | Home</title>
+	<!-- CSS -->
+	<link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+	<link href="{% static 'css/homepagestyle.css' %}" rel="stylesheet">
+	<!-- FAVICON AND TOUCH ICONS -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+	<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
 
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+	<!-- google fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
 
-    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
 
-    <style>
-        * {
-            cursor: url("{% static '/images/cursor.svg' %}"), auto !important;
-        }
-    </style>
+	<style>
+		* {
+			cursor: url("{% static '/images/cursor.svg' %}"),
+			auto !important;
+		}
+	</style>
 
-    <!-- slider -->
+	<!-- slider -->
 
-    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static '/css/slick.css' %}" />
 
 </head>
 
 <body>
 
-    <div id="preloader">
+	<div id="preloader">
 		<div class="bulb">
 			<svg height="511pt" viewBox="1 -13 511.999 511" width="511pt" xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -71,18 +72,19 @@
 		<nav id="navbar">
 			<div id="nav_tot" class="topnav">
 				<div class="left">
-					<img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
-					<img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+					<img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
+					<img class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
 				</div>
 				<div class="right">
 					<div class="container">
-						<input placeholder="Search Something" required="" class="input" name="text" type="search">
-						<div class="icon">
+						<input id="search_bar" placeholder="Search Something" required="" class="input" name="text"
+							type="search">
+						<div onclick="searchresult(true)" class="icon">
 							<img src="{% static '/images/search_ic.svg'%}" alt="">
 						</div>
 					</div>
-					<div class="cart_ic">
-						<p class="cartitems">12</p>
+					<div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items}}</p>
 						<img src="{% static '/images/cart_ic.svg'%}" alt="">
 					</div>
 					<div class="tab_nav">
@@ -95,7 +97,7 @@
 							<h4>PROFILE</h4>
 						</div>
 						<div class="favorites pill">
-							<img src="{% static '/images/fav_ic.svg'%}" alt="">
+							<img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
 							<h4>FAVORITE'S</h4>
 						</div>
 					</div>
@@ -106,7 +108,7 @@
 					<div id="sbcont" class="container">
 						<input id="inputHolder" placeholder="Search Something" required="" class="input" name="text"
 							type="search">
-						<div class="icon">
+						<div onclick="searchresult(false)" class="icon">
 							<img src="{% static '/images/search_ic_black.svg'%}" alt="">
 						</div>
 					</div>
@@ -116,8 +118,8 @@
 					<img id="name_logo" class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
 				</div>
 				<div class="right">
-					<div class="cart_ic">
-						<p class="cartitems">12</p>
+					<div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items}}</p>
 						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
 					</div>
 				</div>
@@ -127,11 +129,11 @@
 
 		</nav>
 
-		
+
 
 	</header>
 
-	
+
 
 	<main>
 		<section class="topmar">
@@ -166,31 +168,31 @@
 				<div class="category_wrap">
 					<h3 class="title"> Shop By Category </h3>
 					<div class="categories">
-						<div class="item_category">
+						<div onclick="searchBy('engine')" class="item_category">
 							<img src="{% static '/images/enginespare.png'%}" alt="">
 							<h4>Engine Spares</h4>
 						</div>
-						<div class="item_category">
+						<div onclick="searchBy('head')" class="item_category">
 							<img src="{% static '/images/headspares.png'%}" alt="">
 							<h4>Head Spares</h4>
 						</div>
-						<div class="item_category">
+						<div onclick="searchBy('tail')" class="item_category">
 							<img src="{% static '/images/tailspare.png'%}" alt="">
 							<h4>Tail Spares</h4>
 						</div>
-						<div class="item_category">
+						<div onclick="searchBy('tank')" class="item_category">
 							<img src="{% static '/images/tankspares.png'%}" alt="">
 							<h4>Tank Spares</h4>
 						</div>
-						<div class="item_category">
+						<div onclick="searchBy('wheel')" class="item_category">
 							<img src="{% static '/images/wheelspare.png'%}" alt="">
 							<h4>Wheel Spares</h4>
 						</div>
-						<div class="item_category">
+						<div onclick="searchBy('body')" class="item_category">
 							<img src="{% static '/images/bodyspare.png'%}" alt="">
 							<h4>Body Spares</h4>
 						</div>
-						<div class="item_category">
+						<div onclick="gotoaccessories()" class="item_category">
 							<img src="{% static '/images/bikeaccessories.png'%}" alt="">
 							<h4>Accessories</h4>
 						</div>
@@ -209,11 +211,11 @@
 					<div class="bikes draggable_sl">
 						<div class="item_bike">
 							<img src="{% static '/images/re-interceptor 1.png'%}" alt="">
-							<h3>Interceptor 650</h3>
+							<h3>Interceptor</h3>
 						</div>
 						<div class="item_bike">
 							<img src="{% static '/images/re-continental 1.png'%}" alt="">
-							<h3>continental Gt650</h3>
+							<h3>continental Gt</h3>
 						</div>
 						<div class="item_bike">
 							<img src="{% static '/images/re-supermeteor650 1.png'%}" alt="">
@@ -241,24 +243,24 @@
 						</div>
 						<div class="item_bike">
 							<img src="{% static '/images/re-Bullet350.png'%}" alt="">
-							<h3>BUllet 350</h3>
+							<h3>Bullet 350</h3>
 						</div>
 						<div class="item_bike">
 							<img src="{% static '/images/re-Bulletes.png'%}" alt="">
 							<h3>Bullet Es</h3>
 						</div>
-						
-						
+
+
 					</div>
 					<div class="faders">
 						<div class="fade_l">
 
 						</div>
 						<div class="fade_r">
-							
+
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</section>
@@ -268,18 +270,20 @@
 			<div class="title">
 				<h3>New Arrivals</h3>
 				<div class="more">
-					<a href=""><h4>more</h4></a>
-					<a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+					<a href="{% url 'store' %}">
+						<h4>more</h4>
+					</a>
+					<a href="{% url 'store' %}"><img src="{% static '/images/arrow.svg'%}" alt=""></a>
 				</div>
 			</div>
 
 			<div class="products draggable_sl">
 				{% for product in products %}
-				<div class="product" >
+				<div class="product" data-product-url="{{ product.get_url }}">
 					<div class="product_img">
 						<img class="product_image" src="{{ product.images.url }}" alt="">
 					</div>
-					<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+					<h2 style="text-transform: capitalize;" class="product_title">{{product.product_name}}</h2>
 					<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
 					<div class="rating_wrap">
 						<div class="rating">
@@ -298,19 +302,25 @@
 			<div class="title">
 				<h3>Spares</h3>
 				<div class="more">
-					<a href=""><h4>more</h4></a>
-					<a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
-				</div> 
+					{% for categories in links %}
+					{% if categories.slug|stringformat:"s" == "spares"%}
+					<a href="{{categories.get_url}}">
+						<h4>more</h4>
+					</a>
+					<a href="{{categories.get_url}}"><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+					{% endif %}
+					{% endfor %}
+				</div>
 			</div>
 
 			<div class="products sapres draggable_sl">
 				{% for product in products %}
-				{% if  product.category.slug|stringformat:"s" == "spares"%}
-				<div class="product" >
+				{% if product.category.slug|stringformat:"s" == "spares"%}
+				<div class="product" data-product-url="{{ product.get_url }}">
 					<div class="product_img">
 						<img class="product_image" src="{{ product.images.url }}" alt="">
 					</div>
-					<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+					<h2 style="text-transform: capitalize;" class="product_title">{{product.product_name}}</h2>
 					<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
 					<div class="rating_wrap">
 						<div class="rating">
@@ -326,19 +336,25 @@
 			<div class="title">
 				<h3>Accessories</h3>
 				<div class="more">
-					<a href=""><h4>more</h4></a>
-					<a href=""><img src="{% static '/images/arrow.svg'%}" alt=""></a>
-				</div> 
+					{% for categories in links %}
+					{% if categories.slug|stringformat:"s" == "accessories"%}
+					<a href="{{categories.get_url}}">
+						<h4>more</h4>
+					</a>
+					<a href="{{categories.get_url}}"><img src="{% static '/images/arrow.svg'%}" alt=""></a>
+					{% endif %}
+					{% endfor %}
+				</div>
 			</div>
 
 			<div class="products accessories draggable_sl">
 				{% for product in products %}
-				{% if  product.category.slug|stringformat:"s" == "accessories"%}
-				<div class="product" >
+				{% if product.category.slug|stringformat:"s" == "accessories"%}
+				<div class="product" data-product-url="{{ product.get_url }}">
 					<div class="product_img">
 						<img class="product_image" src="{{ product.images.url }}" alt="">
 					</div>
-					<h2 class="product_title" onclick="location.href='{{ product.get_url }}'">{{product.product_name}}</h2>
+					<h2 style="text-transform: capitalize;" class="product_title">{{product.product_name}}</h2>
 					<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
 					<div class="rating_wrap">
 						<div class="rating">
@@ -384,7 +400,7 @@
 				</div>
 			</div>
 
-			
+
 
 
 		</section>
@@ -394,35 +410,55 @@
 
 
 	{% include 'includes/footer.html' %}
+	{% include 'includes/links.html' %}
 
 
 
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/slick.js' %}"></script>
-    <script src="{% static 'js/homepage.js' %}"></script>
 
-	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'js/slick.js' %}"></script>
+	<script src="{% static 'js/homepage.js' %}"></script>
+
+	<script>
+
+		
+
+		const bikes_all = document.querySelectorAll('.item_bike');
+		bikes_all.forEach(bike => {
+			bike.addEventListener('click', () => {
+
+				kew_bike=bike.children[1].innerHTML;
+				if (!drag) {
+					searchBy(kew_bike);
+				}
+
+			});
+		});
+
+
+	</script>
+
 
 
 </body>
 
 <div class="mbnavpill">
-    <div class="tab_nav">
-        <div class="home pill pillactive">
-            <img src="{% static '/images/home_ic.svg' %}" alt="">
-            <h4>HOME</h4>
-        </div>
-        <div class="profile pill">
-            <img src="{% static '/images/profile_ic.svg' %}" alt="">
-            <h4>PROFILE</h4>
-        </div>
-        <div class="favorites pill">
-            <img src="{% static '/images/fav_ic.svg' %}" alt="">
-            <h4>FAVORITE'S</h4>
-        </div>
-    </div>
+	<div class="tab_nav">
+		<div class="home pill pillactive">
+			<img src="{% static '/images/home_ic.svg' %}" alt="">
+			<h4>HOME</h4>
+		</div>
+		<div class="profile pill">
+			<img src="{% static '/images/profile_ic.svg' %}" alt="">
+			<h4>PROFILE</h4>
+		</div>
+		<div class="favorites pill">
+			<img onclick="gofav()" src="{% static '/images/fav_ic.svg' %}" alt="">
+			<h4>FAVORITE'S</h4>
+		</div>
+	</div>
 </div>
 
 </html>

@@ -14,6 +14,7 @@ const right = document.querySelector('.sec1_right');
 const minus = document.getElementById('minus_btn');
 const plus = document.getElementById('plus_btn');
 const itemno = document.getElementById('item_no');
+const qty = document.getElementById('quantity_lay');
 const like = document.getElementById('like');
 const favou = document.getElementById('favou');
 const likecontainer = document.getElementById('likecontainer');
@@ -48,10 +49,12 @@ plus.addEventListener('click', () => {
 
         if (items < 10) {
             itemno.innerHTML = "0" + items;
+            qty.value=items;
         }
         else {
             itemno.innerHTML = items;
         }
+        qty.value=items;
 
     }
 
@@ -62,6 +65,7 @@ minus.addEventListener('click', () => {
         items--;
         console.log(items)
         itemno.innerHTML = "0" + items;
+        qty.value=items;
     }
 
 })

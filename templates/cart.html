@@ -1,0 +1,310 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Hari Babu" />
+    <meta name="description" content="Kalyani Autospares Cart Page" />
+    <meta name="keywords" content="Food, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SITE TITLE -->
+    <title>Kalyani Autospares | Cart</title>
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/cartstyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div class="bulb">
+            <svg height="511pt" viewBox="1 -13 511.999 511" width="511pt" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="m300.386719 20.367188c-11.515625-12.628907-27.910157-19.867188-44.996094-19.867188-.03125 0-.0625 0-.09375 0-17.121094.027344-33.535156 7.320312-45.027344 20.011719 0 0-193.199219 212.128906-196.042969 215.1875-9.410156 10.609375-14.226562 22.394531-14.226562 34.308593v166.316407c0 26.78125 21.789062 48.574219 48.570312 48.574219h414.855469c26.785157 0 48.574219-21.792969 48.574219-48.574219v-166.316407c0-12.390624-4.667969-23.71875-12.335938-32.308593-2.175781-2.441407-199.277343-217.332031-199.277343-217.332031zm-44.386719 11.984374c12.722656 0 23.035156 10.3125 23.035156 23.035157 0 12.722656-10.3125 23.035156-23.035156 23.035156s-23.035156-10.3125-23.035156-23.035156c0-12.71875 10.3125-23.035157 23.035156-23.035157zm0 76.070313c23.589844 0 43.621094-15.484375 50.488281-36.820313l136.574219 149.835938h-374.300781l136.480469-150.6875c6.601562 21.773438 26.855468 37.671875 50.757812 37.671875zm226 327.902344c0 10.238281-8.332031 18.570312-18.570312 18.570312h-414.859376c-10.238281 0-18.570312-8.332031-18.570312-18.570312v-166.316407c0-10.238281 8.332031-18.570312 18.570312-18.570312h414.855469c10.242188 0 18.574219 8.332031 18.574219 18.570312zm0 0" />
+                <path
+                    d="m132.28125 280.375h-58.648438c-8.285156 0-15 6.714844-15 15v125.304688c0 8.285156 6.714844 15 15 15h58.648438c8.285156 0 15-6.714844 15-15v-125.304688c0-8.285156-6.714844-15-15-15zm-15 125.304688h-28.648438v-95.304688h28.648438zm0 0" />
+                <path
+                    d="m237.121094 280.375h-55.203125c-8.285157 0-15 6.714844-15 15v125.304688c0 8.285156 6.714843 15 15 15 8.28125 0 15-6.714844 15-15v-47.652344h40.203125c8.285156 0 15-6.714844 15-15v-62.652344c0-8.285156-6.714844-15-15-15zm-15 62.652344h-25.203125v-32.652344h25.203125zm0 0" />
+                <path
+                    d="m438.367188 280.375c-8.28125 0-15 6.714844-15 15v60.148438l-32.429688-66.707032c-3.054688-6.285156-10.042969-9.625-16.855469-8.058594-6.8125 1.566407-11.636719 7.628907-11.636719 14.617188v125.304688c0 8.285156 6.714844 15 15 15 8.285157 0 15-6.714844 15-15v-60.148438l32.433594 66.707031c2.550782 5.25 7.84375 8.445313 13.484375 8.445313 1.117188 0 2.246094-.125 3.371094-.386719 6.808594-1.566406 11.632813-7.628906 11.632813-14.617187v-125.304688c0-8.285156-6.714844-15-15-15zm0 0" />
+                <path
+                    d="m323.96875 310.375c8.285156 0 15-6.714844 15-15s-6.714844-15-15-15h-38.507812c-8.285157 0-15 6.714844-15 15v125.304688c0 8.285156 6.714843 15 15 15h38.507812c8.285156 0 15-6.714844 15-15 0-8.28125-6.714844-15-15-15h-23.507812v-32.652344h17.976562c8.28125 0 15-6.714844 15-15s-6.71875-15-15-15h-17.976562v-32.652344zm0 0" />
+            </svg>
+        </div>
+
+        <div class="line-wobble"></div>
+
+    </div>
+
+    <header>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div class="left">
+                    <img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div class="cart_ic">
+                        {% if quantity > 0 %}
+                        <p class="cartitems">{{quantity}}</p>
+                        {% endif %}
+                        <img src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav">
+                        <div class="home pill">
+                            <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div class="profile pill">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt="">
+                </div>
+                <div class="middle">
+                    <h3>Cart</h3>
+                </div>
+                <div class="right">
+
+                </div>
+            </div>
+
+
+
+        </nav>
+
+    </header>
+
+
+    {% if quantity != 0 %}
+    <input type="checkbox" id="ChekBox" placeholder="jj" checked>
+    {% else %}
+    <input type="checkbox" id="ChekBox" placeholder="jj">
+    {% endif %}
+    <div class="wr_empty">
+        <div class="empty_fav">
+            <div class="pics">
+                <img id="left_top" src="{% static '/images/product_img_1.png' %}" alt="" data-value="6"
+                    class="levitate">
+                <img id="middle" src="{% static '/images/cartemptycart.svg'%}" alt="" data-value="3" class="levitate">
+                <img id="bottom_right" src="{% static '/images/product_img_2.png'%}" alt="" data-value="6"
+                    class="levitate">
+            </div>
+            <h1>Your Cart is <span>empty</span></h1>
+            <a style="text-decoration: none;" href="{% url 'store' %}">
+                <p>browse items</p>
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <section class="topmar">
+
+        </section>
+
+        <section class="section1">
+            <div class="sec1_left">
+                <div class="heading">
+                    <h1>Your Cart</h1>
+                </div>
+
+                <div class="cart_items_wrap">
+                    {% for cart_item in cart_items %}
+                    <div class="cart_item">
+                        <div class="item_left">
+                            <img onclick="location.href='{{cart_item.product.get_url}}'" src="{{cart_item.product.images.url}}" alt="">
+                        </div>
+                        <div class="item_right">
+                            <div class="name_wrap">
+                                <h3 onclick="location.href='{{cart_item.product.get_url}}'" >{{cart_item.product.product_name}}</h3>
+                                <img id="garbage" onclick="delete_from_cart('{{cart_item.product.id}}','{{cart_item.id}}')" src="{% static '/images/garbage.svg' %}" alt="" class="garbage">
+                            </div>
+                            <h3 style="font-size: 12px;">
+                            {% if cart_item.variations.all %}
+                                {% for item in cart_item.variations.all %}
+                                    {{ item.variation_category }} : {{ item.variation_value }}
+                                {% endfor %}
+                            {% endif %}
+                            </h3>
+                            <h3 style="font-size: 12px; margin-top: 10px; color: #949494;">{{cart_item.quantity}} x
+                                ₹{{cart_item.product.selling_price}}</h3>
+                            <div class="price_wrap">
+                                <div class="prices">
+                                    <h1>₹{{cart_item.sub_total}}</h1>
+                                </div>
+                                <div class="items">
+                                    <form action="{% url 'minus_cart' %}" method="GET">
+                                        <input type="hidden" name="cart_item_id" value="{{cart_item.id}}">
+                                        <input type="hidden" name="product_id" value="{{cart_item.product.id}}">
+                                        <button id="btn_button" type="submit"><img class="minus_btn" src="{% static '/images/minuscart.svg' %}" alt=""></button>
+                                    </form>
+                                    <h3 class="item_no" data-product-id="{{cart_item.product.id}}"
+                                        data-item-qty="{{cart_item.quantity}}"></h3>
+                                    <form action="{% url 'add_cart' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="product_id" value="{{cart_item.product.id}}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        {% if cart_item.variations.all %}
+                                            {% for item in cart_item.variations.all %}
+                                                <input type="hidden" name="color" value="{{ item.variation_value }}">
+                                            {% endfor %}
+                                        {% endif %}
+                                        
+                                        <button id="btn_button" type="submit"><img class="plus_btn" src="{% static '/images/pluscart.svg' %}" alt=""></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="sec1_right">
+                <div class="cart_total">
+                    <div class="items_total totitem">
+                        <h3 class="light">Cart Total</h3>
+                        <h3>₹{{total}}</h3>
+                    </div>
+                    <div class="extras totitem">
+                        <h3 class="light">Taxes & charges</h3>
+                        <h3>₹0</h3>
+                    </div>
+                    <div class="total totitem">
+                        <h2>TOTAL</h2>
+                        <h2 id="pricemain">₹{{total}}</h2>
+                    </div>
+                </div>
+                <div class="chekout">
+                    <h1>chekout</h1>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+    {% include 'includes/links.html' %}
+
+
+
+
+
+    <style>
+        #btn_button{
+            border: 0;
+            background: #ffffff00;
+        }
+    </style>
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/cart.js'%}"></script>
+
+    <script>
+        
+        const cart_items_wrap = document.querySelector('.cart_items_wrap');
+        const main_wrap = document.querySelector(".sec1_left");
+
+        window.addEventListener('load', setqty())
+
+        function setqty() {
+            txtno.forEach(function (txts, i) {
+                var items = txts.getAttribute("data-item-qty");
+                if (items < 10) {
+                    txts.innerHTML = "0" + items;
+                }
+                else {
+                    txts.innerHTML = items;
+                }
+            });
+
+
+            if(cart_items_wrap.scrollHeight+75<main_wrap.clientHeight){
+                main_wrap.style.justifyContent="center";
+            }
+
+        }
+
+        // minus.forEach(function (mins, i) {
+
+        //     mins.addEventListener('click', () => {
+        //         productId = txtno[i].getAttribute("data-product-id");
+        //         var url = "{% url 'minus_cart' %}?product_id=" + productId;
+        //         location.href = url;
+        //     });
+
+        // });
+
+
+        // plus.forEach(function (pls, i) {
+
+        //     pls.addEventListener('click', () => {
+
+        //         productId = txtno[i].getAttribute("data-product-id");
+
+        //         var url = "{% url 'add_cart' %}?product_id=" + productId + "&quantity=1";
+        //         location.href = url;
+
+        //     })
+
+        // });
+
+        function delete_from_cart(productId,cart_id) {
+            var url = "{% url 'delete_cart' %}?product_id=" + productId + "&cart_item_id=" + cart_id;
+            location.href = url;
+        }
+
+    </script>
+
+
+</body>
+
+
+</html>

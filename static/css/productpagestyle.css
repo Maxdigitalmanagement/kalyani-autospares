@@ -754,6 +754,14 @@ input[name="color"]:checked {
 }
 
 
+@media screen and (max-width : 420px) {
+    .sec2_left .details h4 {
+        font-size: 14px;
+    }
+}
+
+
+
 @media screen and (max-width : 380px) {
     .color_items{
         flex-direction: column;

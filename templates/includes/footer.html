@@ -16,52 +16,52 @@
         <div class="bikel link_wrapper">
             <h2>Bikes</h2>
             <ul class="links">
-                <li><a href=""><h5>Hunter 350</h5></a></li>
-                <li><a href=""><h5>All New Classic 350</h5></a></li>
-                <li><a href=""><h5>Meteor 350</h5></a></li>
-                <li><a href=""><h5>Bullet 350</h5></a></li>
-                <li><a href=""><h5>Interceptor</h5></a></li>
-                <li><a href=""><h5>Continental GT</h5></a></li>
-                <li><a href=""><h5>Himalayan</h5></a></li>
-                <li><a href=""><h5>Bullet ES</h5></a></li>
-                <li><a href=""><h5>Scram 411</h5></a></li>
-                <li><a href=""><h5>Super meteor 650</h5></a></li>
+                <li><a href="#"><h5>Hunter 350</h5></a></li>
+                <li><a href="#"><h5>All New Classic 350</h5></a></li>
+                <li><a href="#"><h5>Meteor 350</h5></a></li>
+                <li><a href="#"><h5>Bullet 350</h5></a></li>
+                <li><a href="#"><h5>Interceptor</h5></a></li>
+                <li><a href="#"><h5>Continental GT</h5></a></li>
+                <li><a href="#"><h5>Himalayan</h5></a></li>
+                <li><a href="#"><h5>Bullet ES</h5></a></li>
+                <li><a href="#"><h5>Scram 411</h5></a></li>
+                <li><a href="#"><h5>Super meteor 650</h5></a></li>
             </ul>
         </div>
         <div class="accessories link_wrapper">
             <h2>Accessories</h2>
             <ul class="links">
-                <li><a href=""><h5>Protection</h5></a></li>
-                <li><a href=""><h5>Seats</h5></a></li>
-                <li><a href=""><h5>Body Work</h5></a></li>
-                <li><a href=""><h5>Luggage</h5></a></li>
-                <li><a href=""><h5>Engine</h5></a></li>
-                <li><a href=""><h5>Security & Maintainance</h5></a></li>
-                <li><a href=""><h5>Controls</h5></a></li>
-                <li><a href=""><h5>Wheels</h5></a></li>
-                <li><a href=""><h5>Electrical</h5></a></li>
-                <li><a href=""><h5>Riding Gear</h5></a></li>
-                <li><a href=""><h5>All Accessories</h5></a></li>
+                <li><a href="#"><h5>Protection</h5></a></li>
+                <li><a href="#"><h5>Seats</h5></a></li>
+                <li><a href="#"><h5>Body Work</h5></a></li>
+                <li><a href="#"><h5>Luggage</h5></a></li>
+                <li><a href="#"><h5>Engine</h5></a></li>
+                <li><a href="#"><h5>Security & Maintainance</h5></a></li>
+                <li><a href="#"><h5>Controls</h5></a></li>
+                <li><a href="#"><h5>Wheels</h5></a></li>
+                <li><a href="#"><h5>Electrical</h5></a></li>
+                <li><a href="#"><h5>Riding Gear</h5></a></li>
+                <li><a href="#"><h5>All Accessories</h5></a></li>
             </ul>
         </div>
         <div class="inner">
             <div class="spares link_wrapper">
                 <h2>Spares</h2>
                 <ul class="links">
-                    <li><a href=""><h5>Engine Spares</h5></a></li>
-                    <li><a href=""><h5>Head Spares</h5></a></li>
-                    <li><a href=""><h5>Tail Spares</h5></a></li>
-                    <li><a href=""><h5>Tank Spares</h5></a></li>
-                    <li><a href=""><h5>Wheel Spares</h5></a></li>
-                    <li><a href=""><h5>Body Spares</h5></a></li>
+                    <li><a href="#"><h5>Engine</h5></a></li>
+                    <li><a href="#"><h5>Head</h5></a></li>
+                    <li><a href="#"><h5>Tail</h5></a></li>
+                    <li><a href="#"><h5>Tank</h5></a></li>
+                    <li><a href="#"><h5>Wheel</h5></a></li>
+                    <li><a href="#"><h5>Body</h5></a></li>
                 </ul>
             </div>
             <div class="services link_wrapper">
                 <h2>Services</h2>
                 <ul class="links">
-                    <li><a href=""><h5>Restoration</h5></a></li>
-                    <li><a href=""><h5>Modification</h5></a></li>
-                    <li><a href=""><h5>Full Service</h5></a></li>
+                    <li><a href="#"><h5>Restoration</h5></a></li>
+                    <li><a href="#"><h5>Modification</h5></a></li>
+                    <li><a href="#"><h5>Full Service</h5></a></li>
                 </ul>
             </div>
         </div>
@@ -75,27 +75,31 @@
     <div class="foo_sociallinks">
         <div class="link">
             <img src="{% static '/images/whatsapp.svg'%}" alt="">
-            <a href="">+91 9848486761</a>
+            <a href="#">+91 9848486761</a>
         </div>
         <div class="link">
             <img src="{% static '/images/facebook.svg'%}" alt="">
-            <a href="">KALYANI AUTOSPARES</a>
+            <a href="#">KALYANI AUTOSPARES</a>
         </div>
         <div class="link">
             <img src="{% static '/images/instagram.svg'%}" alt="">
-            <a href="">KALYANI AUTOSPARES</a>
+            <a href="#">KALYANI AUTOSPARES</a>
         </div>
     </div>
 
     <div class="foobottom">
-        <a href="">2023 All rights reserved</a>
-        <a href="">Powered by <span>MAX</span> DM</a>
+        <a href="#">2023 All rights reserved</a>
+        <a href="#">Powered by <span>MAX</span> DM</a>
     </div>
 </footer>
 
-
 <script>
-    function gohome(){
-        location.href="{% url 'home' %}"
-    }
+    const foo_links_All = document.querySelectorAll('.links');
+    foo_links_All.forEach(links =>{
+        links.childNodes.forEach(child =>{
+            child.addEventListener('click', () => {
+                location.href="{% url 'search' %}?keyword=" + child.childNodes[0].childNodes[0].innerHTML;
+            });
+        });
+    });
 </script>

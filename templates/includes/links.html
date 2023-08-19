@@ -1,0 +1,95 @@
+<script>
+    function gohome() {
+        location.href = "{% url 'home' %}"
+    }
+
+    function gocart() {
+        location.href = "{% url 'cart' %}"
+    }
+
+    function gofav() {
+        location.href = "{% url 'favorites' %}"
+    }
+
+    function searchBy(name) {
+        var url = "{% url 'search' %}?keyword=" + name;
+        location.href = url;
+    }
+
+    function gotospares(){
+        var url = "{% url 'products_by_category' 'spares'%}";
+        location.href = url;
+    }
+
+    function gotoaccessories(){
+        var url = "{% url 'products_by_category' 'accessories'%}";
+        location.href = url;
+    }
+
+
+    const searchbarbig = document.getElementById("search_bar");
+    const searchbarsmall = document.getElementById("inputHolder")
+
+    searchbarbig.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            searchresult(true);
+        }
+    });
+
+    searchbarsmall.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            searchresult(false);
+        }
+    });
+
+    function searchresult(key_i) {
+
+        if (key_i) {
+            if (searchbarbig.value != "") {
+                var url = "{% url 'search' %}?keyword=" + searchbarbig.value;
+                location.href = url;
+            }
+        }
+        else {
+            if (searchbarsmall.value != "") {
+                var url = "{% url 'search' %}?keyword=" + searchbarsmall.value;
+                location.href = url;
+            }
+        }
+        vibrate();
+
+    }
+
+    let drag = false;
+
+		document.addEventListener(
+			'mousedown', () => drag = false);
+
+		document.addEventListener(
+			'mousemove', () => drag = true);
+
+		
+
+    const products_all = document.querySelectorAll('.product');
+    products_all.forEach(product => {
+        product.addEventListener('click', () => {
+            keyww = product.getAttribute("data-product-url");
+            if (!drag) {
+                location.href=keyww;
+            }
+        });
+    });
+
+
+    
+
+
+</script>

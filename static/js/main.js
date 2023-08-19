@@ -7,8 +7,8 @@ const sbcont = document.getElementById('sbcont');
 const back = document.getElementById('backBtn');
 
 
-if(back){
-    back.addEventListener('click',function(event){
+if (back) {
+    back.addEventListener('click', function (event) {
         event.preventDefault();
         history.back();
         vibrate();
@@ -21,7 +21,7 @@ window.addEventListener("load", function () {
 });
 
 
-if(input){
+if (input) {
     input.addEventListener('focus', () => {
         namelogo.style.display = "none";
         sbcont.style.width = "100%";
@@ -35,9 +35,9 @@ if(input){
         sbleft.style.width = "100%";
         input.style.width = "100%";
     }
-    
+
     input.addEventListener('focusout', () => {
-    
+
         if (input.value.length >= 1) {
             namelogo.style.display = "none";
             sbcont.style.width = "100%";
@@ -105,13 +105,13 @@ function setDraggable(products) {
 
 
 
-function vibrate(){
+function vibrate() {
     if ('vibrate' in navigator) {
         // Event listener for the click event
-          navigator.vibrate(50);
-          console.log('Vibrated');
-      } else {
+        navigator.vibrate(50);
+        console.log('Vibrated');
+    } else {
         console.log('Vibration API is not supported.');
-      }
+    }
 }
 
