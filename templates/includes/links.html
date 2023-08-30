@@ -1,3 +1,5 @@
+{% load static %}
+
 <script>
     function gohome() {
         location.href = "{% url 'home' %}"
@@ -16,14 +18,25 @@
         location.href = url;
     }
 
-    function gotospares(){
+    function gotospares() {
         var url = "{% url 'products_by_category' 'spares'%}";
         location.href = url;
     }
 
-    function gotoaccessories(){
+    function gotoaccessories() {
         var url = "{% url 'products_by_category' 'accessories'%}";
         location.href = url;
+    }
+
+    function goprofile() {
+        user_login = "false";
+        user_login = "{% if user.id %}true{% endif %}";
+        if(user_login=="true"){
+            location.href= "{% url 'profile' %}?user={{user}}"
+        }
+        else{
+            location.href= "{% url 'login' %}"
+        }
     }
 
 
@@ -70,26 +83,37 @@
 
     let drag = false;
 
-		document.addEventListener(
-			'mousedown', () => drag = false);
+    document.addEventListener(
+        'mousedown', () => drag = false);
 
-		document.addEventListener(
-			'mousemove', () => drag = true);
+    document.addEventListener(
+        'mousemove', () => drag = true);
 
-		
+
 
     const products_all = document.querySelectorAll('.product');
     products_all.forEach(product => {
         product.addEventListener('click', () => {
             keyww = product.getAttribute("data-product-url");
             if (!drag) {
-                location.href=keyww;
+                location.href = keyww;
             }
         });
     });
 
 
-    
+    function togglePasswordVisibility() {
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleimg.src = "{% static '/images/togglevisible.svg'%}";
+        } else {
+            passwordInput.type = "password";
+            toggleimg.src = "{% static '/images/togglehide.svg'%}";
+        }
+
+    }
+
 
 
 </script>

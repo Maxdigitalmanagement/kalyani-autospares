@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Hari Babu" />
+    <meta name="description" content="Kalyani Autospares signup Page" />
+    <meta name="keywords" content="Food, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SITE TITLE -->
+    <title>Kalyani Autospares | Sign up</title>
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/loginemailpwdstyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+
+
+    <section class="containermain">
+        <div onclick="gohome()" class="mainlogo">
+            <img class="imagelogo" src="{% static 'images/logo.png' %}" alt="">
+            <img class="imagelogo_name" src="{% static 'images/logo_name.svg' %}" alt="">
+        </div>
+        <h1 class="heading">Sign Up</h1>
+        {% include 'includes/alerts.html' %}
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <div class="login_cred">
+                <div id="firstnamewrp" class="name wrpp">
+                    <h4>First Name</h4>
+                    {{form.first_name}}
+                    <!-- <input id="firstname-input" type="text" placeholder="enter first Name"> -->
+                </div>
+                <div id="lastnamewrp" class="name wrpp">
+                    <h4>Last Name</h4>
+                    {{form.last_name}}
+                    <!-- <input id="lastname-input" type="text" placeholder="enter last Name"> -->
+                </div>
+                <div id="emailwrp" class="email_wr wrpp">
+                    <h4>Email</h4>
+                    {{form.email}}
+                    <!-- <input id="email-input" type="email" placeholder="enter email"> -->
+                    <small id="email_err" style="display: none;"> invalid email </small>
+                </div>
+                <div id="phonewrp" class="wrpp wrph">
+                    <h4>Phone number</h4>
+                    <div class="phone_wr">
+                        <h3 id="country_code">+91</h3>
+                        {{form.phone_number}}
+                        <!-- <input id="phone-input" type="tel" placeholder="enter phone number" maxlength="10"> -->
+                    </div>
+                </div>
+                <div id="passwrp" class="pass_wr wrpp">
+                    <h4>Password</h4>
+                    {{form.password}}
+                    <!-- <input id="password-input" type="password" placeholder="enter password" maxlength="10"> -->
+                </div>
+                <div id="confirmwrp" class="wrpp">
+                    <h4>confirm password</h4>
+                    {{form.confirm_password}}
+                    <!-- <input id="confirm-input" type="password" placeholder="confirm password" maxlength="10"> -->
+                </div>
+                <button id="login_button_hidden" type="submit" style="display: none;"></button>
+                <div onclick="validateform()" class="login_bt Signup">
+                    <h3>Signup</h3>
+                </div>
+                <div class="sign_up_wr">
+                    <h4>Already have account<span><a href="{% url 'login' %}"> Login</a></span> </h4>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    {% include 'includes/links.html' %}
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/loginemailpwd.js'%}"></script>
+
+    <style>
+        .login_bt {
+            font-family: fugazone;
+        }
+    </style>
+
+
+
+
+
+</body>
+
+</html>

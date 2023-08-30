@@ -75,16 +75,16 @@
 					<img class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
 				</div>
 				<div class="right">
-					<div class="cart_ic">
+					<div onclick="gocart()" class="cart_ic">
 						<p class="cartitems">{{cart_items}}</p>
-						<img onclick="gocart()" src="{% static '/images/cart_ic.svg'%}" alt="">
+						<img src="{% static '/images/cart_ic.svg'%}" alt="">
 					</div>
 					<div class="tab_nav">
 						<div class="home pill">
 							<img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
 							<h4>HOME</h4>
 						</div>
-						<div class="profile pill">
+						<div onclick="goprofile()" class="profile pill">
 							<img src="{% static '/images/profile_ic.svg'%}" alt="">
 							<h4>PROFILE</h4>
 						</div>
@@ -149,29 +149,48 @@
 			</div>
 
 			<div class="fav_items_wrap">
+				{% if items != 0 %}
 				{% for favorite in favorites_items %}
-				<div class="fav_item">
-					<div class="item_left">
-						<img onclick="location.href='{{favorite.product.get_url}}'" src="{{favorite.product.images.url}}" alt="">
-					</div>
-					<div class="item_right">
-						<div class="name_wrap">
-							<h3 onclick="location.href='{{favorite.product.get_url}}'" >{{favorite.product.product_name}}</h3>
-							<img onclick="delete_favorite(this)" data-product-id="{{favorite.product.id}}" src="{% static '/images/garbage.svg'%}" alt="" class="garbage">
+				<form action="{% url 'add_cart' %}" method="POST">
+				{% csrf_token %}
+					<input type="hidden" name="product_id" value="{{ favorite.product.id }}">
+					<input type="hidden" name="quantity" value="1">
+					<input type="hidden" name="addedfromfav" value="1">
+					<div class="fav_item">
+						<div class="item_left">
+							<img onclick="location.href='{{favorite.product.get_url}}'" src="{{favorite.product.images.url}}" alt="">
 						</div>
-						<div class="price_wrap">
-							<div class="prices">
-								<p>₹{{favorite.product.price}}</p>
-								<h1>₹{{favorite.product.selling_price}}</h1>
+						<div class="item_right">
+							<div class="name_wrap">
+								<h3 onclick="location.href='{{favorite.product.get_url}}'" >{{favorite.product.product_name}}</h3>
+								<img onclick="delete_favorite(this)" data-product-id="{{favorite.product.id}}" src="{% static '/images/garbage.svg'%}" alt="" class="garbage">
 							</div>
-							<div onclick="add_to_cart(this)" data-product-id="{{favorite.product.id}}" class="add_cart">
-								<img src="{% static '/images/cart_ic.svg'%}" alt="">
-								<h2>Add</h2>
+							{% if favorite.product.variation_set.all|length > 0 %}
+								<div class="colors">
+									<h3>colors:</h3>
+									<div class="rad_color">
+										{% for i in favorite.product.variation_set.all %}
+										<input type="radio" name="color" value="{{i.variation_value}}">
+										{% endfor %}
+									</div>
+								</div>
+							{% endif %}
+							<div class="price_wrap">
+								<div class="prices">
+									<p>₹{{favorite.product.price}}</p>
+									<h1>₹{{favorite.product.selling_price}}</h1>
+								</div>
+								<button type="submit" id="addtocart_btn" style="display: none;" ></button>
+								<div onclick="add_to_cart(this)" data-product-id="{{favorite.product.id}}" class="add_cart">
+									<img src="{% static '/images/cart_ic.svg'%}" alt="">
+									<h2>Add</h2>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 				{% endfor %}
+				{% endif %}
 			</div>
 		</section>
 	</main>
@@ -194,17 +213,55 @@
     <script src="{% static 'js/slick.js'%}"></script>
     <script src="{% static 'js/favourites.js'%}"></script>
 
-	<script>
-		function add_to_cart(object){
-			productId=object.getAttribute("data-product-id");
-			var url = "{% url 'move_to_cart' %}?product_id=" + productId;
-            location.href = url;
+	<style>
+		input[name="color"] {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			border: none;
+		}
+	
+		.fav_items_wrap{
+			height: max-content;
 		}
 
-		function delete_favorite(object){
-			productId=object.getAttribute("data-product-id");
+		.fav_items_wrap .item_right{
+			gap: 10px;
+			height: max-content;
+		}
+	
+	
+		input[name="color"]:checked {
+			outline: 3px solid #214CDB;
+		}
+	</style>
+
+	<script>
+
+		var color_rad = document.querySelectorAll('input[name="color"]');
+		var inp = true;
+
+		color_rad.forEach(rads => {
+			if (inp) {
+				rads.checked = true;
+				inp = false;
+			}
+			var color = rads.value;
+			rads.style.backgroundColor = color;
+		});
+
+		function add_to_cart(object) {
+			document.getElementById("addtocart_btn").click();
+		}
+
+		function delete_favorite(object) {
+			productId = object.getAttribute("data-product-id");
 			var url = "{% url 'delete_favorites' %}?product_id=" + productId;
-            location.href = url;
+			location.href = url;
 		}
 
 	</script>
@@ -218,7 +275,7 @@
             <img src="{% static '/images/home_ic.svg' %}" alt="">
             <h4>HOME</h4>
         </div>
-        <div class="profile pill">
+        <div onclick="goprofile()" class="profile pill">
             <img src="{% static '/images/profile_ic.svg' %}" alt="">
             <h4>PROFILE</h4>
         </div>

@@ -1,0 +1,200 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Hari Babu" />
+	<meta name="description" content="Kalyani Autospares Profile Page" />
+	<meta name="keywords" content="Food, Restaurant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- SITE TITLE -->
+	<title>Kalyani Autospares | profile</title>
+	<!-- CSS -->
+	<link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+	<link href="{% static 'css/profilestyle.css' %}" rel="stylesheet">
+	<!-- FAVICON AND TOUCH ICONS -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+	<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+	<!-- google fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+	<style>
+		* {
+			cursor: url("{% static '/images/cursor.svg' %}"),
+			auto !important;
+		}
+	</style>
+
+	<!-- slider -->
+
+	<link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+	<header>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div class="left">
+                    <img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+                        <p class="cartitems">{{cart_items}}</p>
+                        <img src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav">
+                        <div class="home pill">
+                            <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div class="profile pill pillactive">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <!-- <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt=""> -->
+                </div>
+                <div class="middle">
+                    <h3>Profile</h3>
+                </div>
+                <div class="right">
+
+                </div>
+            </div>
+
+
+
+        </nav>
+
+    </header>
+
+
+
+	<main>
+        <section class="section1">
+            
+            <div class="wrapper">
+                
+                <div class="profile_and_name">
+                    <div class="profilepic">
+                        <img src="{% static '/images/profilepicture.jpg'%}" alt="">
+                    </div>
+                    <div class="profile_name">
+                        {% include 'includes/alerts.html' %}
+                        <h1 id="prfname" >{{user.first_name}} {{user.last_name}}</h1>
+                        <h3 id="prfemail" >{{user.email}}</h3>
+                    </div>
+                </div>
+    
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>My Orders</h1>
+                        <p>you have 10 orders</p>
+                    </div>
+                    <div class="right">
+                        <img src="/images/backbtn.svg" alt="">
+                    </div>
+                </div>
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>Address</h1>
+                        <p>3 saved addresses</p>
+                    </div>
+                    <div class="right">
+                        <img src="/images/backbtn.svg" alt="">
+                    </div>
+                </div>
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>saved cards</h1>
+                        <p>you have 10 orders</p>
+                    </div>
+                    <div class="right">
+                        <img src="/images/backbtn.svg" alt="">
+                    </div>
+                </div>
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>my reviews</h1>
+                        <p>you reviewed 10 orders</p>
+                    </div>
+                    <div class="right">
+                        <img src="/images/backbtn.svg" alt="">
+                    </div>
+                </div>
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>My info</h1>
+                        <p>profile, password, mail etc...</p>
+                    </div>
+                    <div class="right">
+                        <img src="/images/backbtn.svg" alt="">
+                    </div>
+                </div>
+
+				<a id="logout_btn" href="{% url 'logout' %}">logout</a>
+            </div>
+        </section>
+	</main>
+
+
+
+
+
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="{% static 'js/main.js'%}"></script>
+	<script src="{% static 'js/slick.js'%}"></script>
+	<script src="{% static 'js/profile.js'%}"></script>
+
+	{% include 'includes/links.html' %}
+
+
+</body>
+
+<div class="mbnavpill">
+	<div class="tab_nav">
+		<div class="home pill">
+			<img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+			<h4>HOME</h4>
+		</div>
+		<div class="profile pill pillactive">
+			<img src="{% static '/images/profile_ic.svg'%}" alt="">
+			<h4>PROFILE</h4>
+		</div>
+		<div class="favorites pill">
+			<img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+			<h4>FAVORITE'S</h4>
+		</div>
+	</div>
+</div>
+
+
+</html>

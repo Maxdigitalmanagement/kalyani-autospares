@@ -7,21 +7,6 @@ const container = document.querySelector('.containermain');
 
 const emailinput = document.getElementById('email-input');
 
-function togglePasswordVisibility() {
-
-
-
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleimg.src = "/images/togglevisible.svg";
-    } else {
-        passwordInput.type = "password";
-        toggleimg.src = "/images/togglehide.svg";
-    }
-
-
-}
-
 
 window.addEventListener('load', settop, false);
 window.addEventListener('resize', settop, false);
@@ -51,9 +36,13 @@ function activeelement(){
         location.href='#confirmwrp';
         document.getElementById('confirm-input').focus();
     }
-    else if(document.activeElement === document.getElementById('name-input')){
-        location.href='#namewrp';
-        document.getElementById('name-input').focus();
+    else if(document.activeElement === document.getElementById('firstname-input')){
+        location.href='#firstnamewrp';
+        document.getElementById('firstname-input').focus();
+    }
+    else if(document.activeElement === document.getElementById('lastname-input')){
+        location.href='#lastnamewrp';
+        document.getElementById('lastname-input').focus();
     }
     else if(document.activeElement === document.getElementById('phone-input')){
         location.href='#phonewrp';

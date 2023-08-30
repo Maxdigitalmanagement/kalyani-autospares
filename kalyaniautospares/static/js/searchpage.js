@@ -57,10 +57,16 @@ sort_clear.addEventListener('click', () => {
     radiobtns_short.forEach((radio) => {
         radio.checked = false;
     })
+    radiobtns_shorts.forEach((radio) => {
+        radio.checked = false;
+    })
 });
 
 sort_clears.addEventListener('click', () => {
     radiobtns_shorts.forEach((radio) => {
+        radio.checked = false;
+    })
+    radiobtns_short.forEach((radio) => {
         radio.checked = false;
     })
 });

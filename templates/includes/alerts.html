@@ -1,0 +1,21 @@
+{% if messages %}
+{% for message in messages %}
+<div id="message" class="container">
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p style="color: #DC3545; margin: 0; padding: 0;">{{message}}</p>
+        {% else %}
+            <p style="color: #5cb85c; margin: 0; padding: 0;">{{message}}</p>
+
+            {% if message|stringformat:"s" == "invalid login credentials" %}
+            <button class="reg_butt"><a href="{% url 'register' %}">Sign Up</a></button>
+            {% endif %}
+
+            {% if message|stringformat:"s" == "Registration Successfull" %}
+            <button class="reg_butt"><a href="{% url 'login' %}">Login</a></button>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endif %}

@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import Cart, CartItem,Favorites
+from django.contrib.auth.decorators import login_required
 
 from store.models import Product, Variation
 from django.core.exceptions import ObjectDoesNotExist
@@ -20,6 +21,11 @@ def add_cart(request):
 
     product_id = request.POST['product_id']
     items_qty = int(request.POST['quantity'])
+
+    try:
+        addedfromfav = int(request.POST['addedfromfav'])
+    except:
+        addedfromfav = 0
 
     product = Product.objects.get(id=product_id)
     product_variation=[]
@@ -79,9 +85,18 @@ def add_cart(request):
             cart_item.variations.clear()
             cart_item.variations.add(*product_variation)
         cart_item.save()
+
+    
+    if addedfromfav > 0:
+        favorites_items = Favorites.objects.filter(product=product, cart=cart)
+        favorites_items.delete()
     
     return redirect('cart')
     
+
+# add_cart ended
+
+
 def minus_cart(request):
 
     cart_item_id = request.GET.get('cart_item_id')
@@ -118,6 +133,7 @@ def delete_cart(request):
     return redirect('cart') 
 
 
+@login_required(login_url = 'login')
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=cart_id(request))
@@ -136,15 +152,18 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
     return render(request, 'cart.html', context)
 
-
+@login_required(login_url = 'login')
 def favorites(request):
+    items = 0
+    favorites_items = 0
     try:
         cart = Cart.objects.get(cart_id=cart_id(request))
         favorites_items = Favorites.objects.filter(cart=cart, is_active=True)
+        items=len(favorites_items)
     except ObjectDoesNotExist:
         pass
 
-    items=len(favorites_items)
+    
 
     context = {
         'items' : items,

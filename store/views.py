@@ -14,15 +14,30 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 def store(request, category_slug=None):
     categories = None
     products = None
+    keywords = ""
+    searches = False
 
     if category_slug != None:
-        categories = get_object_or_404(Category,slug=category_slug)
-        products = Product.objects.filter(category=categories, is_available = True)
-        paginator = Paginator(products,21)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
-        product_count = products.count()
-        product_filter = categories
+        if 'keyword' in request.GET:
+            keyword = request.GET['keyword']
+            if keyword:
+                categories = get_object_or_404(Category,slug=category_slug)
+                products = Product.objects.order_by('-created_date').filter(Q(category=categories), Q(description__icontains=keyword) | Q(product_name__icontains=keyword) | Q(compatible_for__bike_name__icontains=keyword) | Q(belongs_to__belongsto__icontains=keyword))
+                paginator = Paginator(products,21)
+                page = request.GET.get('page')
+                paged_products = paginator.get_page(page)
+                product_count = products.count()
+                product_filter = categories
+                searches = True
+                keywords = keyword
+        else:
+            categories = get_object_or_404(Category,slug=category_slug)
+            products = Product.objects.filter(category=categories, is_available = True)
+            paginator = Paginator(products,21)
+            page = request.GET.get('page')
+            paged_products = paginator.get_page(page)
+            product_count = products.count()
+            product_filter = categories
     else:
         products=Product.objects.all().filter(is_available=True).order_by('id')
         paginator = Paginator(products,21)
@@ -41,8 +56,8 @@ def store(request, category_slug=None):
         'products': paged_products,
         'product_count' : product_count,
         'product_filter': product_filter,
-        'searched' : False,
-        'keyword' : "",
+        'searched' : searches,
+        'keyword' : keywords,
         'page_range': page_range,
     }
 
