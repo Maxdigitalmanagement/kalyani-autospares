@@ -101,7 +101,7 @@
 
 
 .cart_item {
-    width: 400px;
+    width: 100%;
     max-width: 100%;
     display: flex;
     gap: 20px;
@@ -146,7 +146,13 @@
 .item_right .name_wrap h3 {
     font-size: 14px;
     line-height: 120%;
-    width: 120px;
+}
+
+.names_fl_wrap{
+    display: flex;
+}
+.namespace{
+    width: 5px;
 }
 
 .garbage {
@@ -407,7 +413,7 @@
     z-index: 100;
     position: fixed;
     margin-top: 54px;
-    height: 190px;
+    height: 227px;
     margin-left: -1px;
     display: flex;
     justify-content: space-between;

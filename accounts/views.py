@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from accounts.models import Account
+from carts.models import Cart, CartItem
+from carts.views import cart_id
 from .forms import RegistrationForm
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
@@ -15,6 +17,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
 import base64
+import requests
 
 
 
@@ -72,9 +75,70 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=cart_id(request))
+                is_cart_item_exists=CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+
+                    # getting product varation by cart id
+                    product_variation=[]
+                    v_ids = []
+                    p_qtys = []
+                    for item in cart_item:
+                        variation = item.variations.all()
+                        product_variation.append(list(variation))
+                        v_ids.append(item.id)
+                        p_qtys.append(item.quantity)
+
+                    # get the cart items from the user to access his product vatriation
+                    cart_item = CartItem.objects.filter(user=user)
+                    ex_var_list = []
+                    id = []
+
+                    for item in cart_item:
+                        existing_variation = item.variations.all()
+                        ex_var_list.append(list(existing_variation))
+                        id.append(item.id)
+
+                    # we need to get the common product variation
+                    count = 0
+                    delete_ids = []
+                    for pr in product_variation:
+                        count += 1
+                        if pr in ex_var_list:
+                            item_id = id[ex_var_list.index(pr)]
+                            v_item_id = v_ids[product_variation.index(pr)]
+                            qtyty = p_qtys[product_variation.index(pr)]
+                            delete_ids.append(v_item_id)
+                            item = CartItem.objects.get(id=item_id)
+                            item.quantity += qtyty
+                            item.user=user
+                            item.save()
+                        else:
+                            cart_item = CartItem.objects.filter(cart=cart)
+                            for item in cart_item:
+                                item.user = user
+                                item.save()
+                    cart_items_to_delete = CartItem.objects.filter(pk__in=delete_ids)
+                    cart_items_to_delete.delete()
+
+            except:
+                pass
             auth.login(request,user)
             messages.success(request, "you are now logged in.")
-            return redirect('profile')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                # next=/cart/checkout
+                params = dict(x.split('=') for x in query.split('&'))
+                # it will split into key & value ----> {'next' : '/cart/checkout'}
+                if 'next' in params:
+                    nextpage = params['next']
+                    return redirect(nextpage)
+            except:
+                return redirect('profile')
+
         else:
             messages.error(request,'invalid login credentials')
             return redirect('login')

@@ -57,7 +57,7 @@
                 </div>
                 <div class="right">
                     <div class="cart_ic">
-                        <p class="cartitems">{{ quantity }}</p>
+                        <p class="cartitems">{{ cart_items_no }}</p>
                         <img src="{% static '/images/cart_ic.svg'%}" alt="">
                         <h4>cart</h4>
                     </div>
@@ -150,8 +150,7 @@
                                 {% endfor %}
                                 {% endif %}
                             </h3>
-                            <h3 style="font-size: 12px; margin-top: 10px; color: #949494;">{{cart_item.quantity}} x
-                                ₹{{cart_item.product.selling_price}}</h3>
+                            <h3 style="font-size: 12px; margin-top: 10px; color: #949494;">₹{{cart_item.product.selling_price}} each</h3>
                             <div class="price_wrap">
                                 <div class="prices">
                                     <h1>₹{{cart_item.sub_total}}</h1>
@@ -200,7 +199,7 @@
                         <h2 id="pricemain">₹{{total}}</h2>
                     </div>
                 </div>
-                <div class="chekout">
+                <div onclick="gocheckout()" class="chekout">
                     <h1>chekout</h1>
                 </div>
 

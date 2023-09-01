@@ -62,7 +62,10 @@ function setmarbot() {
 
 
 
-var add_name = "";
+var add_first_name = "";
+var add_last_name = "";
+var add_email = "";
+var phone = "";
 var add_house_no = "";
 var add_roadname_area = "";
 var add_city = "";
@@ -92,12 +95,15 @@ function setaddress(){
         const chkbox = ele.querySelector('input[type="checkbox"]');
     
         if (chkbox.checked) {
-            add_name = ele.querySelector('h2[id="ship_name"]').innerHTML;
-            add_house_no = ele.querySelector('h4[id="houseno"]').innerHTML;
-            add_roadname_area = ele.querySelector('h4[id="Roadname_area_colony"]').innerHTML;
-            add_city = ele.querySelector('h4[id="city"]').innerHTML;
-            add_state = ele.querySelector('h4[id="State"]').innerHTML;
-            add_pincode = ele.querySelector('span[id="pincode"]').innerHTML;
+            add_first_name = ele.querySelector('h2[id="first_name"]').textContent;
+            add_last_name = ele.querySelector('h2[id="last_name"]').textContent;
+            add_email = ele.querySelector('h4[id="email"]').textContent;
+            add_phone = ele.querySelector('h4[id="phone"]').textContent;
+            add_house_no = ele.querySelector('h4[id="houseno"]').textContent;
+            add_roadname_area = ele.querySelector('h4[id="Roadname_area_colony"]').textContent;
+            add_city = ele.querySelector('h4[id="city"]').textContent;
+            add_state = ele.querySelector('h4[id="State"]').textContent;
+            add_pincode = ele.querySelector('span[id="pincode"]').textContent;
         }
     });
 }
@@ -110,7 +116,17 @@ const continuebtn = document.querySelector('.chekout');
 
 continuebtn.addEventListener('click',()=>{
     vibrate();
-    alert(add_name+add_house_no+add_roadname_area+add_city+add_state+add_pincode);
+    alert(add_first_name+add_last_name+add_house_no+add_roadname_area+add_city+add_state+add_pincode);
+    document.querySelector("input[name='first_name']").value = ""+add_first_name;
+    document.querySelector("input[name='last_name']").value = ""+add_last_name;
+    document.querySelector("input[name='email']").value = ""+add_email;
+    document.querySelector("input[name='phone']").value = ""+add_phone;
+    document.querySelector("input[name='address_line_1']").value = ""+add_house_no;
+    document.querySelector("input[name='address_line_2']").value = ""+add_roadname_area;
+    document.querySelector("input[name='state']").value = ""+add_state;
+    document.querySelector("input[name='city']").value = ""+add_city;
+    document.querySelector("input[name='pincode']").value = ""+add_pincode;
+    document.getElementById('place_order_btn').click();
 });
 
 

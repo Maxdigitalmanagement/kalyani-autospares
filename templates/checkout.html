@@ -1,0 +1,292 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Hari Babu" />
+    <meta name="description" content="Kalyani Autospares Chekout Page" />
+    <meta name="keywords" content="Food, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SITE TITLE -->
+    <title>Kalyani Autospares | Chekout</title>
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/chekoutstyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+    <header>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div class="left">
+                    <img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+                        <p class="cartitems">{{ cart_items_no }}</p>
+                        <img src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav">
+                        <div class="home pill">
+                            <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div onclick="goprofile()" class="profile pill">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt="">
+                </div>
+                <div class="middle">
+                    <h3>Checkout</h3>
+                </div>
+                <div class="right">
+
+                </div>
+            </div>
+
+
+
+        </nav>
+
+    </header>
+
+    {% if quantity != 0 %}
+    <input type="checkbox" id="ChekBox" placeholder="jj" checked>
+    {% else %}
+    <input type="checkbox" id="ChekBox" placeholder="jj">
+    {% endif %}
+    <div class="wr_empty">
+        <div class="empty_fav">
+            <div class="pics">
+                <img id="left_top" src="{% static '/images/product_img_1.png' %}" alt="" data-value="6" class="levitate">
+                <img id="middle" src="{% static '/images/cartemptycart.svg'%}" alt="" data-value="3" class="levitate">
+                <img id="bottom_right" src="{% static '/images/product_img_2.png'%}" alt="" data-value="6" class="levitate">
+            </div>
+            <h1>Your Cart is <span>empty</span></h1>
+            <a style="text-decoration: none;" href="{% url 'store' %}">
+                <p>browse items</p>
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <section class="topmar">
+
+        </section>
+
+        <section class="section1">
+            <div class="sec1_left">
+                <div class="heading">
+                    <h1>Review cart</h1>
+                </div>
+
+                <div class="cart_items_wrap">
+                    {% for cart_item in cart_items %}
+                    <div class="cart_item">
+                        <div class="item_left">
+                            <img onclick="location.href='{{cart_item.product.get_url}}'"
+                                src="{{cart_item.product.images.url}}" alt="">
+                        </div>
+                        <div class="item_right">
+                            <div class="name_wrap">
+                                <h3 onclick="location.href='{{cart_item.product.get_url}}'">
+                                    {{cart_item.product.product_name}}</h3>
+                            </div>
+                            <h3 style="font-size: 12px;">
+                                {% if cart_item.variations.all %}
+                                {% for item in cart_item.variations.all %}
+                                {{ item.variation_category }} : {{ item.variation_value }}
+                                {% endfor %}
+                                {% endif %}
+                            </h3>
+                            <h3 style="font-size: 12px; margin-top: 10px; color: #949494;">₹{{cart_item.product.selling_price}} each</h3>
+                            <div class="price_wrap">
+                                <div class="prices">
+                                    <h1>₹{{cart_item.sub_total}}</h1>
+                                </div>
+                                <div class="items">
+                                    <h3 class="item_no">QTY: {% if cart_item.quantity > 0 and cart_item.quantity < 10 %}0{% endif %}{{cart_item.quantity}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="sec1_right">
+                <div class="select_address draggable_sl">
+                    <h1>Select Shipping Address</h1>
+                    <div class="faders">
+                        <div class="fade_l">
+            
+                        </div>
+                        <div class="fade_r">
+            
+                        </div>
+                    </div>
+                    <div class="addresses_to_select">
+                        <div class="address_wr">
+                            <div class="top">
+                                <div class="names_fl_wrap">
+                                    <h2 id="first_name">Hari Babu</h2>
+                                    <div class="namespace"></div>
+                                    <h2 id="last_name">Araveti</h2>
+                                </div>
+                                <label class="container">
+                                    <input checked type="checkbox">
+                                    <div class="checkmark"></div>
+                                </label>
+                            </div>
+                            <div class="address_details">
+                                <h4 id="email">hari181489@gmail.com</h4>
+                                <h4 id="phone">9182914018</h4>
+                                <div class="namespace">..</div>
+                                <h4 id="houseno">2/110,</h4>
+                                <h4 id="floor_buildingname"></h4>
+                                <h4 id="Roadname_area_colony">Anjaneya swamy temple street, Moragudi, jammalamadugu,
+                                </h4>
+                                <h4 id="city">Kadapa</h4>
+                                <div class="statepin">
+                                    <h4 id="State">Andhra Pradesh</h4>
+                                    -
+                                    <span id="pincode">516434</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="address_wr">
+                            <div class="top">
+                                <div class="names_fl_wrap">
+                                    <h2 id="first_name">Harish</h2>
+                                    <div class="namespace"></div>
+                                    <h2 id="last_name">Dande</h2>
+                                </div>
+                                <label class="container">
+                                    <input type="checkbox">
+                                    <div class="checkmark"></div>
+                                </label>
+                            </div>
+                            <div class="address_details">
+                                <h4 id="email">hari181489@gmail.com</h4>
+                                <h4 id="phone">9182914018</h4>
+                                <div class="namespace">..</div>
+                                <h4 id="houseno">2/110,</h4>
+                                <h4 id="floor_buildingname"></h4>
+                                <h4 id="Roadname_area_colony">Anjaneya swamy temple street, Moragudi, jammalamadugu,
+                                </h4>
+                                <h4 id="city">Kadapa</h4>
+                                <div class="statepin">
+                                    <h4 id="State">Andhra Pradesh</h4>
+                                    -
+                                    <span id="pincode">516434</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="address_wr">
+                            <div class="top">
+                                <div class="names_fl_wrap">
+                                    <h2 id="first_name">Sesha sai</h2>
+                                    <div class="namespace"></div>
+                                    <h2 id="last_name">Nichenametla</h2>
+                                </div>
+                                <label class="container">
+                                    <input type="checkbox">
+                                    <div class="checkmark"></div>
+                                </label>
+                            </div>
+                            <div class="address_details">
+                                <h4 id="email">hari181489@gmail.com</h4>
+                                <h4 id="phone">9182914018</h4>
+                                <div class="namespace">..</div>
+                                <h4 id="houseno">2/110,</h4>
+                                <h4 id="floor_buildingname"></h4>
+                                <h4 id="Roadname_area_colony">Anjaneya swamy temple street, Moragudi, jammalamadugu,
+                                </h4>
+                                <h4 id="city">Kadapa</h4>
+                                <div class="statepin">
+                                    <h4 id="State">Andhra Pradesh</h4>
+                                    -
+                                    <span id="pincode">516434</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add_address">
+                            <h1>Add Address</h1>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="chekout">
+                    <h1>Place Order</h1>
+                </div>
+            </div>
+        </section>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="first_name" value="">
+            <input type="hidden" name="last_name" value="">
+            <input type="hidden" name="email" value="">
+            <input type="hidden" name="phone" value="">
+            <input type="hidden" name="address_line_1" value="">
+            <input type="hidden" name="address_line_2" value="">
+            <input type="hidden" name="city" value="">
+            <input type="hidden" name="state" value="">
+            <input type="hidden" name="pincode" value="">
+            <button type="submit" name="submit" style="display: none;" id="place_order_btn"></button>
+        </form>
+    </main>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/chekout.js'%}"></script>
+
+    {% include 'includes/links.html' %}
+
+</body>
+
+</html>

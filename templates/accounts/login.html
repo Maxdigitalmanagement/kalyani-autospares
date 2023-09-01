@@ -78,13 +78,13 @@
             <div class="login_cred">
                 <div id="emailwrp" class="email_wr wrpp">
                     <h4>Email</h4>
-                    <input id="email-input" name="email" type="email" placeholder="enter email">
+                    <input id="email-input" name="email" type="email" placeholder="enter email" required>
                     <!-- <small id="email_err" style="display: none;"></small> -->
                     <small id="email_err" style="display: none;"> invalid email </small>
                 </div>
                 <div id="passwrp" class="pass_wr wrpp">
                     <h4>Password</h4>
-                    <input id="password-input" name="password" type="password" placeholder="enter password">
+                    <input id="password-input" name="password" type="password" placeholder="enter password" required>
                     <div id="toggle-button"><img id="toggleimg" src="{% static '/images/togglehide.svg'%}" alt=""
                             onclick="togglePasswordVisibility()"></div>
                 </div>
