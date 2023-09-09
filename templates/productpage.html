@@ -13,6 +13,7 @@
     <title>Kalyani Autospares | product</title>
     <!-- CSS -->
     <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/customstar.css' %}" rel="stylesheet">
     <link href="{% static 'css/productpagestyle.css' %}" rel="stylesheet">
     <!-- FAVICON AND TOUCH ICONS -->
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
@@ -31,6 +32,7 @@
         rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         * {
@@ -176,7 +178,7 @@
                                     <p>({{single_product.discount}})</p>
                                 </div>
                                 <div class="reviews_detail">
-                                    <img src="{% static '/images/star.svg'%}" alt="">
+                                    <span><label for="" class="star"></label></span>
                                     <h3 class="review_no">4.3</h3>
                                     <h3 class="review_count">(50 Reviews)</h3>
                                 </div>
@@ -319,122 +321,55 @@
             </div>
             <div class="sec2_right">
                 <div class="reviews_detail">
-                    <img src="{% static '/images/star.svg'%}" alt="">
+                    <span><label for="" class="star"></label></span>
                     <h3 class="review_no">4.3</h3>
                     <h3 class="review_count">(50 Reviews)</h3>
                 </div>
                 <div class="reviews">
-                    <div class="user_rev_input">
-                        <h3>write a review</h3>
-                        <h3>input stars</h3>
-                        <textarea name="review" rows="4" data-gramm="false" wt-ignore-input="true"></textarea>
-                    </div>
+                    <form action="{% url 'submit_review' single_product.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="user_rev_input">
+                            <h3>write a review</h3>
+                            <div class="star_wrp">
+                                <label for="">Rate this Product</label>
+                                <div class="rate">
+                                    <input type="radio" name="rating" id="rating10" value="5" required><label for="rating10" title="5"></label>
+                                    <input type="radio" name="rating" id="rating9" value="4.5" required><label for="rating9" title="4.5" class="half"></label>
+                                    <input type="radio" name="rating" id="rating8" value="4" required><label for="rating8" title="4"></label>
+                                    <input type="radio" name="rating" id="rating7" value="3.5" required><label for="rating7" title="3.5" class="half"></label>
+                                    <input type="radio" name="rating" id="rating6" value="3" required><label for="rating6" title="3"></label>
+                                    <input type="radio" name="rating" id="rating5" value="2.5" required><label for="rating5" title="2.5" class="half"></label>
+                                    <input type="radio" name="rating" id="rating4" value="2" required><label for="rating4" title="2"></label>
+                                    <input type="radio" name="rating" id="rating3" value="1.5" required><label for="rating3" title="1.5" class="half"></label>
+                                    <input type="radio" name="rating" id="rating2" value="1" required><label for="rating2" title="1"></label>
+                                    <input type="radio" name="rating" id="rating1" value="0.5" required><label for="rating1" title="0.5" class="half"></label>
+                                </div>
+                            </div>
+                            <div class="wrpp">
+                                <h4>Review Title</h4>
+                                <input name="subject" type="email" placeholder="Enter title">
+                            </div>
+                            <div class="wrpp">
+                                <h4>Review</h4>
+                                <textarea name="review" placeholder="Write review here" rows="4" data-gramm="false" wt-ignore-input="true"></textarea>
+                            </div>
+                            {% if user.is_authenticated %}
+                            {% if orderproduct %}
+                            <div class="submit_wrp">
+                                <input type="submit" id="submit_review" value="Submit Review">
+                            </div>
+                            {% else %}
+                            <p class="login_p">you must be purchase this product to post a review</p>
+                            {% endif %}
+                            {% else %}
+                            <p class="login_p">you must be logged in to post a review. <span><a href="{% url 'login' %}">Login now</a></span></p>
+                            {% endif %}
+                            {% include 'includes/alerts.html' %}
+                            
+                        </div>
+                    </form>
+                    
                     <h3>Customer Reviews</h3>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
-                    <div class="cust_rev">
-                        <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
-                        </div>
-                        <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                        </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
-                    </div>
                     <div class="cust_rev">
                         <div class="nam_date">
                             <h3 class="cust_name">Sesha Sai</h3>
@@ -515,6 +450,7 @@
 
 
     <style>
+        
         #compatible_top {
             margin-top: -10px;
             font-size: 16px;
@@ -536,6 +472,90 @@
         #addtocart_btn {
             border: none;
             font-family: fugazone;
+        }
+    
+        .wrpp {
+            width: 100%;
+            padding: 10px;
+            background-color: #ECECEC;
+            border: 2px solid #fff;
+            box-shadow: -4px 4px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+    
+        .wrpp h4 {
+            font-size: 12px;
+            color: #B3B3B3;
+            line-height: 140%;
+        }
+    
+        .wrpp input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            font-family: FugazOne;
+            font-size: 16px;
+        }
+
+        textarea{
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            font-family: FugazOne;
+            font-size: 16px;
+        }
+
+        #submit_review{
+            width: 50%;
+            color: #fff;
+            border: 2px solid #fff;
+            background-color: #214CDB;
+            font-family: FugazOne;
+            box-shadow: black -4px 4px;
+            border-radius: 10px;
+            padding: 10px 0;
+            float: right;
+        }
+
+        .user_rev_input h3{
+            text-transform: capitalize;
+        }
+
+        .user_rev_input label{
+            font-size: 14px;
+        }
+
+        .star_wrp{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login_p{
+            font-size: 14px;
+        }
+        .login_p a{
+            text-decoration: none;
+            color: #214CDB
+        }
+
+        @media screen and (max-width : 600px){
+            #submit_review{
+                width: 100%;
+            }
         }
 
     </style>
