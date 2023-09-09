@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from store.forms import ReviewForm
@@ -6,7 +5,7 @@ from store.forms import ReviewForm
 from .models import Product, ReviewRating
 from orders.models import OrderProduct
 from category.models import Category
-from carts.models import Favorites,Cart,CartItem
+from carts.models import Favorites,CartItem
 from carts.views import cart_id
 from django.db.models import Q
 from django.contrib import messages
@@ -79,18 +78,22 @@ def product_detail(request, category_slug=None, product_slug=None):
 
     except Exception as e:
         raise e
+    orderproduct = None
+    if(request.user.is_authenticated):
+        try:
+            orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
+        except OrderProduct.DoesNotExist:
+            pass
     
-    try:
-        orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
-    except OrderProduct.DoesNotExist:
-        orderproduct=None
-    
+    reviews = ReviewRating.objects.filter(product_id=single_product.id,status=True)
+
     context = {
         'single_product' : single_product,
         'favorite' : favorite,
         'in_cart' : in_cart,
         'like_products' : like_products,
         'orderproduct' : orderproduct,
+        'reviews': reviews,
     }
 
 

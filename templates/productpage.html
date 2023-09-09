@@ -173,15 +173,20 @@
                         <div class="det_container">
                             <div class="price_reviews">
                                 <div class="price_details">
+                                    {% if single_product.price <= single_product.selling_price %}
+                                    {% else %}
                                     <h3 class="mrp">₹{{single_product.price}}</h3>
-                                    <h2 class="selling_price">₹{{single_product.selling_price}}</h2>
                                     <p>({{single_product.discount}})</p>
+                                    {% endif %}
+                                    <h2 class="selling_price">₹{{single_product.selling_price}}</h2>
                                 </div>
+                                {% if reviews %}
                                 <div class="reviews_detail">
-                                    <span><label for="" class="star"></label></span>
-                                    <h3 class="review_no">4.3</h3>
-                                    <h3 class="review_count">(50 Reviews)</h3>
+                                    <span><i class="fa fa-star {% if single_product.averageReview < 0.5 %}-o{% elif single_product.averageReview >= 0.5 and single_product.averageReview < 1 %}-half-o{% endif %}" aria-hidden="true"></i></span>
+                                    <h3 class="review_no">{{single_product.averageReview}}</h3>
+                                    <h3 class="review_count">( {{reviews|length}} Review{% if reviews|length > 1 %}s{% endif %} )</h3>
                                 </div>
+                                {% endif %}
                             </div>
                             <div class="color_items">
                                 {% if single_product.variation_set.all|length > 0 %}
@@ -320,11 +325,13 @@
                 </div>
             </div>
             <div class="sec2_right">
+                {% if reviews %}
                 <div class="reviews_detail">
-                    <span><label for="" class="star"></label></span>
-                    <h3 class="review_no">4.3</h3>
-                    <h3 class="review_count">(50 Reviews)</h3>
+                    <span><i class="fa fa-star {% if single_product.averageReview < 0.5 %}-o{% elif single_product.averageReview >= 0.5 and single_product.averageReview < 1 %}-half-o{% endif %}" aria-hidden="true"></i></span>
+                    <h3 class="review_no">{{single_product.averageReview}}</h3>
+                    <h3 class="review_count">( {{reviews|length}} Review{% if reviews|length > 1 %}s{% endif %} )</h3>
                 </div>
+                {% endif %}
                 <div class="reviews">
                     <form action="{% url 'submit_review' single_product.id %}" method="POST">
                         {% csrf_token %}
@@ -347,11 +354,12 @@
                             </div>
                             <div class="wrpp">
                                 <h4>Review Title</h4>
-                                <input name="subject" type="email" placeholder="Enter title">
+                                <input name="subject" type="text" placeholder="Enter title">
                             </div>
                             <div class="wrpp">
                                 <h4>Review</h4>
-                                <textarea name="review" placeholder="Write review here" rows="4" data-gramm="false" wt-ignore-input="true"></textarea>
+                                <textarea name="review" placeholder="Write review here" rows="4" data-gramm="false"
+                                    wt-ignore-input="true"></textarea>
                             </div>
                             {% if user.is_authenticated %}
                             {% if orderproduct %}
@@ -359,32 +367,42 @@
                                 <input type="submit" id="submit_review" value="Submit Review">
                             </div>
                             {% else %}
-                            <p class="login_p">you must be purchase this product to post a review</p>
+                            <p class="login_p">you must purchase this product to post a review</p>
                             {% endif %}
                             {% else %}
-                            <p class="login_p">you must be logged in to post a review. <span><a href="{% url 'login' %}">Login now</a></span></p>
+                            <p class="login_p">you must be logged in to post a review. <span><a href="{% url 'login' %}">Login
+                                        now</a></span></p>
                             {% endif %}
                             {% include 'includes/alerts.html' %}
-                            
+            
                         </div>
                     </form>
                     
+                    {% if reviews %}
                     <h3>Customer Reviews</h3>
+                    {% endif %}
+                    {% for review in reviews %}
                     <div class="cust_rev">
                         <div class="nam_date">
-                            <h3 class="cust_name">Sesha Sai</h3>
-                            <h3 class="cust_rev_date">20/03/2020</h3>
+                            <h3 class="cust_name">{{review.user.full_name}}</h3>
+                            <h3 class="cust_rev_date">{{review.date}}</h3>
                         </div>
                         <div class="rating">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
-                            <img src="{% static '/images/star.svg'%}" alt="">
+                            <span><i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1%}-o {% endif %}"
+                                    aria-hidden="true"></i></span>
+                            <span><i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2%}-o {% endif %}"
+                                    aria-hidden="true"></i></span>
+                            <span><i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3%}-o {% endif %}"
+                                    aria-hidden="true"></i></span>
+                            <span><i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4%}-o {% endif %}"
+                                    aria-hidden="true"></i></span>
+                            <span><i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5%}-o {% endif %}"
+                                    aria-hidden="true"></i></span>
                         </div>
-                        <p>Nice Product with good delivery. The delivery time is very fast. Then products look like
-                            exactly the picture in the app.</p>
+                        <h2>{{review.subject}}</h2>
+                        <p>{{review.review}}</p>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -409,14 +427,26 @@
                     </div>
                     <h2 class="product_title">{{product.product_name}}
                     </h2>
-                    <h1 class="price">₹{{product.selling_price}} <span>₹{{product.price}}</span></h1>
-					<p>({{product.discount}})</p>
+                    <h1 class="price">₹{{product.selling_price}} 
+						{% if product.price > product.selling_price %}
+						<span>₹{{product.price}}</span>
+						</h1>
+						<p>({{product.discount}})</p>
+						{% else %}
+						</h1>
+						{% endif %}
+                    {% if product.ratings_count > 0 %}
                     <div class="rating_wrap">
                         <div class="rating">
-                            <img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
-                        </div>
-                        <h4 class="rating_count">(350)</h4>
+							<span><i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}"></i></span>
+						</div>
+                        <h4 class="rating_count">({{product.ratings_count}} Review{% if product.ratings_count > 1 %}s{% endif %})</h4>
                     </div>
+                    {% endif %}
                 </div>
                 {% endif %}
                 {% endfor %}
@@ -552,10 +582,30 @@
             color: #214CDB
         }
 
+        .price_details p{
+            position: absolute;
+            right: inherit;
+            transform: translateY(100%);
+            font-size: 12px;
+            color: #00c12d;
+        }
+
         @media screen and (max-width : 600px){
             #submit_review{
                 width: 100%;
             }
+        }
+
+        .rating i{
+            font-size: 14px;
+            color: #ffb503;
+        }
+        .rating_wrap{
+            display: flex;
+            flex-direction: column;
+        }
+        .reviews_detail i{
+            color: #ffb503;
         }
 
     </style>

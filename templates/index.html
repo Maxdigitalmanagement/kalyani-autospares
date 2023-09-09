@@ -290,14 +290,26 @@
 						<img class="product_image" src="{{ product.images.url }}" alt="">
 					</div>
 					<h2 style="text-transform: capitalize;" class="product_title">{{product.product_name}}</h2>
-					<h1 class="price">₹{{product.selling_price}} <span>₹{{product.price}}</span></h1>
-					<p>{{product.discount}}</p>
-					<div class="rating_wrap">
-						<div class="rating">
-							<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
+					<h1 class="price">₹{{product.selling_price}} 
+						{% if product.price > product.selling_price %}
+						<span>₹{{product.price}}</span>
+						</h1>
+						<p>({{product.discount}})</p>
+						{% else %}
+						</h1>
+						{% endif %}
+						{% if product.ratings_count > 0 %}
+						<div class="rating_wrap">
+							<div class="rating">
+								<span><i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}"></i></span>
+							</div>
+							<h4 class="rating_count">({{product.ratings_count}} Review{% if product.ratings_count > 1 %}s{% endif %})</h4>
 						</div>
-						<h4 class="rating_count">(350)</h4>
-					</div>
+						{% endif %}
 				</div>
 				{% endfor %}
 			</div>
@@ -328,14 +340,26 @@
 						<img class="product_image" src="{{ product.images.url }}" alt="">
 					</div>
 					<h2 style="text-transform: capitalize;" class="product_title">{{product.product_name}}</h2>
-					<h1 class="price">₹{{product.selling_price}} <span>₹{{product.price}}</span></h1>
-					<p>{{product.discount}}</p>
-					<div class="rating_wrap">
-						<div class="rating">
-							<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
+					<h1 class="price">₹{{product.selling_price}} 
+						{% if product.price > product.selling_price %}
+						<span>₹{{product.price}}</span>
+						</h1>
+						<p>({{product.discount}})</p>
+						{% else %}
+						</h1>
+						{% endif %}
+						{% if product.ratings_count > 0 %}
+						<div class="rating_wrap">
+							<div class="rating">
+								<span><i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}"></i></span>
+							</div>
+							<h4 class="rating_count">({{product.ratings_count}} Review{% if product.ratings_count > 1 %}s{% endif %})</h4>
 						</div>
-						<h4 class="rating_count">(350)</h4>
-					</div>
+						{% endif %}
 				</div>
 				{% endif %}
 				{% endfor %}
@@ -363,14 +387,26 @@
 						<img class="product_image" src="{{ product.images.url }}" alt="">
 					</div>
 					<h2 style="text-transform: capitalize;" class="product_title">{{product.product_name}}</h2>
-					<h1 class="price">₹{{product.selling_price}} <span>₹{{product.price}}</span></h1>
-					<p>{{product.discount}}</p>
-					<div class="rating_wrap">
-						<div class="rating">
-							<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
+					<h1 class="price">₹{{product.selling_price}} 
+						{% if product.price > product.selling_price %}
+						<span>₹{{product.price}}</span>
+						</h1>
+						<p>({{product.discount}})</p>
+						{% else %}
+						</h1>
+						{% endif %}
+						{% if product.ratings_count > 0 %}
+						<div class="rating_wrap">
+							<div class="rating">
+								<span><i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}"></i></span>
+								<span><i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}"></i></span>
+							</div>
+							<h4 class="rating_count">({{product.ratings_count}} Review{% if product.ratings_count > 1 %}s{% endif %})</h4>
 						</div>
-						<h4 class="rating_count">(350)</h4>
-					</div>
+						{% endif %}
 				</div>
 				{% endif %}
 				{% endfor %}
@@ -422,6 +458,21 @@
 	{% include 'includes/links.html' %}
 
 
+	<style>
+		.product p {
+			font-size: 12px;
+			margin: 0;
+			color: #00c12d;
+		}
+		.rating_wrap i{
+			font-size: 14px;
+			color: #ffb503;
+		}
+		.rating_wrap{
+			display: flex;
+			flex-direction: column;
+		}
+	</style>
 
 
 
