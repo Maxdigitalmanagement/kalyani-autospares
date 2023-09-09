@@ -70,14 +70,20 @@
                             <img src="{% static '/images/home_ic.svg'%}" alt="">
                             <h4>HOME</h4>
                         </div>
-                        <div onclick="goprofile()" class="profile pill">
-                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
-                            <h4>PROFILE</h4>
-                        </div>
-                        <div class="favorites pill">
-                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
-                            <h4>FAVORITE'S</h4>
-                        </div>
+                        {% if user.id %}
+						<div onclick="goprofile()" class="profile pill">
+							<img src="{% static '/images/profile_ic.svg'%}" alt="">
+							<h4>PROFILE</h4>
+						</div>
+						<div onclick="gofav()" class="favorites pill">
+							<img src="{% static '/images/fav_ic.svg'%}" alt="">
+							<h4>FAVORITE'S</h4>
+						</div>
+						{% else %}
+						<div onclick="login()" class="login pill">
+							<h2>Login</h2>
+						</div>
+						{% endif %}
                     </div>
                 </div>
             </div>
@@ -167,6 +173,7 @@
                                 <div class="price_details">
                                     <h3 class="mrp">₹{{single_product.price}}</h3>
                                     <h2 class="selling_price">₹{{single_product.selling_price}}</h2>
+                                    <p>({{single_product.discount}})</p>
                                 </div>
                                 <div class="reviews_detail">
                                     <img src="{% static '/images/star.svg'%}" alt="">
@@ -467,7 +474,8 @@
                     </div>
                     <h2 class="product_title">{{product.product_name}}
                     </h2>
-                    <h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
+                    <h1 class="price">₹{{product.selling_price}} <span>₹{{product.price}}</span></h1>
+					<p>({{product.discount}})</p>
                     <div class="rating_wrap">
                         <div class="rating">
                             <img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">

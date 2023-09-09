@@ -591,7 +591,7 @@ input[type="password"]::-webkit-outer-spin-button {
     background-color: #000;
     padding: 15px;
     border-radius: 40px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     color: #FFF;

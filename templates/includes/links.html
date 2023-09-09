@@ -16,6 +16,18 @@
         location.href = "{% url 'favorites' %}"
     }
 
+    function login(){
+        location.href = "{% url 'login' %}"
+    }
+
+    function gostore(){
+        location.href = "{% url 'store' %}"
+    }
+
+    function gomyinfo(){
+        location.href = "{% url 'infoverify' %}"
+    }
+
     function searchBy(name) {
         var url = "{% url 'search' %}?keyword=" + name;
         location.href = url;

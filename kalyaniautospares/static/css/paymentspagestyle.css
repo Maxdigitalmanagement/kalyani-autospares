@@ -1,0 +1,175 @@
+html,
+body {
+    height: 100%;
+    padding: 0;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section1 {
+    margin-top: 70px;
+    padding-bottom: 60px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 20px;
+}
+
+#prfname{
+    color: #214cdb;
+}
+
+.profile_and_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.profilepic img {
+    width: 80px;
+    height: 80px;
+}
+
+.profilepic {
+    overflow: hidden;
+    border-radius: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fff;
+    box-shadow: -2px 2px #000;
+}
+
+.profile_name {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile_name h1 {
+    font-size: 20px;
+}
+
+.profile_name h3 {
+    font-size: 14px;
+    color: #808080;
+}
+
+.detail_wr {
+    padding: 20px;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail_wr .left h1 {
+    font-size: 20px;
+}
+
+.detail_wr .left p {
+    font-size: 14px;
+    color: #808080;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.detail_wr .right img {
+    rotate: 180deg;
+}
+
+
+.cencen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+}
+
+.detail_wr .left{
+    width: 100%;
+}
+
+.pay_btn{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.pay_btn img{
+    height: 30px;
+}
+
+.buttons_wrapper{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+
+
+@media screen and (max-width : 800px) {
+
+    main {
+        justify-content: start;
+    }
+    .wrapper {
+        padding-bottom: 30px;
+    }
+
+    .ordwrpper {
+        padding-bottom: 22px;
+    }
+
+    .section1 {
+        margin-top: 80px;
+    }
+
+    .statusbar .middle h3 {
+        font-size: 18px;
+    }
+
+    .statusbar {
+        padding: 20px 30px;
+    }
+
+    .ordstb {
+        padding: 10px 30px;
+    }
+
+}
+
+@media screen and (max-width : 500px) {
+
+    .profile_and_name {
+        justify-content: start;
+    }
+
+    
+}
+
+@media screen and (max-width : 650px) {
+
+    .buttons_wrapper{
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

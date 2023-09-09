@@ -1,0 +1,162 @@
+<!-- {% autoescape off %} -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Montserrat;
+            background-color: #f9f9f9;
+            font-family: fugaz one;
+            font-style: normal;
+            font-weight: 400;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+        }
+        h2{
+            color: black;
+            font-family: fugaz one;
+            font-style: normal;
+            font-weight: 500;
+        }
+        p{
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            color: #636363;
+
+        }
+        p span{
+            color: #214CDB;
+            font-size: 18px;
+            font-family: fugaz one;
+            font-style: normal;
+            font-weight: 200;
+        }
+        .container {
+            width: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #214CDB;
+            margin: 20px;
+            max-width: 600px;
+            font-size: 14px;
+        }
+        .header {
+            text-align: start;
+            padding: 20px 20px;
+        }
+        .logo {
+            max-width: 180px;
+        }
+        .content {
+            padding: 20px;
+            border-top: 2px solid #f1f1f1;
+        }
+        .order-details {
+            padding: 20px 0;
+            border-top: 2px solid #f1f1f1;
+        }
+        .order-summary {
+            padding: 20px 0;
+            border-top: 2px solid #f1f1f1;
+        }
+        .order-summary p{
+            text-align: end;
+        }
+        .toc {
+            border: 1px solid #f1f1f1;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .toc th, .toc td {
+            border: 1px solid #f1f1f1;
+            padding: 10px;
+            text-align: left;
+        }
+        .toc th {
+            background-color: #f9f9f9;
+        }
+        .button {
+            display: inline-block;
+            border: 2px solid #214CDB;
+            color: #214CDB;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: fugaz one;
+            font-style: normal;
+            font-weight: 200;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888888;
+            font-size: 12px;
+        }
+
+        .footer p{
+            color: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="https://i.ibb.co/sp7TxbQ/main-logo.png" alt="Your Company Logo">
+        </div>
+        <div class="content">
+            <h2>Order Received!</h2>
+            <p>Hello <span>{{ user.first_name }}</span>,</p>
+            <p>We are excited to inform you that we have received your order. Here are the details:</p>
+            <div class="order-details">
+                <h2>Order Details</h2>
+                <p><strong>Order Number:</strong> {{order.order_number}}</p>
+                <p><strong>Order Date:</strong> {{order.date}}</p>
+                <p><strong>Shipping Address:</strong><br>{{order.full_name}},<br>{{order.address_line_1}},<br>{{order.address_line_2}},<br>{{order.city}},<br>{{order.state}},<br>{{order.country}} - {{order.pincode}}.</p>
+                <p><strong>Phone Number:</strong> {{order.phone}}</p>
+                <p><strong>Email:</strong> {{order.email}}</p>
+            </div>
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <table class="toc">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for item in order_items %}
+                    <tr>
+                        <td>{{item.product.product_name}}<br>
+                            <small>
+                                {% if item.variations.all %}
+                                {% for i in item.variations.all %}
+                                {{ i.variation_category }} : {{ i.variation_value }}
+                                {% endfor %}
+                                {% endif %}
+                            </small>
+                        </td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.product_price}}</td>
+                    </tr>
+                    {% endfor %}
+                    <!-- Add more rows for other products -->
+                </table>
+                <p><strong>Total Amount:</strong> ₹{{order.order_total}}</p>
+            </div>
+            <p>If you have any questions or need assistance with your order, please feel free to contact our customer support team.</p>
+            <p><a class="button" href="mailto:haribabu.teamup@gmail.com">Contact Support</a></p>
+            <p>Thank you for choosing us. We appreciate your business!</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2023 Kalyani Autospares. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- {% endautoescape %} -->

@@ -180,6 +180,11 @@
     font-size: 18px;
 }
 
+.price_wrap .add_cart img{
+    width: 20px;
+    height: 20px;
+}
+
 
 .price_wrap .add_cart{
     display: flex;

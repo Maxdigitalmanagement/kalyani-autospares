@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
+from accounts.models import UserAddress
 from .models import Cart, CartItem,Favorites
 from django.contrib.auth.decorators import login_required
 
@@ -272,6 +274,7 @@ def add_favorites(request):
     cart.save()
 
     favorite_item = Favorites.objects.create(
+        user = request.user,
         product = product,
         cart = cart,
     )
@@ -283,14 +286,15 @@ def move_to_cart(request):
     product_id = request.GET.get('product_id')
     product = Product.objects.get(id=product_id)
     cart = Cart.objects.get(cart_id=cart_id(request))
-    favorites_items = Favorites.objects.filter(product=product, cart=cart)
+    favorites_items = Favorites.objects.filter(product=product, user=request.user)
     try :
-        cart_item = CartItem.objects.get(product=product, cart=cart)
+        cart_item = CartItem.objects.get(product=product, user=request.user)
         if(cart_item.quantity<10):
             cart_item.quantity += 1
             cart_item.save()
     except CartItem.DoesNotExist :
         cart_item = CartItem.objects.create(
+            user = request.user,
             product = product,
             quantity = 1,
             cart = cart,
@@ -315,6 +319,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
     try:
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
+            addresses = UserAddress.objects.filter(user=request.user)
         else:
             cart = Cart.objects.get(cart_id=cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
@@ -328,6 +333,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'total': total,
         'quantity':quantity,
         'cart_items':cart_items,
+        'addresses' : addresses,
     }
     return render(request, 'checkout.html', context)
 

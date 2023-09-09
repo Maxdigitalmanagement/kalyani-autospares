@@ -1,0 +1,256 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Hari Babu" />
+	<meta name="description" content="Kalyani Autospares Payments Page" />
+	<meta name="keywords" content="Food, Restaurant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- SITE TITLE -->
+	<title>Kalyani Autospares | Payments Page</title>
+	<!-- CSS -->
+	<link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+	<link href="{% static 'css/paymentspagestyle.css' %}" rel="stylesheet">
+	<!-- FAVICON AND TOUCH ICONS -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+	<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+	<!-- google fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+	<style>
+		* {
+			cursor: url("{% static '/images/cursor.svg' %}"),
+			auto !important;
+		}
+	</style>
+
+	<!-- slider -->
+
+	<link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+	<header>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div class="left">
+                    <img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+                        <p class="cartitems">{{cart_items_no}}</p>
+                        <img src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav" style="padding: 10px 15px;">
+                        <div class="home pill">
+                            <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div class="profile pill">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt="">
+                </div>
+                <div class="middle">
+                    <h3>Payments</h3>
+                </div>
+                <div class="right">
+                    <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                </div>
+            </div>
+
+
+
+        </nav>
+
+    </header>
+
+
+
+	<main>
+        <section class="section1">
+            
+            <div class="wrapper">
+                
+                <div class="profile_and_name">
+                    <div class="profile_name">
+                        {% include 'includes/alerts.html' %}
+                        <h1 id="prfname">Select a payment method</h1>
+                    </div>
+                </div>
+    
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>Shipping Addresses</h1>
+                        <p>{{order.full_name}}</p>
+                        <p id="below">{{address.address_line_1}}</p>
+                        <p id="below">{{address.address_line_2}}</p>
+                        <p id="below">{{address.city}}</p>
+                        <p id="below">{{address.state}} - {{address.pincode}}</p>
+                    </div>
+                </div>
+
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>Order Details</h1>
+                        <p>Total price : &emsp;&emsp;&emsp;&emsp;&ensp;<span style="color: black;">{{order.order_total}}</span></p>
+                        <p id="below">Taxes : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;<span style="color: black;">{{order.tax}}</span></p>
+                        <p id="below">Order Quantity : &emsp;&emsp;&nbsp;<span style="color: black;">{{cart_items_no}}</span></p>
+                        <p><span>Grand total :&emsp;&emsp;&emsp;&emsp;</span> <span style="color: #214cdb; font-size: 20px;">{{order.order_total}}</span></p>
+                    </div>
+                </div>
+
+                <div class="detail_wr">
+                    <div class="left">
+                        <h1>Pay by</h1>
+                        <div class="buttons_wrapper">
+                            <div class="pay_btn" data-paid-by="Googlepay">
+                                <img  src="{% static '/images/Google_Pay_Logo.svg'%}" alt="">
+                            </div>
+                            <div class="pay_btn" data-paid-by="PhonePe">
+                                <img  src="{% static '/images/PhonePe_Logo.svg'%}" alt="">
+                            </div>
+                            <div class="pay_btn" data-paid-by="Paytm">
+                                <img  src="{% static '/images/Paytm_Logo.svg'%}" alt="">
+                            </div>
+                        </div>
+                        <div class="buttons_wrapper">
+                            <div class="pay_btn" data-paid-by="Cashfree">
+                                <img  src="{% static '/images/cashfree_logo.svg'%}" alt="">
+                            </div>
+                            <div class="pay_btn" data-paid-by="Razorpay">
+                                <img  src="{% static '/images/razorpay_logo.svg'%}" alt="">
+                            </div>
+                            <div class="pay_btn" data-paid-by="Billdesk">
+                                <img  src="{% static '/images/billdesk.svg'%}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="order_animation">
+                <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js"></script> 
+                <dotlottie-player src="https://lottie.host/4155c526-6fc4-4e5a-a16d-4afd6aa9a050/KcC3jeYJeR.lottie"  background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+                <h2>your order is packing</h2>
+            </div>
+        </section>
+	</main>
+
+
+    <style>
+        #below {
+            margin-top: 2px;
+        }
+    
+        .order_animation {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+    </style>
+
+
+
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="{% static 'js/main.js'%}"></script>
+	<script src="{% static 'js/payments.js'%}"></script>
+
+	{% include 'includes/links.html' %}
+
+    <script>
+        const pay_btns = document.querySelectorAll(".pay_btn");
+        var url = "{% url 'payments' %}";
+        var csrftoken = getCookie('csrftoken');
+        var orderID = "{{order.order_number}}";
+        var redirect_url = "{% url 'order_complete' %}"
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        pay_btns.forEach(pay_bt => {
+            pay_bt.addEventListener('click', () => {
+                document.querySelector('.wrapper').style.display="none";
+                document.querySelector('.order_animation').style.display="flex";
+                sendData(pay_bt.getAttribute("data-paid-by"));
+            });
+        });
+
+        function sendData(payment_method) {
+            fetch(url, {
+                method  : 'POST',
+                headers : {
+                    "Content-type": "application/json",
+                    "x-CSRFToken": csrftoken,
+                },
+                body : JSON.stringify({
+                    orderID : orderID,
+                    transID : "45879421321674652",
+                    payment_method : payment_method,
+                    status : "COMPLETED",
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                var delayInMilliseconds = 2000; //1 second
+                setTimeout(function() {
+
+                }, delayInMilliseconds);
+                window.location.href = redirect_url + '?order_number='+data.order_number+'&payment_id='+data.transID;
+            });
+        }
+
+    </script>
+
+
+</body>
+
+
+</html>

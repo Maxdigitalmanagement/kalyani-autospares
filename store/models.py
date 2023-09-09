@@ -24,7 +24,11 @@ class Product(models.Model):
 
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug,self.slug])
-
+    
+    def discount(self):
+        if self.price > self.selling_price:
+            percentage_discount = int(((self.price - self.selling_price) / self.price) * 100)
+            return f'{percentage_discount}% off'
 
     def __str__(self):
         return self.product_name
@@ -41,4 +45,4 @@ class Variation(models.Model):
     created_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.Product.product_name
+        return self.variation_value

@@ -91,6 +91,7 @@
 							<img src="{% static '/images/home_ic.svg'%}" alt="">
 							<h4>HOME</h4>
 						</div>
+						{% if user.id %}
 						<div onclick="goprofile()" class="profile pill">
 							<img src="{% static '/images/profile_ic.svg'%}" alt="">
 							<h4>PROFILE</h4>
@@ -99,6 +100,11 @@
 							<img src="{% static '/images/fav_ic.svg'%}" alt="">
 							<h4>FAVORITE'S</h4>
 						</div>
+						{% else %}
+						<div onclick="login()" class="login pill">
+							<h2>Login</h2>
+						</div>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -209,9 +215,9 @@
 						<div class="product_img">
 							<img class="product_image" src="{{ product.images.url }}" alt="">
 						</div>
-						<h2 class="product_title">
-							{{product.product_name}}</h2>
-						<h1 class="price"><span>₹</span>{{product.selling_price}}</h1>
+						<h2 class="product_title">{{product.product_name}}</h2>
+						<h1 class="price">₹{{product.selling_price}} <span>₹{{product.price}}</span></h1>
+						<p>({{product.discount}})</p>
 						<div class="rating_wrap">
 							<div class="rating">
 								<img class="rating_img" src="{% static '/images/rating_img.png'%}" alt="">
@@ -432,6 +438,7 @@
 			<img src="{% static '/images/home_ic.svg'%}" alt="">
 			<h4>HOME</h4>
 		</div>
+		{% if user.id %}
 		<div onclick="goprofile()" class="profile pill">
 			<img src="{% static '/images/profile_ic.svg'%}" alt="">
 			<h4>PROFILE</h4>
@@ -440,6 +447,11 @@
 			<img src="{% static '/images/fav_ic.svg'%}" alt="">
 			<h4>FAVORITE'S</h4>
 		</div>
+		{% else %}
+		<div onclick="login()" class="login pill">
+			<h2>Login</h2>
+		</div>
+		{% endif %}
 	</div>
 </div>
 

@@ -307,7 +307,7 @@
     padding-top: 20px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 20px;
-    align-items: center;
+    align-items: top;
     height: max-content;
 }
 
@@ -316,7 +316,7 @@
 .product {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .product .product_img {
@@ -342,8 +342,15 @@
 }
 
 .product h1 span{
-    font-style: normal;
-    font-weight: 600;
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #B3B3B3;
+}
+
+.product p{
+    font-size: 12px;
+    margin: 0;
+    color: #B3B3B3;
 }
 
 .product .rating_wrap .rating_count{

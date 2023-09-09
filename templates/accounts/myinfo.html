@@ -11,7 +11,7 @@
 	<meta name="keywords" content="Food, Restaurant">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- SITE TITLE -->
-	<title>Kalyani Autospares | profile</title>
+	<title>Kalyani Autospares | My info</title>
 	<!-- CSS -->
 	<link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
 	<link href="{% static 'css/profilestyle.css' %}" rel="stylesheet">
@@ -48,7 +48,8 @@
 
 <body>
 
-	<header>
+
+    <header>
         <nav id="navbar">
             <div id="nav_tot" class="topnav">
                 <div class="left">
@@ -81,7 +82,7 @@
                     <!-- <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt=""> -->
                 </div>
                 <div class="middle">
-                    <h3>Profile</h3>
+                    <h3>My info</h3>
                 </div>
                 <div class="right">
 
@@ -94,98 +95,98 @@
 
     </header>
 
-
-
-	<main>
+    <main>
         <section class="section1">
-            
-            <div class="wrapper">
+            <div class="wrapper ordwrpper myinf">
+
+                <h1 class="title">My info</h1>
+                <form action="{% url 'saveinfo' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="main_or_wr disfle">
                 
-                <div class="profile_and_name">
-                    <div class="profilepic">
-                        <img src="{% static '/images/profilepicture.jpg'%}" alt="">
-                    </div>
-                    <div class="profile_name">
-                        {% include 'includes/alerts.html' %}
-                        <h1 id="prfname" >{{user.first_name}} {{user.last_name}}</h1>
-                        <h3 id="prfemail" >{{user.email}}</h3>
-                    </div>
-                </div>
-    
-                <div class="detail_wr">
-                    <div class="left">
-                        <h1>My Orders</h1>
-                        <p>you have 10 orders</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
-                <div class="detail_wr">
-                    <div class="left">
-                        <h1>Address</h1>
-                        <p>3 saved addresses</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
-                <div class="detail_wr">
-                    <div class="left">
-                        <h1>my reviews</h1>
-                        <p>you reviewed 10 orders</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
-                <div onclick="gomyinfo()" class="detail_wr">
-                    <div class="left">
-                        <h1>My info</h1>
-                        <p>profile, password, mail etc...</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
+                        <h3 id="heading_pinfo">Personal information</h3>
+                
+                        <div id="namewrp" class="name wrpp">
+                            <h4>First Name</h4>
+                            <input name="" id="firstname-input" type="text" placeholder="enter Name" value="{{user.first_name}}"
+                                readonly>
+                            <div class="btn_edit"><img src="{% static '/images/pencil.svg'%}" alt=""></div>
+                        </div>
+                
+                        <div id="namewrp" class="name wrpp">
+                            <h4>First Name</h4>
+                            <input name="" id="lastname-input" type="text" placeholder="enter Name" value="{{user.last_name}}"
+                                readonly>
+                            <div class="btn_edit"><img src="{% static '/images/pencil.svg'%}" alt=""></div>
+                        </div>
+                
+                        <div id="emailwrp" class="email_wr wrpp">
+                            <h4>Email</h4>
+                            <input id="email-input" type="email" placeholder="enter email" value="{{user.email}}" readonly disabled>
+                        </div>
+                
+                        <div id="phonewrp" class="wrpp wrph">
+                            <h4>Phone number</h4>
+                            <div class="phone_wr">
+                                <h3 id="country_code">+91</h3>
+                                <!-- <input type="number" name="ccode" id="country_code" value="91" maxlength="2"> -->
+                                <input name="" id="phone-input" type="tel" placeholder="enter phone number" maxlength="10"
+                                    value="{{user.phone_number}}" readonly>
+                                <div class="btn_edit"><img src="{% static '/images/pencil.svg'%}" alt=""></div>
+                            </div>
+                        </div>
+                
+                        <div class="break_info">
+                
+                        </div>
+                
+                        <h3 id="heading_pinfo">Password</h3>
 
-				<a id="logout_btn" href="{% url 'logout' %}">logout</a>
+                
+                        <div onclick="resetpassword()" id="passwrp" class="pass_wr wrpp">
+                            reset password
+                        </div>
+
+                        <p id="note">click on pencil icon to edit</p>
+                
+                
+                    </div>
+                    <button id="saveinfo" style="display: none;"></button>
+                </form>
+                
+                
+                <div class="btn_save_info">SAVE INFO</div>
             </div>
+            
         </section>
-	</main>
+        
+        
+
+    </main>
 
 
+    <style>
+        #note{
+            color: #B3B3B3;
+            font-size: 12px;
+        }
+    </style>
 
-
-
-
-
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="{% static 'js/main.js'%}"></script>
 	<script src="{% static 'js/slick.js'%}"></script>
 	<script src="{% static 'js/profile.js'%}"></script>
 
 	{% include 'includes/links.html' %}
 
+    <script>
+        function resetpassword(){
+            location.href = "{% url 'forgotPassword' %}?email={{user.email}}"
+        }
+    </script>
+
 
 </body>
-
-<div class="mbnavpill">
-	<div class="tab_nav">
-		<div class="home pill">
-			<img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
-			<h4>HOME</h4>
-		</div>
-		<div class="profile pill pillactive">
-			<img src="{% static '/images/profile_ic.svg'%}" alt="">
-			<h4>PROFILE</h4>
-		</div>
-		<div class="favorites pill">
-			<img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
-			<h4>FAVORITE'S</h4>
-		</div>
-	</div>
-</div>
 
 
 </html>

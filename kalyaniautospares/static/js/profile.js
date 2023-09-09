@@ -162,6 +162,7 @@ function handlecardCheckboxChange(e) {
 var passwordInput = document.getElementById("password-input");
 var toggleButton = document.getElementById("toggle-button");
 var toggleimg = document.getElementById("toggleimg");
+const btnsave_info = document.querySelector('.btn_save_info');
 
 function togglePasswordVisibility() {
 
@@ -184,9 +185,47 @@ btnsEd.forEach(btnEd => {
             btnEd.parentElement.querySelector('input').readOnly = false;
             btnEd.parentElement.querySelector('input').style.color = "#214CDB";
             btnEd.style.display = "none";
+            btnsave_info.style.display = "flex";
         }
     });
 });
+
+
+
+btnsave_info.addEventListener('click', ()=>{
+    btnsEd.forEach(btnEd => {
+        ele = btnEd.parentElement.querySelector('input');
+        if (!ele.readOnly) {
+            if(ele.id == "lastname-input"){
+                ele.name = "last_name";
+                console.log(ele.name);
+            }
+            if(ele.id == "firstname-input"){
+                ele.name = "first_name";
+                console.log(ele.name);
+            }
+            if(ele.id == "phone-input"){
+                ele.name = "phone";
+                console.log(ele.name);
+            }
+        }
+    });
+
+    phonelay = document.querySelector('input[id="phone-input"]');
+    if (!phonelay.readOnly) {
+        phonennn = phonelay.value;
+        if (phonennn.length > 9) {
+            document.getElementById('saveinfo').click();
+        }
+    }
+    else{
+        document.getElementById('saveinfo').click();
+    }
+
+
+
+});
+
 
 
 const inputss = document.querySelectorAll('.wrpp input')

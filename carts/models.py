@@ -30,6 +30,7 @@ class CartItem(models.Model):
     
 
 class Favorites(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     variations = models.ManyToManyField(Variation, blank=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)

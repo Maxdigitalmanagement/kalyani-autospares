@@ -84,7 +84,7 @@
                     <h3>Checkout</h3>
                 </div>
                 <div class="right">
-
+                    <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
                 </div>
             </div>
 
@@ -169,40 +169,13 @@
                         </div>
                     </div>
                     <div class="addresses_to_select">
+                        {% for address in addresses %}
                         <div class="address_wr">
                             <div class="top">
                                 <div class="names_fl_wrap">
-                                    <h2 id="first_name">Hari Babu</h2>
-                                    <div class="namespace"></div>
-                                    <h2 id="last_name">Araveti</h2>
-                                </div>
-                                <label class="container">
-                                    <input checked type="checkbox">
-                                    <div class="checkmark"></div>
-                                </label>
-                            </div>
-                            <div class="address_details">
-                                <h4 id="email">hari181489@gmail.com</h4>
-                                <h4 id="phone">9182914018</h4>
-                                <div class="namespace">..</div>
-                                <h4 id="houseno">2/110,</h4>
-                                <h4 id="floor_buildingname"></h4>
-                                <h4 id="Roadname_area_colony">Anjaneya swamy temple street, Moragudi, jammalamadugu,
-                                </h4>
-                                <h4 id="city">Kadapa</h4>
-                                <div class="statepin">
-                                    <h4 id="State">Andhra Pradesh</h4>
-                                    -
-                                    <span id="pincode">516434</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="address_wr">
-                            <div class="top">
-                                <div class="names_fl_wrap">
-                                    <h2 id="first_name">Harish</h2>
-                                    <div class="namespace"></div>
-                                    <h2 id="last_name">Dande</h2>
+                                    <h2 id="first_name">{{address.first_name}}</h2>
+                                    <!-- <div class="namespace"></div>
+                                    <h2 id="last_name">{{address.last_name}}</h2> -->
                                 </div>
                                 <label class="container">
                                     <input type="checkbox">
@@ -210,49 +183,22 @@
                                 </label>
                             </div>
                             <div class="address_details">
-                                <h4 id="email">hari181489@gmail.com</h4>
-                                <h4 id="phone">9182914018</h4>
+                                <h4 id="email">{{address.email}}</h4>
+                                <h4 id="phone">{{address.phone}}</h4>
+                                <h4 id="addr_id" style="display: none;">{{address.id}}</h4>
                                 <div class="namespace">..</div>
-                                <h4 id="houseno">2/110,</h4>
+                                <h4 id="houseno">{{address.address_line_1}}</h4>
                                 <h4 id="floor_buildingname"></h4>
-                                <h4 id="Roadname_area_colony">Anjaneya swamy temple street, Moragudi, jammalamadugu,
-                                </h4>
-                                <h4 id="city">Kadapa</h4>
+                                <h4 id="Roadname_area_colony">{{address.address_line_2}}</h4>
+                                <h4 id="city">{{address.city}}</h4>
                                 <div class="statepin">
-                                    <h4 id="State">Andhra Pradesh</h4>
+                                    <h4 id="State">{{address.state}}</h4>
                                     -
-                                    <span id="pincode">516434</span>
+                                    <span id="pincode">{{address.pincode}}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="address_wr">
-                            <div class="top">
-                                <div class="names_fl_wrap">
-                                    <h2 id="first_name">Sesha sai</h2>
-                                    <div class="namespace"></div>
-                                    <h2 id="last_name">Nichenametla</h2>
-                                </div>
-                                <label class="container">
-                                    <input type="checkbox">
-                                    <div class="checkmark"></div>
-                                </label>
-                            </div>
-                            <div class="address_details">
-                                <h4 id="email">hari181489@gmail.com</h4>
-                                <h4 id="phone">9182914018</h4>
-                                <div class="namespace">..</div>
-                                <h4 id="houseno">2/110,</h4>
-                                <h4 id="floor_buildingname"></h4>
-                                <h4 id="Roadname_area_colony">Anjaneya swamy temple street, Moragudi, jammalamadugu,
-                                </h4>
-                                <h4 id="city">Kadapa</h4>
-                                <div class="statepin">
-                                    <h4 id="State">Andhra Pradesh</h4>
-                                    -
-                                    <span id="pincode">516434</span>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                         <div class="add_address">
                             <h1>Add Address</h1>
                         </div>
@@ -265,17 +211,9 @@
             </div>
         </section>
 
-        <form action="" method="POST">
+        <form action="{% url 'place_order' %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="first_name" value="">
-            <input type="hidden" name="last_name" value="">
-            <input type="hidden" name="email" value="">
-            <input type="hidden" name="phone" value="">
-            <input type="hidden" name="address_line_1" value="">
-            <input type="hidden" name="address_line_2" value="">
-            <input type="hidden" name="city" value="">
-            <input type="hidden" name="state" value="">
-            <input type="hidden" name="pincode" value="">
+            <input type="hidden" name="addr_id" value="">
             <button type="submit" name="submit" style="display: none;" id="place_order_btn"></button>
         </form>
     </main>

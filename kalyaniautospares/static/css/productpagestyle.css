@@ -8,7 +8,7 @@
 
 .sec1_right {
     height: max-content;
-    width: calc(50vw - 10px);
+    width: calc(50vw - 50px);
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -506,7 +506,7 @@ input[name="color"]:checked {
 .product {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .product .product_img {
@@ -532,8 +532,15 @@ input[name="color"]:checked {
 }
 
 .product h1 span{
-    font-style: normal;
-    font-weight: 600;
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #B3B3B3;
+}
+
+.product p{
+    font-size: 12px;
+    margin: 0;
+    color: #B3B3B3;
 }
 
 .product .rating_wrap .rating_count{
@@ -610,7 +617,7 @@ input[name="color"]:checked {
     }
 
     .sec1_right{
-        max-width: 600px;
+        max-width: 680px;
     }
 
     .mobtab{

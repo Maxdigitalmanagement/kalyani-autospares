@@ -135,6 +135,10 @@ def login(request):
                 # it will split into key & value ----> {'next' : '/cart/checkout'}
                 if 'next' in params:
                     nextpage = params['next']
+                    if "%3F" in nextpage:
+                        nextpage = nextpage.replace("%3F", "?")
+                    if "%3D" in nextpage:
+                        nextpage = nextpage.replace("%3D", "=")
                     return redirect(nextpage)
             except:
                 return redirect('profile')
@@ -234,10 +238,58 @@ def resetPassword(request):
             user = Account.objects.get(pk=uid)
             user.set_password(password)
             user.save()
-            messages.success(request, 'Password reset successgully')
+            messages.success(request, 'Password reset successfully')
+            if request.user is not None:
+                auth.logout(request)
             return redirect('login')
         else:
             messages.error(request, 'Password do not match!')
             return redirect('resetPassword')
+        
     else:
         return render(request, 'accounts/resetpassword.html')
+        
+
+
+@login_required(login_url = 'login')
+def infoverify(request):
+
+    if request.method == 'POST':
+        password = request.POST['password']
+        email = request.POST['email']
+        user = auth.authenticate(email=email, password=password)
+        if user is not None:
+            return redirect('myinfo')
+        else:
+            messages.error(request, 'Password do not match!')
+            return redirect('infoverify')
+    else:
+        return render(request, 'accounts/authenticateinfo.html')
+
+
+@login_required(login_url = 'login')
+def myinfo(request):
+    return render(request, 'accounts/myinfo.html')
+
+@login_required(login_url = 'login')
+def saveinfo(request):
+    user = Account.objects.get(pk=request.user.id)
+
+    if request.method == 'POST':
+        try:
+            if request.POST['last_name']:
+                user.last_name = request.POST['last_name']
+        except:
+            pass
+        try:
+            if request.POST['first_name']:
+                user.first_name = request.POST['first_name']
+        except:
+            pass
+        try:
+            if request.POST['phone']:
+                user.phone_number = request.POST['phone']
+        except:
+            pass
+        user.save()
+        return redirect('profile')

@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Hari Babu" />
+	<meta name="description" content="Kalyani Autospares Favorite's Page" />
+	<meta name="keywords" content="Food, Restaurant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- SITE TITLE -->
+	<title>Kalyani Autospares | Favorite's</title>
+	<!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/favoritesstyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+	<header>
+		<nav id="navbar">
+			<div id="nav_tot" class="topnav">
+				<div onclick="gohome()" class="left">
+					<img class="imagelogo" src="{% static 'images/logo.png'%}" alt="">
+					<img class="imagelogo_name" src="{% static 'images/logo_name.svg'%}" alt="">
+				</div>
+				<div class="right">
+					<div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items_no}}</p>
+						<img src="{% static '/images/cart_ic.svg'%}" alt="">
+					</div>
+					<div class="tab_nav">
+						<div class="home pill">
+							<img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+							<h4>HOME</h4>
+						</div>
+						<div onclick="goprofile()" class="profile pill">
+							<img src="{% static '/images/profile_ic.svg'%}" alt="">
+							<h4>PROFILE</h4>
+						</div>
+						<div class="favorites pill">
+							<img src="{% static '/images/fav_ic.svg'%}" alt="">
+							<h4>FAVORITE'S</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="statusbar">
+				<div id="sbleft" class="left">
+				</div>
+				<div class="middle">
+					<h3>thank you</h3>
+				</div>
+				<div class="right">
+				</div>
+			</div>
+
+
+
+		</nav>
+
+
+
+	</header>
+
+
+    <input type="checkbox" id="ChekBox" placeholder="jj">
+	<div class="wr_empty">
+		<div class="empty_fav">
+			<h1>Your order has been<br><span>Placed Successfully</span></h1>
+			
+			<div class="pics">
+				<img id="middle" src="{% static '/images/orderplaced.svg'%}" alt="" data-value="3" class="levitate">
+			</div>
+            <a style="text-decoration: none;" href="{% url 'home' %}">
+                <p>Continue Shopping</p>
+            </a>
+		</div>
+        <div class="content">
+            <div class="order-details">
+                <h2>Order Details</h2>
+                <p><strong>Order Number:</strong> #{{order.order_number}}</p>
+                <p><strong>Transaction Id:</strong> #{{payment.payment_id}}</p>
+                <p><strong>Order Date:</strong> {{order.date}}</p>
+                <p><strong>Shipping Address:</strong><br>{{order.full_name}},<br>{{order.address_line_1}},<br>{{order.address_line_2}},<br>{{order.city}},<br>{{order.state}},<br>{{order.country}} - {{order.pincode}}.</p>
+                <p><strong>Phone Number:</strong> {{order.phone}}</p>
+                <p><strong>Email:</strong> {{order.email}}</p>
+            </div>
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <table class="toc">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for item in order_items %}
+                    <tr>
+                        <td>{{item.product.product_name}}<br>
+                            <small>
+                                {% if item.variations.all %}
+                                {% for i in item.variations.all %}
+                                {{ i.variation_category }} : {{ i.variation_value }}
+                                {% endfor %}
+                                {% endif %}
+                            </small>
+                        </td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.product_price}}</td>
+                    </tr>
+                    {% endfor %}
+                    <!-- Add more rows for other products -->
+                </table>
+                <p><strong>Sub Total:</strong> ₹{{subtotal}}</p>
+                <p><strong>taxes & charges:</strong> ₹{{order.tax}}</p>
+                <p><strong>Grand Total:</strong> ₹{{order.order_total}}</p>
+            </div>
+        </div>
+	</div>
+
+    <style>
+        .container {
+            width: 70vw;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #214CDB;
+            margin: 20px;
+            max-width: 600px;
+            font-size: 14px;
+        }
+        .content {
+            width: 100%;
+            padding: 20px;
+            max-width: 600px;
+            padding-bottom: 50px;
+
+        }
+        .order-details {
+            padding: 20px 0;
+            border-top: 2px solid #f1f1f1;
+        }
+        .order-summary {
+            padding: 20px 0;
+            border-top: 2px solid #f1f1f1;
+        }
+        .order-summary p{
+            text-align: end;
+            font-size: 14px;
+            font-weight: 200;
+        }
+        .order-summary td{
+            font-size: 14px;
+        }
+        .order-summary h2{
+            margin-bottom: 20px;
+        }
+        .order-summary p strong{
+            color: #214CDB;
+            font-weight: 200;
+        }
+        .order-details p strong{
+            color: #214CDB;
+            font-weight: 200;
+        }
+        .order-details p{
+            font-weight: 200;
+            font-size: 14px;
+        }
+        .toc {
+            border: 1px solid #f1f1f1;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .toc th, .toc td {
+            border: 1px solid #f1f1f1;
+            padding: 10px;
+            text-align: left;
+        }
+        .toc th {
+            background-color: #f9f9f9;
+        }
+        .button {
+            display: inline-block;
+            border: 2px solid #214CDB;
+            color: #214CDB;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: fugaz one;
+            font-style: normal;
+            font-weight: 200;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888888;
+            font-size: 12px;
+        }
+
+        .footer p{
+            color: #a8a8a8;
+        }
+    </style>
+
+
+
+
+	{% include 'includes/links.html' %}
+
+
+
+
+
+
+    <style>
+        .empty_fav{
+            position: relative;
+            gap: 20px;
+            left: 0;
+            transform: translate(0);
+        }
+        .wr_empty{
+            margin-top: 70px;
+            flex-direction: column;
+        }
+        #navbar{
+            margin-left: 0;
+        }
+        .empty_fav span{
+            font-size: 20px;
+        }
+        .empty_fav h1{
+            text-align: center;
+        }
+        .empty_fav p{
+            font-size: 16px;
+        }
+    </style>
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/favourites.js'%}"></script>
+
+
+</body>
+
+<div class="mbnavpill">
+    <div class="tab_nav">
+        <div onclick="gohome()" class="home pill">
+            <img src="{% static '/images/home_ic.svg' %}" alt="">
+            <h4>HOME</h4>
+        </div>
+        <div onclick="goprofile()" class="profile pill">
+            <img src="{% static '/images/profile_ic.svg' %}" alt="">
+            <h4>PROFILE</h4>
+        </div>
+        <div onclick="gofav()" class="favorites pill">
+            <img src="{% static '/images/fav_ic.svg' %}" alt="">
+            <h4>FAVORITE'S</h4>
+        </div>
+    </div>
+</div>
+
+
+</html>
