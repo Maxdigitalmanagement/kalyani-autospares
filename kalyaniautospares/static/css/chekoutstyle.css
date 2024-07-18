@@ -441,7 +441,7 @@
 .add_address{
     width: max-content;
     height: inherit;
-    padding: 0px 40px;
+    padding: 10px 40px;
     display: flex;
     align-items: center;
     justify-content: center;

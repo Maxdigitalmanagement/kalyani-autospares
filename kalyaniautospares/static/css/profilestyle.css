@@ -30,14 +30,15 @@ main {
 }
 
 .profilepic img {
-    width: 80px;
-    height: 80px;
+    width: 100%;
 }
 
 .profilepic {
     overflow: hidden;
     border-radius: 80px;
     display: flex;
+    width: 80px;
+    height: 80px;
     align-items: center;
     justify-content: center;
     border: 3px solid #fff;
@@ -123,7 +124,42 @@ main {
     box-shadow: 0 0 #000;
 }
 
+#ChekBox {
+    display: none;
+}
 
+.wr_empty {
+    position: absolute;
+    display: none;
+    left: 0;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.empty_fav {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.empty_fav h1 {
+    font-size: 32px;
+}
+
+.empty_fav span {
+    color: white;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.empty_fav p {
+    font-size: 12px;
+    color: #214CDB;
+}
 
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@
@@ -135,6 +171,7 @@ main {
 
 
 #allorders:checked~.cat_nav .allorders,
+#new:checked~.cat_nav .new,
 #delivered:checked~.cat_nav .delivered,
 #processing:checked~.cat_nav .processing,
 #cancelled:checked~.cat_nav .cancelled {
@@ -195,9 +232,15 @@ main {
     align-items: center;
 }
 
+.use_default > a{
+    display: flex;
+    align-items: center;
+}
+
 
 .or_inner {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -280,6 +323,8 @@ main {
     padding: 5px;
     height: fit-content;
     border-radius: 5px;
+    width: 24px;
+    height: 24px;
 }
 
 .add_wrap {
@@ -591,7 +636,7 @@ input[type="password"]::-webkit-outer-spin-button {
     background-color: #000;
     padding: 15px;
     border-radius: 40px;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     color: #FFF;
@@ -629,7 +674,9 @@ input[type="password"]::-webkit-outer-spin-button {
     transform: translate(-200%,-50%);
 }
 
-
+#prof_back{
+    padding: 10px;
+}
 
 
 
@@ -849,10 +896,6 @@ input[type="password"]::-webkit-outer-spin-button {
 
     .statusbar .middle h3 {
         font-size: 18px;
-    }
-
-    .statusbar {
-        padding: 20px 30px;
     }
 
     .ordstb {

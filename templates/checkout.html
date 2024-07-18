@@ -48,6 +48,8 @@
 
 <body>
 
+    {% include 'includes/preloader.html' %}
+
     <header>
         <nav id="navbar">
             <div id="nav_tot" class="topnav">
@@ -199,7 +201,7 @@
                             </div>
                         </div>
                         {% endfor %}
-                        <div class="add_address">
+                        <div onclick="addaddress()" class="add_address">
                             <h1>Add Address</h1>
                         </div>
                     </div>

@@ -24,8 +24,8 @@
         location.href = "{% url 'store' %}"
     }
 
-    function gomyinfo(){
-        location.href = "{% url 'infoverify' %}"
+    function saveinfo(){
+        location.href = "{% url 'saveinfo' %}"
     }
 
     function searchBy(name) {
@@ -44,15 +44,22 @@
     }
 
     function goprofile() {
-        user_login = "false";
-        user_login = "{% if user.id %}true{% endif %}";
-        if(user_login=="true"){
-            location.href= "{% url 'profile' %}?user={{user}}"
-        }
-        else{
-            location.href= "{% url 'login' %}"
-        }
+        location.href= "{% url 'profile' %}";
     }
+    function gomyaddr(){
+        location.href= "{% url 'myaddresses' %}";
+    }
+    function gomyordrs(){
+        location.href= "{% url 'myorders' %}";
+    }
+    function goreviews(){
+        location.href= "{% url 'myreviews' %}";
+    }
+
+    function addaddress(){
+        location.href= "{% url 'add_address' %}";
+    }
+
 
 
     const searchbarbig = document.getElementById("search_bar");

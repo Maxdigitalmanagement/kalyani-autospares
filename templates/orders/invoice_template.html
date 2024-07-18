@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        /* Add your styles here */
+        /* Customize this template to match your branding */
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @font-face {
+            font-family: FugazOne;
+            src: url('{% static "fonts/FugazOne-Regular.ttf"%}');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .invoice-container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .invoice-header h1 {
+            margin: 0;
+            color: #007BFF;
+        }
+
+        .invoice-lines {
+            margin-bottom: 20px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .invoice-details {
+            margin-bottom: 20px;
+        }
+
+        .invoice-details h2 {
+            margin: 0;
+        }
+
+        .order-details {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .order-details-left {
+            width: 48%;
+        }
+
+        .order-details-right {
+            width: 48%;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .invoice-total {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .return-policy {
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 10px;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        p{
+            margin: 0;
+        }
+        h3{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>INVOICE</h1>
+        </div>
+        <div class="ship-from">
+            <h3>Ship From:</h3>
+            <p>Kalyani Autospares,</p>
+            <p>7/281, Holmespet Backside,</p>
+            <p>Proddatur, Andhra Pradesh - 516360</p>
+        </div>
+        <div class="sold-by">
+            <h3>Sold By:</h3>
+            <p>Kalyani Autospares, Proddatur</p>
+        </div>
+        <div class="invoice-details">
+            <h2>Order Details</h2>
+            <div class="order-details" style="display: flex; flex-direction: row; justify-content: space-between;">
+                <div class="order-details-left">
+                    <p>Order Number: #{{order.order_number}}</p>
+                    <p>Order Date: {{order.date}}</p>
+                    <p>Transaction ID: {{order.payment.payment_id}}</p>
+                </div>
+                <div class="order-details-right">
+                    <h3>Ship To:</h3>
+                    <!-- Add customer's shipping details here -->
+                    <p>{{order.full_name}}</p>
+                    <p>{{order.address_line_1}},</p>
+                    <p>{{order.address_line_2}}</p>
+                    <p>{{order.city}},</p>
+                    <p>{{order.state}} - {{order.pincode}}</p>
+                    <p>{{order.phone}}</p>
+                    <p>{{order.email}}</p>
+                </div>
+            </div>
+        </div>
+        <table class="invoice-table">
+            <h1>Products</h1>
+            <p>Total Products : {{order.order_quantity}}</p>
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in order_products %}
+                <tr>
+                    <td>{{product.product.part_number}}</td>
+                    <td>{{product.product.product_name}} <br>
+                        <small>
+                            {% if product.variations.all %}
+                            {% for i in product.variations.all %}
+                            {{ i.variation_category }} : {{ i.variation_value }}
+                            {% endfor %}
+                            {% endif %}
+                        </small>
+                    </td>
+                    <td>Rs. {{product.product_price}}</td>
+                    <td>Rs. {{product.quantity}}</td>
+                    <td>Rs. {{product.sub_total}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="invoice-total">
+            <p>Total: Rs. <span style="font-size: 20px; font-weight: 800;">{{order.order_total}}</span></p>
+        </div>
+        <div class="return-policy">
+            <h1>Return Policy:</h1>
+            <p>At Kalyani Autospares, we strive for perfection in every delivery. In the unlikely event that you need to return an item, please ensure it is returned with the original brand box, price tag, original packaging, and invoice. Without these, processing your request may be difficult. Your cooperation is appreciated. Terms and conditions apply.</p>
+            <p>The goods sold are intended for end-user consumption and not for resale.</p>
+        </div>
+    </div>
+</body>
+</html>

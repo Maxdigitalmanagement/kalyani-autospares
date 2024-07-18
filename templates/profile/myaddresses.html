@@ -7,11 +7,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="author" content="Hari Babu" />
-	<meta name="description" content="Kalyani Autospares Profile Page" />
+	<meta name="description" content="Kalyani Autospares Addresses Page" />
 	<meta name="keywords" content="Food, Restaurant">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- SITE TITLE -->
-	<title>Kalyani Autospares | profile</title>
+	<title>Kalyani Autospares | My Addresses</title>
 	<!-- CSS -->
 	<link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
 	<link href="{% static 'css/profilestyle.css' %}" rel="stylesheet">
@@ -67,7 +67,7 @@
                             <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
                             <h4>HOME</h4>
                         </div>
-                        <div class="profile pill pillactive">
+                        <div onclick="goprofile()" class="profile pill pillactive">
                             <img src="{% static '/images/profile_ic.svg'%}" alt="">
                             <h4>PROFILE</h4>
                         </div>
@@ -80,13 +80,13 @@
             </div>
             <div class="statusbar">
                 <div id="sbleft" class="left">
-                    <!-- <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt=""> -->
+                    <img id="prof_back" onclick="goprofile()" src="{% static '/images/backbtn.svg'%}" alt="">
                 </div>
                 <div class="middle">
-                    <h3>Profile</h3>
+                    <h3>Addresses</h3>
                 </div>
                 <div class="right">
-
+                    <img onclick="addaddress()" class="plus_ic" src="{% static '/images/plus_ic.svg'%}" alt="">
                 </div>
             </div>
 
@@ -97,64 +97,77 @@
     </header>
 
 
+    {% if user_addresses %}
+    <input type="checkbox" id="ChekBox" placeholder="jj" checked>
+    {% else %}
+    <input type="checkbox" id="ChekBox" placeholder="jj">
+    {% endif %}
+    <div class="wr_empty">
+        <div class="empty_fav">
+            <h1>No Addresses <span>Added</span></h1>
+            <a style="text-decoration: none;" href="{% url 'add_address' %}">
+                <p>Add Address</p>
+            </a>
+        </div>
+    </div>
 
-	<main>
+
+    <main>
         <section class="section1">
-            
-            <div class="wrapper">
-                
-                <div class="profile_and_name">
-                    <div class="profilepic">
-                        <img src="{{userprofile.profile_picture.url}}" style="background-size: cover;" alt="">
-                    </div>
-                    <div class="profile_name">
-                        {% include 'includes/alerts.html' %}
-                        <h1 id="prfname" >{{user.first_name}} {{user.last_name}}</h1>
-                        <h3 id="prfemail" >{{user.email}}</h3>
-                    </div>
+            <div class="wrapper ordwrpper">
+                <div class="addr_title">
+                    <h1 class="title">Addresses</h1>
+                    <img onclick="addaddress()" class="plus_ic" src="{% static '/images/plus_ic.svg'%}" alt="">
                 </div>
-    
-                <div onclick="gomyordrs()" class="detail_wr">
-                    <div class="left">
-                        <h1>My Orders</h1>
-                        <p>you have {{orders_count}} orders</p>
+                {% include 'includes/alerts.html' %}
+                <div class="main_or_wr disfle">
+                    {% for address in user_addresses %}
+                    <div class="order_wrap add_wrap">
+                        <div class="or_inner">
+                            <h2>{{address.first_name}}</h2>
+                            <div class="use_default">
+                                <a style="text-decoration: none;" href="{% url 'edit_address' address.id %}"><h3>edit <i class="fas fa-edit"></i></h3></a>
+                                <a href="{% url 'delete_address' address.id %}" id="deleteadd"><img src="{% static '/images/garbage.svg' %}" alt="delete" ></a>
+                            </div>
+                        </div>
+                        <div class="break">
+                        </div>
+                        <div class="or_inner">
+                            <h3>{{address.address_line_1}},<br>
+                                {% if address.address_line_2 %}
+                                {{address.address_line_2}},<br>
+                                {% endif %}
+                                {{address.city}},<br>
+                                {{address.state}},<br>
+                                {{address.country}} - {{address.pincode}}.</h3>
+                        </div>
                     </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
+                    {% endfor %}
                 </div>
-                <div onclick="gomyaddr()" class="detail_wr">
-                    <div class="left">
-                        <h1>Address</h1>
-                        <p>{{addresses_count}} saved addresses</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
-                <div onclick="goreviews()" class="detail_wr">
-                    <div class="left">
-                        <h1>my reviews</h1>
-                        <p>you reviewed {{reviews_count}} orders</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
-                <div onclick="saveinfo()" class="detail_wr">
-                    <div class="left">
-                        <h1>Edit info</h1>
-                        <p>profile, password, mail etc...</p>
-                    </div>
-                    <div class="right">
-                        <img src="{% static '/images/backbtn.svg'%}" alt="">
-                    </div>
-                </div>
-
-				<a id="logout_btn" href="{% url 'logout' %}">logout</a>
             </div>
         </section>
-	</main>
+    </main>
+
+
+
+    <style>
+        #message{
+            width: max-content;
+            margin: 0 auto;
+        }
+        #deleteadd{
+            font-size: 12px;
+            text-decoration: none;
+            background-color: black;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+	
 
 
 
@@ -166,6 +179,24 @@
 	<script src="{% static 'js/main.js'%}"></script>
 	<script src="{% static 'js/slick.js'%}"></script>
 	<script src="{% static 'js/profile.js'%}"></script>
+
+    <script>
+        deletebtns = document.querySelectorAll("#deleteadd");
+        deletebtns.forEach(element => {
+
+            element.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (window.confirm('delete address ?')) {
+                    // They clicked Yes
+                    location.href = this.getAttribute('href');
+                }
+                else {
+
+                }
+            });
+
+        });
+    </script>
 
 	{% include 'includes/links.html' %}
 

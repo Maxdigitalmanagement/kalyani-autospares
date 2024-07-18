@@ -77,7 +77,23 @@ class Order(models.Model):
         formatted_order_created_kolkata = order_created_kolkata.strftime('%B %d, %Y @ %I:%M %p')
         return f'{formatted_order_created_kolkata}'
     
-
+    def ordered_date(self):
+        order_date = self.created_at.strftime('%d/%m/%Y')
+        return f'{order_date}'
+    
+    def order_quantity(self):
+        qty = 0
+        order_prd = OrderProduct.objects.filter(user=self.user,order_id=self.id)
+        for order in order_prd:
+            qty +=order.quantity
+        return qty
+    
+    def order_subtotal(self):
+        sub = 0
+        order_prd = OrderProduct.objects.filter(user=self.user,order_id=self.id)
+        for order in order_prd:
+            sub +=order.quantity*order.product_price
+        return sub
 
     def __str__(self):
         return self.user.first_name
@@ -98,3 +114,6 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.product.product_name
+    
+    def sub_total(self):
+        return self.product_price*self.quantity

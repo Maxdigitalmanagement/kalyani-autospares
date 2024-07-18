@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from store.forms import ReviewForm
 
-from .models import Product, ReviewRating
+from .models import Product, ProductGallery, ReviewRating
 from orders.models import OrderProduct
 from category.models import Category
 from carts.models import Favorites,CartItem
@@ -87,6 +87,10 @@ def product_detail(request, category_slug=None, product_slug=None):
     
     reviews = ReviewRating.objects.filter(product_id=single_product.id,status=True)
 
+    # get the product gallery
+
+    product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
+
     context = {
         'single_product' : single_product,
         'favorite' : favorite,
@@ -94,6 +98,7 @@ def product_detail(request, category_slug=None, product_slug=None):
         'like_products' : like_products,
         'orderproduct' : orderproduct,
         'reviews': reviews,
+        'product_gallery':product_gallery,
     }
 
 

@@ -1,10 +1,12 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 
-from accounts.models import Account
+from accounts.models import Account, UserAddress, UserProfile
 from carts.models import Cart, CartItem
 from carts.views import cart_id
-from .forms import RegistrationForm
+from orders.models import Order, OrderProduct
+from store.models import ReviewRating
+from .forms import AddressForm, RegistrationForm, UserForm, UserProfileForm
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 
@@ -14,7 +16,8 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
+from kalyaniautospares.settings import EMAIL_HOST_USER
 
 import base64
 import requests
@@ -37,6 +40,13 @@ def register(request):
             user.phone_number = phone_number
             user.save()
 
+            # Create user profile
+
+            profile = UserProfile()
+            profile.user_id = user.id
+            profile.profile_picture = 'default/profile_empty.svg'
+            profile.save()
+
             # USER ACTIVATION
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'
@@ -46,10 +56,8 @@ def register(request):
                 'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
                 'token' : default_token_generator.make_token(user),
             })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.content_subtype = 'html'
-            send_email.send()
+            to_email = [email]
+            send_mail(mail_subject, message, EMAIL_HOST_USER, to_email, fail_silently=True)
 
             # messages.success(request,'Thank you for registering wth us we have set you a verification email to your email address. please verify it.')
 
@@ -161,7 +169,20 @@ def logout(request):
 
 @login_required(login_url = 'login')
 def profile(request):
-    return render(request, 'profile.html')
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders_count = orders.count()
+    reviews = ReviewRating.objects.order_by('-created_at').filter(user_id=request.user.id)
+    reviews_count = reviews.count()
+    addresses = UserAddress.objects.order_by('-created_at').filter(user_id=request.user.id)
+    addresses_count = addresses.count()
+    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    context = {
+        'orders_count' : orders_count,
+        'reviews_count' : reviews_count,
+        'addresses_count' : addresses_count,
+        'userprofile' : userprofile,
+    }
+    return render(request, 'profile.html', context)
     
 
 
@@ -250,46 +271,189 @@ def resetPassword(request):
         return render(request, 'accounts/resetpassword.html')
         
 
-
-@login_required(login_url = 'login')
-def infoverify(request):
-
-    if request.method == 'POST':
-        password = request.POST['password']
-        email = request.POST['email']
-        user = auth.authenticate(email=email, password=password)
-        if user is not None:
-            return redirect('myinfo')
-        else:
-            messages.error(request, 'Password do not match!')
-            return redirect('infoverify')
-    else:
-        return render(request, 'accounts/authenticateinfo.html')
-
-
-@login_required(login_url = 'login')
-def myinfo(request):
-    return render(request, 'accounts/myinfo.html')
-
 @login_required(login_url = 'login')
 def saveinfo(request):
     user = Account.objects.get(pk=request.user.id)
+    userprofile = UserProfile.objects.get(user_id=request.user.id)
 
     if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "your profile is updated.")
+            return redirect('profile')
+    else :
+        user_form = UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=userprofile)
+    context = {
+        'user_form' : user_form,
+        'profile_form' : profile_form,
+        'userprofile' : userprofile,
+    }
+    return render(request, 'profile/myinfo.html', context)
+    
+
+
+@login_required(login_url = 'login')
+def myaddresses(request):
+    try:
+        user_addresses = UserAddress.objects.filter(user=request.user)
+    except:
+        user_addresses = None
+    context = {
+        'user_addresses' : user_addresses,
+    }
+    return render(request, 'profile/myaddresses.html', context)
+
+@login_required(login_url = 'login')
+def add_address(request):
+    if request.method == 'POST':
         try:
-            if request.POST['last_name']:
-                user.last_name = request.POST['last_name']
+            form = AddressForm(request.POST)
+            if form.is_valid():
+                data = UserAddress()
+                data.first_name = form.cleaned_data['first_name']
+                data.last_name = form.cleaned_data['last_name']
+                data.phone = form.cleaned_data['phone']
+                data.email = form.cleaned_data['email']
+                data.address_line_1 = form.cleaned_data['address_line_1']
+                data.address_line_2 = form.cleaned_data['address_line_2']
+                data.country = form.cleaned_data['country']
+                data.pincode = form.cleaned_data['pincode']
+                data.state = form.cleaned_data['state']
+                data.city = form.cleaned_data['city']
+                data.user_id = request.user.id
+                data.save()
+                messages.success(request, "Address Added")
+                return redirect('myaddresses')
         except:
-            pass
-        try:
-            if request.POST['first_name']:
-                user.first_name = request.POST['first_name']
-        except:
-            pass
-        try:
-            if request.POST['phone']:
-                user.phone_number = request.POST['phone']
-        except:
-            pass
-        user.save()
-        return redirect('profile')
+            messages.error(request, "wrong address")
+            return redirect('myaddresses')
+    return render(request, 'profile/addaddress.html')
+
+@login_required(login_url = 'login')
+def edit_address(request, address_id):
+    address = UserAddress.objects.get(id=address_id)
+
+    if request.method == 'POST':
+        form = AddressForm(request.POST, instance=address)
+        form.save()
+        messages.success(request, "Address updated")
+        return redirect('myaddresses')
+    else:
+        context = {
+            'edit_address' : True,
+            'address' : address,
+        }
+        return render(request, 'profile/addaddress.html', context)
+    
+@login_required(login_url = 'login')
+def delete_address(request, address_id):
+    address = UserAddress.objects.get(id=address_id)
+    is_present = False
+    try:
+        orders = Order.objects.filter(user_id=request.user.id, is_ordered=True)
+        if orders:
+            for order in orders:
+                if order.address.id == address.id:
+                    is_present = True
+
+        if is_present:
+            messages.error(request, "you have orders with this address we cannot delete")
+            return redirect('myaddresses')
+        else:
+            name = address.first_name
+            address.delete()
+            mess = f'{name} address deleted'
+            messages.success(request, mess)
+            return redirect('myaddresses')
+        
+    except Order.DoesNotExist:
+        name = address.first_name
+        address.delete()
+        mess = f'{name} address deleted'
+        messages.success(request, mess)
+        return redirect('myaddresses')
+
+
+@login_required(login_url = 'login')
+def myorders(request):
+    new_orders = []
+    pro_orders = []
+    del_orders = []
+    can_orders = []
+    try:
+        orders = Order.objects.order_by('-created_at').filter(user=request.user,is_ordered=True)
+        if orders:
+            for order in orders:
+                if order.status == "New":
+                    new_orders.append(order)
+                elif order.status == "Processing":
+                    pro_orders.append(order)
+                elif order.status == "Delivered":
+                    del_orders.append(order)
+                elif order.status == "Cancelled":
+                    can_orders.append(order)
+    except OrderProduct.DoesNotExist:
+        order_products = None
+
+    context = {
+        'all_orders' : orders,
+        'new_orders' : new_orders,
+        'pro_orders' : pro_orders,
+        'del_orders' : del_orders,
+        'can_orders' : can_orders,
+    }
+
+    return render(request, 'profile/myorders.html', context)
+
+
+@login_required(login_url = 'login')
+def orderdetails(request, order_id):
+        orders = Order.objects.get(id=order_id)
+        order_products = OrderProduct.objects.order_by('-created_at').filter(user=request.user,order_id=order_id)
+
+        context = {
+            'order' : orders,
+            'order_products': order_products,
+        }
+        return render(request, 'profile/orderdetail.html', context)
+
+
+@login_required(login_url = 'login')
+def myreviews(request):
+
+    reviews = ReviewRating.objects.order_by('-created_at').filter(user=request.user)
+
+    context = {
+        'reviews' : reviews,
+    }
+
+    return render(request, 'profile/myreviews.html', context)
+
+
+@login_required(login_url = 'login')
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password updated successfully.")
+                return redirect('profile')
+            else:
+                messages.error(request, "Please enter valid current Password")
+                return redirect('confirm_password')
+        else:
+            messages.error(request, "Password does not match!")
+            return redirect('confirm_password')
+    return render(request, 'accounts/change_password.html')

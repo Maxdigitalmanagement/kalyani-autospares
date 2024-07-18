@@ -117,7 +117,7 @@
                 <h2>Order Details</h2>
                 <p><strong>Order Number:</strong> {{order.order_number}}</p>
                 <p><strong>Order Date:</strong> {{order.date}}</p>
-                <p><strong>Shipping Address:</strong><br>{{order.full_name}},<br>{{order.address_line_1}},<br>{{order.address_line_2}},<br>{{order.city}},<br>{{order.state}},<br>{{order.country}} - {{order.pincode}}.</p>
+                <p><strong>Shipping Address:</strong><br>{{order.full_name}},<br>{{order.address_line_1}},<br>{% if order.address_line_2 %}{{order.address_line_2}},<br>{% endif %}{{order.city}},<br>{{order.state}},<br>{{order.country}} - {{order.pincode}}.</p>
                 <p><strong>Phone Number:</strong> {{order.phone}}</p>
                 <p><strong>Email:</strong> {{order.email}}</p>
             </div>

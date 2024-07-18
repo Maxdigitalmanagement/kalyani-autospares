@@ -48,6 +48,7 @@
 
 <body>
 
+    {% include 'includes/preloader.html' %}
 
     <header>
         <nav id="navbar">
@@ -66,7 +67,7 @@
                             <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
                             <h4>HOME</h4>
                         </div>
-                        <div class="profile pill pillactive">
+                        <div onclick="goprofile()" class="profile pill pillactive">
                             <img src="{% static '/images/profile_ic.svg'%}" alt="">
                             <h4>PROFILE</h4>
                         </div>
@@ -79,13 +80,16 @@
             </div>
             <div class="statusbar">
                 <div id="sbleft" class="left">
-                    <!-- <img id="backBtn" src="{% static '/images/backbtn.svg'%}" alt=""> -->
+                    <img id="prof_back" onclick="goprofile()" src="{% static '/images/backbtn.svg'%}" alt="">
                 </div>
                 <div class="middle">
                     <h3>My info</h3>
                 </div>
                 <div class="right">
-
+                    <div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items_no}}</p>
+						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
+					</div>
                 </div>
             </div>
 
@@ -100,39 +104,38 @@
             <div class="wrapper ordwrpper myinf">
 
                 <h1 class="title">My info</h1>
-                <form action="{% url 'saveinfo' %}" method="POST">
+                <form action="{% url 'saveinfo' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="main_or_wr disfle">
                 
                         <h3 id="heading_pinfo">Personal information</h3>
-                
-                        <div id="namewrp" class="name wrpp">
-                            <h4>First Name</h4>
-                            <input name="" id="firstname-input" type="text" placeholder="enter Name" value="{{user.first_name}}"
-                                readonly>
-                            <div class="btn_edit"><img src="{% static '/images/pencil.svg'%}" alt=""></div>
+
+                        <div id="profilewrp" class="name wrpp">
+                            <h4>profile</h4>
+                            <img src="{{userprofile.profile_picture.url}}" width="50px" height="50px" style="background-size: cover; border-radius: 50%;" alt="">
+                            {{profile_form.profile_picture}}
                         </div>
                 
-                        <div id="namewrp" class="name wrpp">
+                        <div id="firstnamewrp" class="name wrpp">
                             <h4>First Name</h4>
-                            <input name="" id="lastname-input" type="text" placeholder="enter Name" value="{{user.last_name}}"
-                                readonly>
-                            <div class="btn_edit"><img src="{% static '/images/pencil.svg'%}" alt=""></div>
+                            {{user_form.first_name}}
+                        </div>
+                
+                        <div id="lastnamewrp" class="name wrpp">
+                            <h4>Last Name</h4>
+                            {{user_form.last_name}}
                         </div>
                 
                         <div id="emailwrp" class="email_wr wrpp">
                             <h4>Email</h4>
-                            <input id="email-input" type="email" placeholder="enter email" value="{{user.email}}" readonly disabled>
+                            <p style="margin: 0; color: #B3B3B3;">{{request.user.email}}</p>
                         </div>
                 
                         <div id="phonewrp" class="wrpp wrph">
                             <h4>Phone number</h4>
                             <div class="phone_wr">
                                 <h3 id="country_code">+91</h3>
-                                <!-- <input type="number" name="ccode" id="country_code" value="91" maxlength="2"> -->
-                                <input name="" id="phone-input" type="tel" placeholder="enter phone number" maxlength="10"
-                                    value="{{user.phone_number}}" readonly>
-                                <div class="btn_edit"><img src="{% static '/images/pencil.svg'%}" alt=""></div>
+                                {{user_form.phone_number}}
                             </div>
                         </div>
                 
@@ -143,15 +146,13 @@
                         <h3 id="heading_pinfo">Password</h3>
 
                 
-                        <div onclick="resetpassword()" id="passwrp" class="pass_wr wrpp">
-                            reset password
+                        <div onclick="changepassword()" id="passwrp" class="pass_wr wrpp">
+                            Change password
                         </div>
-
-                        <p id="note">click on pencil icon to edit</p>
                 
                 
                     </div>
-                    <button id="saveinfo" style="display: none;"></button>
+                    <button id="saveinfo" type="submit" value="Save" style="display: none;"></button>
                 </form>
                 
                 
@@ -180,8 +181,8 @@
 	{% include 'includes/links.html' %}
 
     <script>
-        function resetpassword(){
-            location.href = "{% url 'forgotPassword' %}?email={{user.email}}"
+        function changepassword(){
+            location.href = "{% url 'change_password' %}"
         }
     </script>
 

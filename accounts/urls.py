@@ -15,8 +15,14 @@ urlpatterns = [
     path('resetpassword_validate/<uidb64>/<token>/',views.resetpassword_validate, name='resetpassword_validate'),
     path('resetPassword/',views.resetPassword, name='resetPassword'),
 
-    path('infoverify/',views.infoverify, name='infoverify'),
-    path('myinfo/',views.myinfo, name='myinfo'),
     path('saveinfo/',views.saveinfo, name='saveinfo'),
+    path('myaddresses/',views.myaddresses, name='myaddresses'),
+    path('add_address/',views.add_address, name='add_address'),
+    path('delete_address/<int:address_id>',views.delete_address, name='delete_address'),
+    path('edit_address/<int:address_id>',views.edit_address, name='edit_address'),
+    path('myorders/',views.myorders, name='myorders'),
+    path('orderdetails/<int:order_id>',views.orderdetails, name='orderdetails'),
+    path('myreviews/',views.myreviews, name='myreviews'),
+    path('change_password/',views.change_password, name='change_password'),
 
 ]

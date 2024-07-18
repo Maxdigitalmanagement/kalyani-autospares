@@ -49,6 +49,8 @@
 
 <body>
 
+    {% include 'includes/preloader.html' %}
+
     <header>
         <nav id="navbar">
             <div id="nav_tot" class="topnav">
@@ -134,27 +136,13 @@
                             <img class="imgs" src="{{single_product.images.url}}" alt="">
                         </div>
                     </div>
+                    {% for i in product_gallery %}
                     <div class="slide">
                         <div class="imagewraper">
-                            <img class="imgs" src="{{single_product.images.url}}" alt="">
+                            <img class="imgs" src="{{i.image.url}}" alt="">
                         </div>
                     </div>
-                    <div class="slide">
-                        <div class="imagewraper">
-                            <img class="imgs" src="{{single_product.images.url}}" alt="">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="imagewraper">
-                            <img class="imgs" src="{{single_product.images.url}}" alt="">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="imagewraper">
-                            <img class="imgs" src="{{single_product.images.url}}" alt="">
-                        </div>
-                    </div>
-
+                    {% endfor %}
                 </div>
             </div>
             <form action="{% url 'add_cart' %}" method="POST">
@@ -293,7 +281,7 @@
                             <h4>Compatibility</h4>
                         </li>
                         <li>
-                            <h4>category</h4>
+                            <h4>Belongs to</h4>
                         </li>
                         <li>
                             <h4>Category</h4>
@@ -407,6 +395,7 @@
             </div>
         </section>
 
+        {% if like_products %}
         <section class="section3">
             <div class="title">
                 <h3>More for your bike</h3>
@@ -438,11 +427,11 @@
                     {% if product.ratings_count > 0 %}
                     <div class="rating_wrap">
                         <div class="rating">
-							<span><i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}"></i></span>
-							<span><i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}"></i></span>
-							<span><i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}"></i></span>
-							<span><i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}"></i></span>
-							<span><i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}"></i></span>
+							<span><i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}"></i></span>
 						</div>
                         <h4 class="rating_count">({{product.ratings_count}} Review{% if product.ratings_count > 1 %}s{% endif %})</h4>
                     </div>
@@ -453,6 +442,7 @@
 
             </div>
         </section>
+        {% endif %}
 
 
 

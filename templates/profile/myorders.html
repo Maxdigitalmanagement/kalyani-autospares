@@ -1,0 +1,295 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Hari Babu" />
+    <meta name="description" content="Kalyani Autospares my orders page" />
+    <meta name="keywords" content="Food, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SITE TITLE -->
+    <title>Kalyani Autospares | My Orders</title>
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/profilestyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+    {% include 'includes/preloader.html' %}
+
+    <header>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div class="left">
+                    <img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+                        <p class="cartitems">{{cart_items_no}}</p>
+                        <img src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav">
+                        <div class="home pill">
+                            <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div onclick="goprofile()" class="profile pill pillactive">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <img id="prof_back" onclick="goprofile()" src="{% static '/images/backbtn.svg'%}" alt="">
+                </div>
+                <div class="middle">
+                    <h3>My Orders</h3>
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items_no}}</p>
+						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
+					</div>
+                </div>
+            </div>
+
+
+
+        </nav>
+
+    </header>
+
+    {% if all_orders %}
+    <input type="checkbox" id="ChekBox" placeholder="jj" checked>
+    {% else %}
+    <input type="checkbox" id="ChekBox" placeholder="jj">
+    {% endif %}
+    <div class="wr_empty">
+        <div class="empty_fav">
+            <h1>No Orders <span>Yet</span></h1>
+            <a style="text-decoration: none;" href="{% url 'store' %}">
+                <p>Browse items</p>
+            </a>
+        </div>
+    </div>
+
+
+    <main>
+        <section class="section1">
+
+            
+
+            <div class="wrapper ordwrpper">
+                <h1 class="title">My Orders</h1>
+                <div class="navradios">
+                    <input type="radio" name="slider" id="allorders" checked>
+                    <input type="radio" name="slider" id="delivered">
+                    <input type="radio" name="slider" id="new">
+                    <input type="radio" name="slider" id="processing">
+                    <input type="radio" name="slider" id="cancelled">
+                    <div class="cat_nav">
+                        <label for="allorders" class="allorders">All</label>
+                        <label for="new" class="new">New</label>
+                        <label for="processing" class="processing">Processing</label>
+                        <label for="delivered" class="delivered">Delivered</label>
+                        <label for="cancelled" class="cancelled">Cancelled</label>
+                    </div>
+                </div>
+
+                <div class="allord main_or_wr disfle">
+                    {% if all_orders %}
+                    {% for order in all_orders %}
+                    <div class="order_wrap">
+                        <div class="or_no_date or_inner">
+                            <h2>Order no : {{order.order_number}}</h2>
+                            <h3>{{order.ordered_date}}</h3>
+                        </div>
+                        <div class="break">
+                        </div>
+                        <div class="or_qty_amt or_inner">
+                            <h2>Quantity : {{order.order_quantity}}</h2>
+                            <h3>Total Amount : {{order.order_total}}</h3>
+                        </div>
+                        <div class="ot_det_st or_inner">
+                            <form action="{% url 'orderdetails' order.id %}">
+                                <button type="submit">Details</button>
+                            </form>
+                            <h3>{{order.status}}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    No orders exist<span onclick="gostore()" style="color: #214cdb;">browse items</span>
+                    {% endif %}
+                </div>
+                <div class="possord main_or_wr">
+                    {% if pro_orders %}
+                    {% for order in pro_orders %}
+                    <div class="order_wrap">
+                        <div class="or_no_date or_inner">
+                            <h2>Order no : {{order.order_number}}</h2>
+                            <h3>{{order.ordered_date}}</h3>
+                        </div>
+                        <div class="break">
+                        </div>
+                        <div class="or_qty_amt or_inner">
+                            <h2>Quantity : {{order.order_quantity}}</h2>
+                            <h3>Total Amount : {{order.order_total}}</h3>
+                        </div>
+                        <div class="ot_det_st or_inner">
+                            <form action="{% url 'orderdetails' order.id %}">
+                                <button type="submit">Details</button>
+                            </form>
+                            <h3>{{order.status}}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    No orders exist<span onclick="gostore()" style="color: #214cdb; font-size: 12px; margin-top: -20px;">browse items</span>
+                    {% endif %}
+                </div>
+                <div class="deliord main_or_wr">
+                    {% if del_orders %}
+                    {% for order in del_orders %}
+                    <div class="order_wrap">
+                        <div class="or_no_date or_inner">
+                            <h2>Order no : {{order.order_number}}</h2>
+                            <h3>{{order.ordered_date}}</h3>
+                        </div>
+                        <div class="break">
+                        </div>
+                        <div class="or_qty_amt or_inner">
+                            <h2>Quantity : {{order.order_quantity}}</h2>
+                            <h3>Total Amount : {{order.order_total}}</h3>
+                        </div>
+                        <div class="ot_det_st or_inner">
+                            <form action="{% url 'orderdetails' order.id %}">
+                                <button type="submit">Details</button>
+                            </form>
+                            <h3>{{order.status}}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    No orders exist<span onclick="gostore()" style="color: #214cdb; font-size: 12px; margin-top: -20px;">browse items</span>
+                    {% endif %}
+                </div>
+                <div class="neword main_or_wr">
+                    {% if new_orders %}
+                    {% for order in new_orders %}
+                    <div class="order_wrap">
+                        <div class="or_no_date or_inner">
+                            <h2>Order no : {{order.order_number}}</h2>
+                            <h3>{{order.ordered_date}}</h3>
+                        </div>
+                        <div class="break">
+                        </div>
+                        <div class="or_qty_amt or_inner">
+                            <h2>Quantity : {{order.order_quantity}}</h2>
+                            <h3>Total Amount : {{order.order_total}}</h3>
+                        </div>
+                        <div class="ot_det_st or_inner">
+                            <form action="{% url 'orderdetails' order.id %}">
+                                <button type="submit">Details</button>
+                            </form>
+                            <h3>{{order.status}}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    No orders exist<span onclick="gostore()" style="color: #214cdb; font-size: 12px; margin-top: -20px;">browse items</span>
+                    {% endif %}
+                </div>
+                <div class="cancord main_or_wr">
+                    {% if can_orders %}
+                    {% for order in can_orders %}
+                    <div class="order_wrap">
+                        <div class="or_no_date or_inner">
+                            <h2>Order no : {{order.order_number}}</h2>
+                            <h3>{{order.ordered_date}}</h3>
+                        </div>
+                        <div class="break">
+                        </div>
+                        <div class="or_qty_amt or_inner">
+                            <h2>Quantity : {{order.order_quantity}}</h2>
+                            <h3>Total Amount : {{order.order_total}}</h3>
+                        </div>
+                        <div class="ot_det_st or_inner">
+                            <form action="{% url 'orderdetails' order.id %}">
+                                <button type="submit">Details</button>
+                            </form>
+                            <h3>{{order.status}}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    No orders exist<span onclick="gostore()" style="color: #214cdb; font-size: 12px; margin-top: -20px;">browse items</span>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+
+    
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/profile.js'%}"></script>
+
+    {% include 'includes/links.html' %}
+
+
+</body>
+
+
+</html>

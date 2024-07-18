@@ -1,0 +1,226 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Hari Babu" />
+    <meta name="description" content="Kalyani Autospares Order details page" />
+    <meta name="keywords" content="Food, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SITE TITLE -->
+    <title>Kalyani Autospares | Order Details</title>
+    <!-- CSS -->
+    <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/profilestyle.css' %}" rel="stylesheet">
+    <!-- FAVICON AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/d6bb2a24d1.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            cursor: url("{% static '/images/cursor.svg' %}"),
+            auto !important;
+        }
+    </style>
+
+    <!-- slider -->
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slick.css'%}" />
+
+</head>
+
+<body>
+
+    {% include 'includes/preloader.html' %}
+
+    <header>
+        <nav id="navbar">
+            <div id="nav_tot" class="topnav">
+                <div class="left">
+                    <img class="imagelogo" onclick="gohome()" src="{% static 'images/logo.png'%}" alt="">
+                    <img class="imagelogo_name" onclick="gohome()" src="{% static 'images/logo_name.svg'%}" alt="">
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+                        <p class="cartitems">{{cart_items_no}}</p>
+                        <img src="{% static '/images/cart_ic.svg'%}" alt="">
+                    </div>
+                    <div class="tab_nav">
+                        <div class="home pill">
+                            <img onclick="gohome()" src="{% static '/images/home_ic.svg'%}" alt="">
+                            <h4>HOME</h4>
+                        </div>
+                        <div onclick="goprofile()" class="profile pill pillactive">
+                            <img src="{% static '/images/profile_ic.svg'%}" alt="">
+                            <h4>PROFILE</h4>
+                        </div>
+                        <div class="favorites pill">
+                            <img onclick="gofav()" src="{% static '/images/fav_ic.svg'%}" alt="">
+                            <h4>FAVORITE'S</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statusbar">
+                <div id="sbleft" class="left">
+                    <img id="prof_back" onclick="goprofile()" src="{% static '/images/backbtn.svg'%}" alt="">
+                </div>
+                <div class="middle">
+                    <h3>Order Details</h3>
+                </div>
+                <div class="right">
+                    <div onclick="gocart()" class="cart_ic">
+						<p class="cartitems">{{cart_items_no}}</p>
+						<img src="{% static '/images/cart_ic_black.svg'%}" alt="">
+					</div>
+                </div>
+            </div>
+
+
+
+        </nav>
+
+    </header>
+
+
+    <main>
+        <section class="section1 nomarg">
+
+            
+
+            <div class="wrapper orddetwrpper">
+                <h1 class="title">Order Details</h1>
+                <div class="order_details_wrap">
+                    <h2>Order No: <span>{{order.order_number}}</span></h2>
+                    <div class="break"></div>
+                    <div class="cart_items_wrap">
+                        {% for orderproduct in order_products %}
+                        <div class="cart_item caror">
+                            <div onclick="location.href='{{orderproduct.product.get_url}}'" class="item_left">
+                                <img src="{{orderproduct.product.images.url}}" alt="">
+                            </div>
+                            <div class="item_right">
+                                <div onclick="location.href='{{orderproduct.product.get_url}}'" class="name_wrap">
+                                    <h3>{{orderproduct.product.product_name}}</h3>
+                                    <h2></h2>
+                                </div>
+                                <small>
+                                    {% if orderproduct.variations.all %}
+                                    {% for i in orderproduct.variations.all %}
+                                    {{ i.variation_category }} : {{ i.variation_value }}
+                                    {% endfor %}
+                                    {% endif %}
+                                </small>
+                                <div class="price_wrap">
+                                    <div class="prices">
+                                        <h1>₹{{orderproduct.product_price}}</h1>
+                                    </div>
+                                    <div class="items">
+                                        <h3 class="item_no">QTY: {{orderproduct.quantity}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="break"></div>
+                    <div id="download-invoice-btn" class="invoice_la">
+                        <img src="{% static '/images/invoice_ic.svg'%}" alt="">
+                        <h4>Download invoice</h4>
+                    </div>
+                    <div class="break"></div>
+                    <div class="add_delivered">
+                        <h3>Delivered to</h3>
+                        <div class="address_details">
+                            <h4 id="personname">{{order.full_name}},</h4>
+                            <h4 id="houseno">{{order.address_line_1}},</h4>
+                            <h4 id="Roadname_area_colony">{{order.address_line_2}},</h4>
+                            <h4 id="city">{{order.city}},</h4>
+                            <div class="statepin">
+                                <h4 id="State">{{order.state}}</h4>
+                                -
+                                <h4 id="pincode">{{order.pincode}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="break"></div>
+                    <div class="cart_total">
+                        <div class="items_total totitem">
+                            <h3 class="light">Cart Total</h3>
+                            <h3>₹{{order.order_subtotal}}</h3>
+                        </div>
+                        <div class="extras totitem">
+                            <h3 class="light">Taxes</h3>
+                            <h3>₹{{order.tax}}</h3>
+                        </div>
+                        <div class="total totitem">
+                            <h2>TOTAL</h2>
+                            <h2 id="pricemain">₹{{order.order_total}}</h2>
+                        </div>
+                    </div>
+                    <div class="break"></div>
+                    <div class="payment_details">
+                        <h4>Paid by <span>{{order.payment.payment_method}}</span></h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+    <style>
+        .cart_items_wrap{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+
+
+
+
+    
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/slick.js'%}"></script>
+    <script src="{% static 'js/profile.js'%}"></script>
+
+    <script>
+        document.getElementById('download-invoice-btn').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the anchor tag's default behavior (navigating to a new page)
+            
+            // Fetch the PDF file from the Django view URL
+            url = "{% url 'generate_invoice_pdf' order.id %}"
+            location.href = url;
+        });
+    </script>
+
+    {% include 'includes/links.html' %}
+
+
+</body>
+
+
+</html>

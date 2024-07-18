@@ -6,11 +6,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="author" content="Hari Babu" />
-	<meta name="description" content="Kalyani Autospares Favorite's Page" />
+	<meta name="description" content="Kalyani Autospares Oeder detail's Page" />
 	<meta name="keywords" content="Food, Restaurant">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- SITE TITLE -->
-	<title>Kalyani Autospares | Favorite's</title>
+	<title>Kalyani Autospares | Order details</title>
 	<!-- CSS -->
     <link href="{% static 'css/mainstyle.css' %}" rel="stylesheet">
     <link href="{% static 'css/favoritesstyle.css' %}" rel="stylesheet">
@@ -46,6 +46,8 @@
 </head>
 
 <body>
+
+    {% include 'includes/preloader.html' %}
 
 	<header>
 		<nav id="navbar">
@@ -112,7 +114,7 @@
                 <p><strong>Order Number:</strong> #{{order.order_number}}</p>
                 <p><strong>Transaction Id:</strong> #{{payment.payment_id}}</p>
                 <p><strong>Order Date:</strong> {{order.date}}</p>
-                <p><strong>Shipping Address:</strong><br>{{order.full_name}},<br>{{order.address_line_1}},<br>{{order.address_line_2}},<br>{{order.city}},<br>{{order.state}},<br>{{order.country}} - {{order.pincode}}.</p>
+                <p><strong>Shipping Address:</strong><br>{{order.full_name}},<br>{{order.address_line_1}},<br>{% if order.address_line_2 %}{{order.address_line_2}},<br>{% endif %}{{order.city}},<br>{{order.state}},<br>{{order.country}} - {{order.pincode}}.</p>
                 <p><strong>Phone Number:</strong> {{order.phone}}</p>
                 <p><strong>Email:</strong> {{order.email}}</p>
             </div>

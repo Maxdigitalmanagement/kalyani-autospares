@@ -5,7 +5,7 @@ const wrp = document.querySelector('.wrapper');
 var i = 0;
 
 function setlay() {
-    if (window.innerWidth > 800) {
+    if (window.innerWidth > 800 ) {
         if (wrp.scrollHeight > window.innerHeight - 70) {
             console.log(true)
             if (sec1.classList.value.includes('cencen')) {
@@ -61,6 +61,9 @@ stat.forEach(element => {
     if (element.innerHTML.toUpperCase() == "CANCELLED") {
         element.style.color = "#EB5757"
     }
+    if (element.innerHTML.toUpperCase() == "NEW") {
+        element.style.color = "#214CDB"
+    }
 
 });
 
@@ -71,6 +74,7 @@ var radios = document.querySelectorAll('input[type=radio][name="slider"]');
 radios.forEach(radio => radio.addEventListener('change', setorderslayout));
 
 const allorders = document.querySelector(".allord");
+const neworders = document.querySelector(".neword");
 const dliveredord = document.querySelector(".deliord");
 const processingord = document.querySelector(".possord");
 const cancelledord = document.querySelector(".cancord");
@@ -84,18 +88,28 @@ function setorderslayout() {
         allorders.classList.remove("disfle");
     }
 
+    if (document.getElementById("new").checked === true) {
+        console.log(true);
+        neworders.classList.add("disfle")
+    }
+    else {
+        neworders.classList.remove("disfle");
+    }
+
     if (document.getElementById("delivered").checked === true) {
         dliveredord.classList.add("disfle");
     }
     else {
         dliveredord.classList.remove("disfle");
     }
+
     if (document.getElementById("processing").checked === true) {
         processingord.classList.add("disfle");
     }
     else {
         processingord.classList.remove("disfle");
     }
+    
     if (document.getElementById("cancelled").checked === true) {
         cancelledord.classList.add("disfle");
     }
@@ -105,8 +119,31 @@ function setorderslayout() {
 }
 
 
+// **************** 
+// myreviews page things
+// ****************
 
 
+const chek = document.getElementById('ChekBox');
+const empty = document.querySelector('.wr_empty');
+const heading = document.querySelector('main');
+const topmarg = document.querySelector('.topmar');
+
+function displayc(){
+    if(chek.checked){
+        console.log("checked");
+        heading.style.display = "flex";
+    }
+    else{
+        console.log("unchecekd")
+        empty.style.display = "flex";
+        heading.style.display = "none";
+    }
+}
+
+window.addEventListener('load',()=>{
+    displayc();
+});
 
 
 
@@ -193,37 +230,7 @@ btnsEd.forEach(btnEd => {
 
 
 btnsave_info.addEventListener('click', ()=>{
-    btnsEd.forEach(btnEd => {
-        ele = btnEd.parentElement.querySelector('input');
-        if (!ele.readOnly) {
-            if(ele.id == "lastname-input"){
-                ele.name = "last_name";
-                console.log(ele.name);
-            }
-            if(ele.id == "firstname-input"){
-                ele.name = "first_name";
-                console.log(ele.name);
-            }
-            if(ele.id == "phone-input"){
-                ele.name = "phone";
-                console.log(ele.name);
-            }
-        }
-    });
-
-    phonelay = document.querySelector('input[id="phone-input"]');
-    if (!phonelay.readOnly) {
-        phonennn = phonelay.value;
-        if (phonennn.length > 9) {
-            document.getElementById('saveinfo').click();
-        }
-    }
-    else{
-        document.getElementById('saveinfo').click();
-    }
-
-
-
+    document.getElementById('saveinfo').click();
 });
 
 
@@ -265,6 +272,7 @@ function findpos(obj){
         return [currenttop];
     };
 }
+
 
 
 window.addEventListener('resize', scrolltothe, false);

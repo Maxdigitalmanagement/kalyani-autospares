@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -76,17 +77,26 @@ class Account(AbstractBaseUser):
 
 class UserAddress(models.Model):
 
-    user = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone = models.CharField(max_length=15)
     email = models.CharField(max_length=50)
     address_line_1 = models.CharField(max_length=50)
-    address_line_2 = models.CharField(max_length=50, blank=True)
+    address_line_2 = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     pincode = models.CharField(max_length=20)
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.first_name
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(blank=True, upload_to='userprofile')
+
+    def __str__(self):
+        return self.user.first_name
